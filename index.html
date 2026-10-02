@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>IR Consent Review</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Stardos+Stencil:wght@400;700&family=Barlow+Condensed:wght@600;700;800;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header class="site-header">
+  <div class="shell header-row">
+    <div class="brand">IR Consent Review</div>
+    <div class="round-label">Round 1</div>
+  </div>
+</header>
+
+<main class="shell">
+  <section id="intro" class="hero">
+    <div class="hero-copy">
+      <span class="eyebrow">Consultant review</span>
+      <h1>Select.<br><em>Review.</em><br>Submit.</h1>
+    </div>
+    <div class="hero-card">
+      <h2>Start</h2>
+      <p>Review any procedures you wish. You can return to complete others later.</p>
+      <label for="consultantId">Consultant ID</label>
+      <input id="consultantId" type="text" placeholder="e.g. C01">
+      <button id="startBtn" class="btn btn-dark">Continue</button>
+      <details class="score-guide">
+        <summary>Scoring guide</summary>
+        <div class="score-key">
+          <span><b>1</b> Definitely exclude</span>
+          <span><b>2</b> Probably exclude</span>
+          <span><b>3</b> Unsure</span>
+          <span><b>4</b> Probably include</span>
+          <span><b>5</b> Definitely include</span>
+        </div>
+      </details>
+    </div>
+  </section>
+
+  <section id="dashboard" class="hidden">
+    <div class="page-head">
+      <div>
+        <span class="eyebrow">Round 1</span>
+        <h2>Procedures</h2>
+      </div>
+      <button id="exportBtnTop" class="btn btn-outline">Download backup</button>
+    </div>
+    <div id="procedureCards" class="procedure-grid"></div>
+  </section>
+
+  <section id="survey" class="hidden">
+    <div class="survey-top">
+      <button id="backDashboardBtn" class="btn btn-outline">← Procedures</button>
+      <div class="survey-heading">
+        <span class="eyebrow">Procedure review</span>
+        <h2 id="procedureTitle"></h2>
+      </div>
+      <div class="progress-box">
+        <div id="progressText">0/0</div>
+        <div class="progress-track"><div id="progress" class="progress-bar"></div></div>
+      </div>
+    </div>
+
+    <div class="experience-card">
+      <label for="experienceSelect">Your experience with this procedure</label>
+      <select id="experienceSelect">
+        <option value="">Select…</option>
+        <option>Routinely perform / supervise</option>
+        <option>Occasionally perform / supervise</option>
+        <option>Do not routinely perform, but comfortable reviewing</option>
+        <option>Prefer not to assess</option>
+      </select>
+    </div>
+
+    <div id="procedurePanel"></div>
+
+    <section class="additional-card">
+      <div class="additional-head">
+        <div>
+          <span class="eyebrow">Optional</span>
+          <h3>Additional risks</h3>
+          <p>Add any risks you think are missing. Enter each risk separately.</p>
+        </div>
+        <button id="addRiskBtn" class="btn btn-dark" type="button">+ Add risk</button>
+      </div>
+      <div id="additionalRisks"></div>
+    </section>
+
+    <div class="action-bar">
+      <button id="saveBackBtn" class="btn btn-outline">Save & return</button>
+      <button id="reviewProcedureBtn" class="btn btn-dark">Review responses</button>
+    </div>
+  </section>
+
+  <section id="review" class="hidden">
+    <div class="page-head">
+      <div>
+        <button id="backSurveyBtn" class="btn btn-outline">← Back</button>
+        <span class="eyebrow review-eyebrow">Review</span>
+        <h2 id="reviewTitle">Review responses</h2>
+        <p id="reviewSummary"></p>
+      </div>
+    </div>
+
+    <div id="missingWarning" class="warning hidden"></div>
+
+    <div class="review-card">
+      <div class="table-wrap">
+        <table class="review-table">
+          <thead><tr><th>Risk</th><th>Score</th><th>Quote frequency?</th><th>Comment</th></tr></thead>
+          <tbody id="reviewBody"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <div id="reviewAdditional" class="review-additional hidden">
+      <h3>Additional risks</h3>
+      <div id="reviewAdditionalList"></div>
+    </div>
+
+    <div class="action-bar">
+      <button id="exportBtn" class="btn btn-outline">Download backup</button>
+      <button id="submitProcedureBtn" class="btn btn-dark">Submit procedure</button>
+    </div>
+    <div id="submitStatus"></div>
+  </section>
+</main>
+
+<script src="config.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

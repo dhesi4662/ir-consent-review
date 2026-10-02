@@ -321,3 +321,7 @@ textarea{min-height:68px;resize:vertical}
   .additional-head{align-items:flex-start;flex-direction:column}
   .action-bar{margin:0 -18px;padding:12px 18px}
 }
+
+.source-detail{margin:8px 0 14px;font-size:12px;opacity:.78}
+.source-detail summary{cursor:pointer;font-family:"Barlow Condensed",Arial,sans-serif;font-weight:800;text-transform:uppercase;letter-spacing:.05em}
+.source-detail div{margin-top:7px;line-height:1.45}

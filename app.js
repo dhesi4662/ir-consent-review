@@ -119,10 +119,7 @@ function renderRisk(proc,item){
   div.innerHTML=`
     <div class="risk-main">
       <h3>${escapeHtml(item.risk)}</h3>
-      <div class="meta">
-        ${item.frequency_evidence ? `${escapeHtml(item.frequency_evidence)}<br>`:""}
-        ${item.source ? `${escapeHtml(item.source)}`:""}
-      </div>
+      ${item.source ? `<details class="source-detail"><summary>Source</summary><div>${escapeHtml(item.source)}</div></details>`:""}
       <div class="scale" aria-label="Score ${escapeHtml(item.risk)}">
         ${[1,2,3,4,5].map(n=>`<label title="${escapeHtml(dataset.project.scale[String(n)])}">
           <input type="radio" name="score-${item.id}" value="${n}" ${String(a.score)===String(n)?"checked":""}> ${n}

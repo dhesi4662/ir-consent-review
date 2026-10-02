@@ -325,3 +325,31 @@ textarea{min-height:68px;resize:vertical}
 .source-detail{margin:8px 0 14px;font-size:12px;opacity:.78}
 .source-detail summary{cursor:pointer;font-family:"Barlow Condensed",Arial,sans-serif;font-weight:800;text-transform:uppercase;letter-spacing:.05em}
 .source-detail div{margin-top:7px;line-height:1.45}
+
+.submitted-card{
+  max-width:720px;
+  margin:90px auto;
+  background:var(--teal);
+  color:var(--paper);
+  border:2px solid var(--ink);
+  border-radius:28px;
+  padding:42px;
+  box-shadow:10px 10px 0 var(--ink);
+}
+.submitted-card h2{
+  font-family:"Stardos Stencil",Georgia,serif;
+  text-transform:uppercase;
+  font-size:64px;
+  line-height:.95;
+  margin:8px 0 14px;
+}
+.submitted-card p{
+  font-size:18px;
+  line-height:1.5;
+  margin:0 0 22px;
+}
+.submitted-card .btn{
+  background:var(--paper);
+  color:var(--ink);
+  margin:0;
+}

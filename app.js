@@ -42,6 +42,7 @@ async function init(){
   $("exportBtn").onclick = exportBackup;
   $("exportBtnTop").onclick = exportBackup;
   $("addRiskBtn").onclick = addAdditionalRisk;
+  $("submittedBackBtn").onclick = showDashboard;
 }
 
 function start(){
@@ -54,7 +55,7 @@ function start(){
   showDashboard();
 }
 
-function hideAll(){["dashboard","survey","review"].forEach(id=>$(id).classList.add("hidden"));}
+function hideAll(){["dashboard","survey","review","submitted"].forEach(id=>$(id).classList.add("hidden"));}
 
 function showDashboard(){
   hideAll();
@@ -263,8 +264,13 @@ async function submitProcedure(){
       headers:{"Content-Type":"text/plain;charset=utf-8"},
       body:JSON.stringify(payload)
     });
-    ps.submitted=true;ps.submittedAt=payload.submittedAt;save();
-    $("submitStatus").innerHTML='<div class="success">Submitted.</div>';
+    ps.submitted=true;
+    ps.submittedAt=payload.submittedAt;
+    save();
+    hideAll();
+    $("submitted").classList.remove("hidden");
+    $("submittedMessage").textContent=`${currentProcedure} has been submitted successfully.`;
+    window.scrollTo({top:0,behavior:"smooth"});
   }catch(e){
     $("submitStatus").innerHTML='<div class="warning">Submission failed. Download your backup and contact the project lead.</div>';
   }finally{

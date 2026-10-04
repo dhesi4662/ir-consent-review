@@ -224,15 +224,7 @@
         ]
       }
     ],
-    "Portal vein embolisation (PVE)": [
-      {
-        "risk": "Air embolism",
-        "note": "Locally proposed common consent risk for venous procedures; no specific published source assigned.",
-        "local_policy": [
-          "Air embolism"
-        ]
-      }
-    ],
+    "Portal vein embolisation (PVE)": [],
     "Prostatic artery embolisation (PAE)": [
       {
         "risk": "Pain / discomfort",

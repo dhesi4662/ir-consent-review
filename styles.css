@@ -49,14 +49,16 @@ a:hover{text-decoration:underline}
   display:flex;
   align-items:center;
   justify-content:flex-start;
-  padding:14px 14px 12px;
+  padding:14px 18px 12px;
   border-bottom:1px solid rgba(255,255,255,.10);
+  overflow:hidden;
 }
 .brand-logo{
   display:block;
-  width:198px;
+  width:172px;
   max-width:100%;
   height:auto;
+  object-fit:contain;
   background:transparent;
 }
 .side-nav{padding:12px 0}

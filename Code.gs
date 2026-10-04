@@ -110,7 +110,7 @@ function login_(p) {
       0,
       "",
       Boolean(lookup.name),
-      lookup.sourceUrl || "https://www.gmc-uk.org/registrants/" + gmc
+      lookup.sourceUrl || "https://www.gmc-uk.org/api/gmc/print/registrant?no=" + gmc
     ]);
   } finally {
     lock.releaseLock();
@@ -288,14 +288,14 @@ function authenticateExistingReviewer_(sheet, existing, pin) {
 }
 
 function lookupGmcName_(gmc) {
-  const url = "https://www.gmc-uk.org/registrants/" + encodeURIComponent(gmc);
+  const url = "https://www.gmc-uk.org/api/gmc/print/registrant?no=" + encodeURIComponent(gmc);
   try {
     const response = UrlFetchApp.fetch(url, {
       method: "get",
       followRedirects: true,
       muteHttpExceptions: true,
       headers: {
-        "User-Agent": "Mozilla/5.0 (compatible; IRConsentReview/1.0; +https://www.gmc-uk.org/registration-and-licensing/our-registers)",
+        "User-Agent": "Mozilla/5.0 (compatible; IRConsentReview/1.0)",
         "Accept": "text/html,application/xhtml+xml"
       }
     });
@@ -305,33 +305,35 @@ function lookupGmcName_(gmc) {
     if (code < 200 || code >= 400) return { name: "", unavailable: true, sourceUrl: url };
 
     const html = response.getContentText();
-    if (/page not found|registrant not found|no record found/i.test(html)) {
+    const text = decodeHtml_(stripTags_(html)).replace(/\s+/g, " ").trim();
+
+    if (/page not found|registrant not found|no record found/i.test(text)) {
       return { name: "", notFound: true, sourceUrl: url };
     }
 
-    const titleMatch = html.match(/<title[^>]*>([\s\S]*?)<\/title>/i);
-    if (titleMatch) {
-      const title = decodeHtml_(stripTags_(titleMatch[1])).replace(/\s+/g, " ").trim();
-      const titleName = title.match(new RegExp("^(.+?)\\s*\\(\\s*" + gmc + "\\s*\\)\\s*-\\s*Registrant details page", "i"));
-      if (titleName && titleName[1]) {
-        return { name: cleanName_(titleName[1]), sourceUrl: url };
-      }
+    const doctorFirst = text.match(new RegExp("Doctor\\s+(.{2,120}?)\\s+" + gmc + "\\s+GMC reference number", "i"));
+    if (doctorFirst && doctorFirst[1]) {
+      return { name: cleanName_(doctorFirst[1]), sourceUrl: url };
     }
 
-    const text = decodeHtml_(stripTags_(html)).replace(/\s+/g, " ").trim();
-    const textMatch = text.match(new RegExp("([A-Za-z][A-Za-z'’\\-., ]{2,100}?)\\s+Doctor\\s+GMC reference number\\s*:?\\s*" + gmc, "i"));
-    if (textMatch && textMatch[1]) {
-      return { name: cleanName_(textMatch[1]), sourceUrl: url };
+    const numberFirst = text.match(new RegExp("(.{2,120}?)\\s+" + gmc + "\\s+GMC reference number", "i"));
+    if (numberFirst && numberFirst[1]) {
+      let candidate = numberFirst[1].replace(/^.*?Doctor\s+/i, "");
+      candidate = cleanName_(candidate);
+      if (candidate) return { name: candidate, sourceUrl: url };
     }
 
     const h1Match = html.match(/<h1[^>]*>([\s\S]*?)<\/h1>/i);
     if (h1Match) {
-      const h1 = decodeHtml_(stripTags_(h1Match[1])).replace(/\s+/g, " ").trim();
+      const h1 = cleanName_(decodeHtml_(stripTags_(h1Match[1])));
       if (h1 && !/our registers|registrant details/i.test(h1)) {
-        return { name: cleanName_(h1.replace(new RegExp("\\s*\\(\\s*" + gmc + "\\s*\\)\\s*$"), "")), sourceUrl: url };
+        return { name: h1, sourceUrl: url };
       }
     }
 
+    if (text.indexOf(gmc) === -1) {
+      return { name: "", notFound: true, sourceUrl: url };
+    }
     return { name: "", unavailable: true, sourceUrl: url };
   } catch (err) {
     return { name: "", unavailable: true, sourceUrl: url };

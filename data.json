@@ -23,7 +23,7 @@
       "Unverified": "No risk-level supporting source confirmed in the current evidence review",
       "Local practice": "Locally proposed common consent risk; no specific published source assigned"
     },
-    "local_core_note": "Locally proposed common risks are only added where no equivalent or closely overlapping procedure-specific risk is already present."
+    "local_core_note": "Locally proposed common risks are only added where no equivalent or closely overlapping procedure-specific risk is already present. The generic local policy includes pain/discomfort, bleeding/bruising/haematoma, damage to surrounding structures, technical or clinical failure, allergic reaction, radiation exposure and renal impairment where applicable, with air embolism additionally considered for venous procedures."
   },
   "procedures": [
     "Bronchial artery embolisation (BAE)",
@@ -88,6 +88,14 @@
       {
         "risk": "Air embolism",
         "note": "Locally proposed common consent risk for venous procedures; no specific published source assigned."
+      },
+      {
+        "risk": "Radiation exposure",
+        "note": "Locally proposed common consent risk; no specific published source assigned. Added only where no equivalent procedure-specific radiation risk is already present."
+      },
+      {
+        "risk": "Renal impairment",
+        "note": "Locally proposed common consent risk; no specific published source assigned. Applied where contrast use makes this relevant and no equivalent procedure-specific renal impairment risk is already present."
       }
     ],
     "Peripheral arterial angioplasty +/- stenting": [

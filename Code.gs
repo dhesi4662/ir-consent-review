@@ -11,16 +11,17 @@ const LOCK_MINUTES = 15;
 
 function doPost(e) {
   try {
-    const payload = JSON.parse((e && e.postData && e.postData.contents) || "{}");
+    const raw = (e && e.parameter && e.parameter.payload) || (e && e.postData && e.postData.contents) || "{}";
+    const payload = JSON.parse(raw);
     const action = payload.action || "submitProcedure";
 
-    if (action === "login") return json_(login_(payload));
-    if (action === "saveDraft") return json_(saveDraft_(payload));
-    if (action === "submitProcedure") return json_(submitProcedure_(payload));
+    if (action === "login") return respond_(withRequestId_(login_(payload), payload.requestId));
+    if (action === "saveDraft") return respond_(withRequestId_(saveDraft_(payload), payload.requestId));
+    if (action === "submitProcedure") return respond_(withRequestId_(submitProcedure_(payload), payload.requestId));
 
-    return json_({ ok: false, code: "UNKNOWN_ACTION", error: "Unknown action" });
+    return respond_(withRequestId_({ ok: false, code: "UNKNOWN_ACTION", error: "Unknown action" }, payload.requestId));
   } catch (err) {
-    return json_({ ok: false, code: "SERVER_ERROR", error: String(err) });
+    return respond_({ ok: false, code: "SERVER_ERROR", error: String(err), requestId: "" });
   }
 }
 
@@ -474,6 +475,23 @@ function getOrCreate_(ss, name, headers) {
   if (!sh) sh = ss.insertSheet(name);
   if (sh.getLastRow() === 0) sh.appendRow(headers);
   return sh;
+}
+
+function withRequestId_(obj, requestId) {
+  obj = obj || {};
+  obj.requestId = String(requestId || "");
+  return obj;
+}
+
+function respond_(obj) {
+  const payload = JSON.stringify(obj).replace(/</g, "\\u003c");
+  const requestId = obj && obj.requestId ? String(obj.requestId) : "";
+  const html = "<!doctype html><html><body><script>" +
+    "window.parent.postMessage({source:'IR_CONSENT_BACKEND',requestId:" +
+    JSON.stringify(requestId) + ",payload:" + payload + "},'*');" +
+    "</script></body></html>";
+  return HtmlService.createHtmlOutput(html)
+    .setXFrameOptionsMode(HtmlService.XFrameOptionsMode.ALLOWALL);
 }
 
 function json_(obj) {

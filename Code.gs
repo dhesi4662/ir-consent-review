@@ -16,7 +16,8 @@ const DEFAULT_APPROVED_REVIEWERS = [
   ["4329532", "Christopher John Hammond", true],
   ["3441901", "Jai Vinodray Patel", true],
   ["3090628", "Simon John McPherson", true],
-  ["6149406", "Paul Walker", true]
+  ["6149406", "Paul Walker", true],
+  ["7753987", "Simran Singh Dhesi", true]
 ];
 const PROJECT_CODE = "IR-CONSENT-2026";
 const ROUND = 1;

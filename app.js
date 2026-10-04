@@ -669,12 +669,13 @@ async function submitProcedure() {
 }
 
 function exportBackup() {
-  if (!state.consultantId) {
-    alert("Start the review before downloading a backup.");
+  if (!auth.gmcNumber) {
+    alert("Sign in before downloading a backup.");
     return;
   }
   const payload = {
-    consultantId: state.consultantId,
+    gmcNumber: auth.gmcNumber,
+    reviewerName: auth.name,
     exportedAt: new Date().toISOString(),
     round: dataset.project.round,
     procedures: state.procedures
@@ -682,9 +683,26 @@ function exportBackup() {
   const blob = new Blob([JSON.stringify(payload, null, 2)], { type: "application/json" });
   const a = document.createElement("a");
   a.href = URL.createObjectURL(blob);
-  a.download = `IR_Consent_Review_R${dataset.project.round}_${state.consultantId || "anonymous"}_backup.json`;
+  a.download = `IR_Consent_Review_R${dataset.project.round}_GMC${auth.gmcNumber}_backup.json`;
   a.click();
   URL.revokeObjectURL(a.href);
+}
+
+async function signOut() {
+  await flushDraft();
+  auth = { gmcNumber: "", pin: "", name: "", gmcVerified: false };
+  state = blankState();
+  currentProcedure = null;
+  clearTimeout(saveTimer);
+  saveTimer = null;
+  if ($("navSignOut")) $("navSignOut").classList.add("hidden");
+  $("topbarConsultant").classList.add("hidden");
+  if ($("saveStatus")) $("saveStatus").classList.add("hidden");
+  $("pin").value = "";
+  hideAll();
+  $("intro").classList.remove("hidden");
+  setPageLabel("Review");
+  window.scrollTo({ top: 0, behavior: "smooth" });
 }
 
 function renderGuide() {

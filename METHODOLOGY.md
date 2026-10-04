@@ -1,4 +1,4 @@
-# Leeds IR Consent Audit Delphi Review - methodology
+# Leeds IR Consent Audit - methodology
 
 ## Purpose
 

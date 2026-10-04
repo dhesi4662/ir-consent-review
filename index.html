@@ -22,6 +22,7 @@
       <button id="navProcedures" class="side-nav-item" type="button">Procedures</button>
       <button id="navGuide" class="side-nav-item" type="button">Scoring guide</button>
       <button id="navBackup" class="side-nav-item" type="button">Download backup</button>
+      <button id="navSignOut" class="side-nav-item hidden" type="button">Sign out</button>
     </nav>
 
   </aside>
@@ -33,7 +34,8 @@
         <span id="topbarPage">Review</span>
       </div>
       <div class="topbar-right">
-        <span id="topbarConsultant" class="consultant-chip hidden"></span>
+        <span id="saveStatus" class="save-status hidden"></span>
+        <span id="topbarReviewer" class="reviewer-chip hidden"></span>
         <span class="round-chip">Round 1</span>
       </div>
     </header>
@@ -47,13 +49,22 @@
               <h1>IR Consent Review</h1>
             </div>
           </div>
-          <p class="lead">Please enter your name below and consider reviewing whichever procedures you routinely perform, supervise, or feel comfortable assessing. You do not need to review every procedure.</p>
-          <div class="form-row single-field">
+          <p class="lead">Please enter your GMC number and 6 digit PIN. On first use, choose a PIN. Your progress will be saved so you can return later.</p>
+          <div class="login-fields">
             <div class="field">
-              <label for="consultantId">Name</label>
-              <input id="consultantId" type="text" autocomplete="name" placeholder="Your full name">
+              <label for="gmcNumber">GMC number</label>
+              <input id="gmcNumber" type="text" inputmode="numeric" autocomplete="username" maxlength="7" placeholder="7 digit GMC number">
+            </div>
+            <div class="field">
+              <label for="pin">PIN</label>
+              <input id="pin" type="password" inputmode="numeric" autocomplete="current-password" maxlength="6" placeholder="6 digit PIN">
             </div>
           </div>
+          <div id="manualNameWrap" class="field manual-name hidden">
+            <label for="manualName">Name</label>
+            <input id="manualName" type="text" autocomplete="name" placeholder="Your full name">
+          </div>
+          <div id="loginStatus" class="login-status hidden"></div>
           <div class="intro-instructions">
             <h2>Instructions</h2>
             <ul>
@@ -67,13 +78,14 @@
             <button id="startBtn" class="btn btn-primary" type="button">Continue</button>
             <button id="introGuideBtn" class="btn btn-secondary" type="button">View scoring guide</button>
           </div>
+          <p class="login-note">Your GMC number identifies your responses. Your PIN is not stored in plain text. Forgotten PIN? Contact the project lead.</p>
         </div>
       </section>
 
       <section id="dashboard" class="page-section hidden">
         <div class="page-heading">
           <div>
-            <div class="section-kicker">Round 1</div>
+            <div id="welcomeText" class="section-kicker"></div>
             <h1>Procedures</h1>
             <p>Please select any procedure you feel comfortable assessing.</p>
           </div>
@@ -130,7 +142,7 @@
         </section>
 
         <div class="action-bar">
-          <button id="saveBackBtn" class="btn btn-secondary" type="button">Save & return</button>
+          <button id="saveBackBtn" class="btn btn-secondary" type="button">Save and return</button>
           <button id="reviewProcedureBtn" class="btn btn-primary" type="button">Review responses</button>
         </div>
       </section>

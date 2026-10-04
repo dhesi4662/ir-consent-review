@@ -1,16 +1,165 @@
 const cfg = window.DELPHI_CONFIG || {};
 let dataset = null;
 let currentProcedure = null;
-let state = { consultantId: "", startedAt: null, procedures: {} };
+let state = blankState();
+let auth = { gmcNumber: "", pin: "", name: "", gmcVerified: false };
+let saveTimer = null;
+let saveInFlight = null;
+let lastServerSavedAt = null;
 
 const $ = id => document.getElementById(id);
-const save = () => localStorage.setItem(cfg.autosaveKey || "ir-consent-review", JSON.stringify(state));
-const load = () => {
+
+function blankState() {
+  return { consultantId: "", reviewerName: "", startedAt: null, updatedAt: null, procedures: {} };
+}
+
+function localDraftKey(gmcNumber) {
+  return `${cfg.autosaveKey || "ir-consent-review"}-${gmcNumber}`;
+}
+
+function lastGmcKey() {
+  return `${cfg.autosaveKey || "ir-consent-review"}-last-gmc`;
+}
+
+function loadLocalDraft(gmcNumber) {
   try {
-    const saved = JSON.parse(localStorage.getItem(cfg.autosaveKey || "ir-consent-review"));
-    if (saved) state = saved;
-  } catch (e) {}
-};
+    const saved = JSON.parse(localStorage.getItem(localDraftKey(gmcNumber)) || "null");
+    return saved && typeof saved === "object" ? saved : null;
+  } catch (e) {
+    return null;
+  }
+}
+
+function normaliseState(input) {
+  const next = input && typeof input === "object" ? input : blankState();
+  if (!next.procedures || typeof next.procedures !== "object") next.procedures = {};
+  if (!next.updatedAt) next.updatedAt = null;
+  return next;
+}
+
+function isNewer(a, b) {
+  if (!a) return false;
+  if (!b) return true;
+  return (Date.parse(a.updatedAt || "") || 0) > (Date.parse(b.updatedAt || "") || 0);
+}
+
+function chooseDraft(serverDraft, localDraft) {
+  if (!serverDraft && !localDraft) return blankState();
+  if (!serverDraft) return normaliseState(localDraft);
+  if (!localDraft) return normaliseState(serverDraft);
+  return normaliseState(isNewer(localDraft, serverDraft) ? localDraft : serverDraft);
+}
+
+function touch(proc) {
+  const now = new Date().toISOString();
+  state.updatedAt = now;
+  if (proc) pState(proc).updatedAt = now;
+}
+
+function save(proc) {
+  touch(proc || currentProcedure);
+  if (auth.gmcNumber) localStorage.setItem(localDraftKey(auth.gmcNumber), JSON.stringify(state));
+  scheduleServerSave();
+}
+
+function scheduleServerSave(delay = 1200) {
+  if (!auth.gmcNumber || !auth.pin) return;
+  clearTimeout(saveTimer);
+  setSaveStatus("Saving...", "saving");
+  saveTimer = setTimeout(() => {
+    saveTimer = null;
+    saveDraftToServer();
+  }, delay);
+}
+
+async function saveDraftToServer() {
+  if (!auth.gmcNumber || !auth.pin) return false;
+  if (saveInFlight) return saveInFlight;
+  const snapshot = JSON.parse(JSON.stringify(state));
+  setSaveStatus("Saving...", "saving");
+  saveInFlight = (async () => {
+    try {
+      const result = await apiRequest({
+        action: "saveDraft",
+        projectCode: cfg.projectCode,
+        round: cfg.round || dataset.project.round,
+        gmcNumber: auth.gmcNumber,
+        pin: auth.pin,
+        draft: snapshot
+      });
+      if (!result.ok) throw new Error(result.error || "Draft save failed");
+      lastServerSavedAt = snapshot.updatedAt || new Date().toISOString();
+      setSaveStatus("Saved", "saved");
+      if ((Date.parse(state.updatedAt || "") || 0) > (Date.parse(lastServerSavedAt || "") || 0)) scheduleServerSave(100);
+      return true;
+    } catch (e) {
+      setSaveStatus("Saved on this device", "local");
+      return false;
+    } finally {
+      saveInFlight = null;
+    }
+  })();
+  return saveInFlight;
+}
+
+async function flushDraft() {
+  clearTimeout(saveTimer);
+  saveTimer = null;
+  if (!auth.gmcNumber) return false;
+  localStorage.setItem(localDraftKey(auth.gmcNumber), JSON.stringify(state));
+  if (saveInFlight) await saveInFlight;
+  clearTimeout(saveTimer);
+  saveTimer = null;
+  const stateTime = Date.parse(state.updatedAt || "") || 0;
+  const savedTime = Date.parse(lastServerSavedAt || "") || 0;
+  if (stateTime > savedTime) return await saveDraftToServer();
+  return true;
+}
+
+function setSaveStatus(text, mode) {
+  const el = $("saveStatus");
+  if (!el || !auth.gmcNumber) return;
+  el.textContent = text;
+  el.className = `save-status ${mode || ""}`;
+}
+
+function apiRequest(payload) {
+  if (!cfg.endpoint) return Promise.reject(new Error("No endpoint configured"));
+  const requestId = `r-${Date.now()}-${Math.random().toString(36).slice(2)}`;
+  payload.requestId = requestId;
+  return new Promise((resolve, reject) => {
+    const frameName = `ir-backend-${requestId}`;
+    const iframe = document.createElement("iframe");
+    iframe.name = frameName;
+    iframe.className = "backend-frame";
+    iframe.setAttribute("aria-hidden", "true");
+    const form = document.createElement("form");
+    form.method = "POST";
+    form.action = cfg.endpoint;
+    form.target = frameName;
+    form.className = "backend-form";
+    const input = document.createElement("textarea");
+    input.name = "payload";
+    input.value = JSON.stringify(payload);
+    form.appendChild(input);
+    const cleanup = () => {
+      window.removeEventListener("message", onMessage);
+      clearTimeout(timeout);
+      setTimeout(() => { iframe.remove(); form.remove(); }, 0);
+    };
+    const onMessage = event => {
+      const d = event.data || {};
+      if (event.source !== iframe.contentWindow || d.source !== "IR_CONSENT_BACKEND" || d.requestId !== requestId) return;
+      cleanup();
+      resolve(d.payload || {});
+    };
+    const timeout = setTimeout(() => { cleanup(); reject(new Error("Backend request timed out")); }, 20000);
+    window.addEventListener("message", onMessage);
+    document.body.appendChild(iframe);
+    document.body.appendChild(form);
+    form.submit();
+  });
+}
 
 const pState = proc => {
   if (!state.procedures[proc]) {
@@ -45,16 +194,13 @@ const reviewItems = proc => [...localReviewItems(proc), ...procItems(proc)];
 
 async function init() {
   dataset = await (await fetch("data.json", { cache: "no-store" })).json();
-  load();
-  if (state.consultantId) {
-    $("consultantId").value = state.consultantId;
-    setConsultantChip();
-  }
+  const rememberedGmc = localStorage.getItem(lastGmcKey());
+  if (rememberedGmc && $("gmcNumber")) $("gmcNumber").value = rememberedGmc;
 
   $("startBtn").onclick = start;
   $("introGuideBtn").onclick = openGuide;
   $("backDashboardBtn").onclick = showDashboard;
-  $("saveBackBtn").onclick = () => { save(); showDashboard(); };
+  $("saveBackBtn").onclick = async () => { await flushDraft(); showDashboard(); };
   $("reviewProcedureBtn").onclick = showReview;
   $("backSurveyBtn").onclick = () => { hideAll(); $("survey").classList.remove("hidden"); setPageLabel("Procedure review"); };
   $("submitProcedureBtn").onclick = submitProcedure;
@@ -62,39 +208,113 @@ async function init() {
   $("exportBtnTop").onclick = exportBackup;
   $("addRiskBtn").onclick = addAdditionalRisk;
   $("submittedBackBtn").onclick = showDashboard;
-
-  $("navProcedures").onclick = () => state.consultantId ? showDashboard() : $("consultantId").focus();
+  $("navProcedures").onclick = () => auth.gmcNumber ? showDashboard() : $("gmcNumber").focus();
   $("navGuide").onclick = openGuide;
   $("navBackup").onclick = exportBackup;
+  if ($("navSignOut")) $("navSignOut").onclick = signOut;
   $("floatingGuideBtn").onclick = openGuide;
   $("closeGuideBtn").onclick = closeGuide;
   $("guideBackdrop").onclick = closeGuide;
   document.addEventListener("keydown", e => { if (e.key === "Escape") closeGuide(); });
+  window.addEventListener("online", () => { if (auth.gmcNumber) flushDraft(); });
+
+  [$("gmcNumber"), $("pin")].filter(Boolean).forEach(el => {
+    el.addEventListener("keydown", e => { if (e.key === "Enter") start(); });
+  });
 
   renderGuide();
 }
 
-function start() {
-  const cid = $("consultantId").value.trim();
-  if (cfg.requireConsultantId && !cid) {
-    alert("Please enter your name.");
+async function start() {
+  const gmcNumber = String($("gmcNumber").value || "").replace(/\D/g, "");
+  const pin = String($("pin").value || "").replace(/\D/g, "");
+  const manualName = $("manualNameWrap").classList.contains("hidden") ? "" : $("manualName").value.trim();
+
+  if (!/^\d{7}$/.test(gmcNumber)) {
+    showLoginStatus("Please enter a valid 7 digit GMC number.", "error");
     return;
   }
-  state.consultantId = cid || "anonymous";
-  state.startedAt = state.startedAt || new Date().toISOString();
-  save();
-  setConsultantChip();
-  showDashboard();
+  if (!/^\d{6}$/.test(pin)) {
+    showLoginStatus("Please enter a 6 digit PIN.", "error");
+    return;
+  }
+
+  $("startBtn").disabled = true;
+  showLoginStatus("Checking details...", "info");
+
+  try {
+    const result = await apiRequest({
+      action: "login",
+      projectCode: cfg.projectCode,
+      round: cfg.round || dataset.project.round,
+      gmcNumber,
+      pin,
+      manualName
+    });
+
+    if (!result.ok) {
+      if (result.requiresName) {
+        $("manualNameWrap").classList.remove("hidden");
+        showLoginStatus(result.error || "Please enter your name to continue.", "warning");
+        $("manualName").focus();
+        return;
+      }
+      showLoginStatus(result.error || "Unable to sign in.", "error");
+      return;
+    }
+
+    auth = { gmcNumber, pin, name: result.name || "", gmcVerified: Boolean(result.gmcVerified) };
+    localStorage.setItem(lastGmcKey(), gmcNumber);
+
+    const localDraft = loadLocalDraft(gmcNumber);
+    state = chooseDraft(result.draft, localDraft);
+    state.consultantId = gmcNumber;
+    state.reviewerName = auth.name;
+    state.startedAt = state.startedAt || new Date().toISOString();
+    state.updatedAt = state.updatedAt || new Date().toISOString();
+
+    (result.submittedProcedures || []).forEach(proc => {
+      const ps = pState(proc);
+      ps.submitted = true;
+      ps.submittedAt = ps.submittedAt || new Date().toISOString();
+    });
+
+    localStorage.setItem(localDraftKey(gmcNumber), JSON.stringify(state));
+    setReviewerChip();
+    if ($("navSignOut")) $("navSignOut").classList.remove("hidden");
+    $("manualNameWrap").classList.add("hidden");
+    $("manualName").value = "";
+    $("pin").value = "";
+    hideLoginStatus();
+    showDashboard();
+
+    if (!result.draft || isNewer(localDraft, result.draft)) scheduleServerSave(100);
+    else setSaveStatus("Saved", "saved");
+  } catch (e) {
+    showLoginStatus("Unable to connect to the review server. Please try again.", "error");
+  } finally {
+    $("startBtn").disabled = false;
+  }
 }
 
-function setConsultantChip() {
-  const chip = $("topbarConsultant");
-  if (!state.consultantId) {
+function setReviewerChip() {
+  const chip = $("topbarReviewer");
+  if (!auth.gmcNumber) {
     chip.classList.add("hidden");
     return;
   }
-  chip.textContent = state.consultantId;
+  chip.textContent = auth.name ? `Dr ${auth.name} | GMC ${auth.gmcNumber}` : `GMC ${auth.gmcNumber}`;
   chip.classList.remove("hidden");
+}
+
+function showLoginStatus(message, kind) {
+  const el = $("loginStatus");
+  el.textContent = message;
+  el.className = `login-status ${kind || "info"}`;
+}
+
+function hideLoginStatus() {
+  $("loginStatus").classList.add("hidden");
 }
 
 function setPageLabel(text) {
@@ -106,9 +326,15 @@ function hideAll() {
 }
 
 function showDashboard() {
+  if (!auth.gmcNumber) {
+    hideAll();
+    $("intro").classList.remove("hidden");
+    return;
+  }
   hideAll();
   $("dashboard").classList.remove("hidden");
   setPageLabel("Procedures");
+  if ($("welcomeText")) $("welcomeText").textContent = auth.name ? `Welcome, Dr ${auth.name}` : `GMC ${auth.gmcNumber}`;
   renderDashboard();
   window.scrollTo({ top: 0, behavior: "smooth" });
 }
@@ -138,13 +364,18 @@ function renderDashboard() {
       <h2>${escapeHtml(proc)}</h2>
       <p>${st.total} risk${st.total === 1 ? "" : "s"}</p>
       <div class="card-progress"><span style="width:${st.total ? Math.round(st.scored / st.total * 100) : 0}%"></span></div>
-      <button class="btn btn-primary" type="button">${st.submitted ? "Open" : "Review"}</button>`;
-    div.querySelector("button").onclick = () => openProcedure(proc);
+      <button class="btn ${st.submitted ? "btn-secondary" : "btn-primary"}" type="button" ${st.submitted ? "disabled" : ""}>${st.submitted ? "Submitted" : "Review"}</button>`;
+    const button = div.querySelector("button");
+    if (!st.submitted) button.onclick = () => openProcedure(proc);
     wrap.appendChild(div);
   });
 }
 
 function openProcedure(proc) {
+  if (pState(proc).submitted) {
+    alert("This procedure has already been submitted.");
+    return;
+  }
   currentProcedure = proc;
   hideAll();
   $("survey").classList.remove("hidden");
@@ -158,20 +389,6 @@ function openProcedure(proc) {
   renderProcedure(proc);
   renderAdditionalRisks();
   window.scrollTo({ top: 0, behavior: "smooth" });
-}
-
-function renderLocalCore(proc) {
-  $("localCoreNote").textContent = dataset.project.local_core_note || "";
-  const wrap = $("localCoreList");
-  wrap.innerHTML = "";
-  localCoreFor(proc).forEach(item => wrap.appendChild(localCoreItem(item)));
-}
-
-function localCoreItem(item) {
-  const div = document.createElement("div");
-  div.className = "local-core-item";
-  div.innerHTML = `<span class="core-check" aria-hidden="true">✓</span><span>${escapeHtml(item.risk)}</span>`;
-  return div;
 }
 
 function renderProcedure(proc) {
@@ -357,10 +574,6 @@ function showReview() {
   setPageLabel("Review responses");
   $("reviewTitle").textContent = currentProcedure;
 
-  const coreWrap = $("reviewLocalCore");
-  coreWrap.innerHTML = "";
-  localCoreFor(currentProcedure).forEach(item => coreWrap.appendChild(localCoreItem(item)));
-
   const body = $("reviewBody");
   body.innerHTML = "";
   let missing = 0;
@@ -394,15 +607,19 @@ function showReview() {
 }
 
 async function submitProcedure() {
-  if (!cfg.endpoint) {
-    $("submitStatus").innerHTML = '<div class="alert alert-warning">Submission is not configured.</div>';
-    return;
-  }
   const ps = pState(currentProcedure);
+  if (ps.submitted) return;
+
+  $("submitProcedureBtn").disabled = true;
+  $("submitStatus").innerHTML = '<div class="alert alert-info">Submitting...</div>';
+
   const payload = {
+    action: "submitProcedure",
     projectCode: cfg.projectCode,
     round: cfg.round || dataset.project.round,
-    consultantId: state.consultantId,
+    gmcNumber: auth.gmcNumber,
+    consultantId: auth.gmcNumber,
+    pin: auth.pin,
     procedure: currentProcedure,
     experience: ps.experience,
     startedAt: state.startedAt,
@@ -420,37 +637,34 @@ async function submitProcedure() {
     }))
   };
 
-  $("submitProcedureBtn").disabled = true;
-  $("submitStatus").innerHTML = '<div class="alert alert-info">Submitting...</div>';
   try {
-    await fetch(cfg.endpoint, {
-      method: "POST",
-      mode: "no-cors",
-      headers: { "Content-Type": "text/plain;charset=utf-8" },
-      body: JSON.stringify(payload)
-    });
+    const result = await apiRequest(payload);
+    if (!result.ok) throw new Error(result.error || "Submission failed");
+
     ps.submitted = true;
     ps.submittedAt = payload.submittedAt;
-    save();
+    save(currentProcedure);
+    await flushDraft();
+
     hideAll();
     $("submitted").classList.remove("hidden");
     setPageLabel("Submitted");
     $("submittedMessage").textContent = `${currentProcedure} has been submitted successfully.`;
     window.scrollTo({ top: 0, behavior: "smooth" });
   } catch (e) {
-    $("submitStatus").innerHTML = '<div class="alert alert-warning">Submission failed. Download your backup and contact the project lead.</div>';
-  } finally {
+    $("submitStatus").innerHTML = '<div class="alert alert-warning">Submission failed. Your progress is still saved. Please try again.</div>';
     $("submitProcedureBtn").disabled = false;
   }
 }
 
 function exportBackup() {
-  if (!state.consultantId) {
-    alert("Start the review before downloading a backup.");
+  if (!auth.gmcNumber) {
+    alert("Sign in before downloading a backup.");
     return;
   }
   const payload = {
-    consultantId: state.consultantId,
+    gmcNumber: auth.gmcNumber,
+    reviewerName: auth.name,
     exportedAt: new Date().toISOString(),
     round: dataset.project.round,
     procedures: state.procedures
@@ -458,9 +672,26 @@ function exportBackup() {
   const blob = new Blob([JSON.stringify(payload, null, 2)], { type: "application/json" });
   const a = document.createElement("a");
   a.href = URL.createObjectURL(blob);
-  a.download = `IR_Consent_Review_R${dataset.project.round}_${state.consultantId || "anonymous"}_backup.json`;
+  a.download = `IR_Consent_Review_R${dataset.project.round}_GMC${auth.gmcNumber}_backup.json`;
   a.click();
   URL.revokeObjectURL(a.href);
+}
+
+async function signOut() {
+  await flushDraft();
+  auth = { gmcNumber: "", pin: "", name: "", gmcVerified: false };
+  state = blankState();
+  currentProcedure = null;
+  clearTimeout(saveTimer);
+  saveTimer = null;
+  if ($("navSignOut")) $("navSignOut").classList.add("hidden");
+  $("topbarReviewer").classList.add("hidden");
+  if ($("saveStatus")) $("saveStatus").classList.add("hidden");
+  $("pin").value = "";
+  hideAll();
+  $("intro").classList.remove("hidden");
+  setPageLabel("Review");
+  window.scrollTo({ top: 0, behavior: "smooth" });
 }
 
 function renderGuide() {

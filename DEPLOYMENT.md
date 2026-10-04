@@ -1,62 +1,56 @@
 # Hosting and deployment
 
-## 1. Create the Google Sheet backend
+## Apps Script backend
 
-1. Create a new blank Google Sheet called something like `IR Consent Delphi Responses`.
-2. Copy the Sheet ID from its URL. It is the long string between `/d/` and `/edit`.
-3. In the Sheet open **Extensions → Apps Script**.
-4. Delete the default code and paste everything from `apps-script/Code.gs`.
-5. Replace:
-   `PASTE_GOOGLE_SHEET_ID_HERE`
-   with your actual Sheet ID.
-6. Save the Apps Script project.
-7. Click **Deploy → New deployment**.
-8. Choose **Web app**.
-9. Set **Execute as: Me**.
-10. Set the access level to the narrowest setting that still allows the GitHub Pages site to submit. Depending on your Google Workspace configuration this may need to be `Anyone`.
-11. Click **Deploy** and authorise the script if prompted.
-12. Copy the Web App URL ending in `/exec`.
+The live site uses the Apps Script web app configured in `config.js`.
 
-The first successful submission creates:
-- `Responses` — one row per consultant × candidate risk
-- `Submissions` — one row per submitted procedure
-- `Additional Risks` — one row per additional risk suggested by a consultant
+After changing `Code.gs`:
 
-## 2. Configure the website
+1. Open the response Google Sheet.
+2. Open **Extensions > Apps Script**.
+3. Replace the existing `Code.gs` with the repository version.
+4. Save.
+5. Open **Deploy > Manage deployments**.
+6. Edit the current web app deployment.
+7. Select **New version** and deploy.
+8. Keep **Execute as: Me**.
+9. Keep the access setting that already allows the GitHub Pages site to use the web app.
+10. Confirm that the deployed URL still ends in the same `/exec` address shown in `config.js`.
 
-Open `config.js`.
+The backend creates these additional tabs automatically:
 
-Paste the Apps Script URL:
+- `Reviewers`: GMC number, name, PIN salt/hash, login and lock information
+- `Drafts`: compressed server-side draft state
 
-```js
-endpoint: "https://script.google.com/macros/s/...../exec",
-```
+Existing tabs remain:
 
-Also review:
+- `Responses`
+- `Submissions`
+- `Additional Risks`
 
-```js
-minimumResponsesForConsensus: 3
-```
+## Reviewer sign-in
 
-This value documents your intended minimum response threshold. The actual Round 2 generator also defaults to 3 unless you pass another number.
+On first use the reviewer enters:
 
-You may optionally set an `accessCode`, but this is not secure authentication because GitHub Pages is static and its JavaScript is public.
+- 7 digit GMC number
+- a self-selected 6 digit PIN
 
-## 3. Create the GitHub repository
+The backend attempts to obtain the reviewer's name from the public GMC registrant page. If that lookup cannot be read, the reviewer is asked to enter their name manually.
 
-1. Sign in to GitHub.
-2. Click **New repository**.
-3. Name it, for example:
-   `ir-consent-delphi`
-4. Choose **Public** if using standard free GitHub Pages. If your organisation/account supports Pages from a private repository, you can use that instead.
-5. Do not initialise with a README if you are uploading the supplied package directly.
-6. Create the repository.
+On later visits the same GMC number and PIN restore the saved server draft. A local browser copy is also maintained as a recovery copy.
 
-## 4. Upload the site files
+After five incorrect PIN attempts the account is temporarily locked for 15 minutes.
 
-Upload the **contents** of this package to the repository root, not the outer ZIP itself.
+A forgotten PIN currently requires the project lead to reset the relevant row in the `Reviewers` tab.
 
-The repository root should contain:
+## GitHub Pages
+
+The repository should deploy from:
+
+- branch: `main`
+- folder: `/ (root)`
+
+The root contains:
 
 ```text
 index.html
@@ -64,75 +58,29 @@ app.js
 styles.css
 config.js
 data.json
+Code.gs
 README.md
-apps-script/
-docs/
-tools/
+DEPLOYMENT.md
 ```
 
-Commit the files.
+## Test before circulation
 
-## 5. Turn on GitHub Pages
+Use a genuine GMC number that you control for testing. Do not use another person's GMC number to create a test account.
 
-1. In the repository open **Settings**.
-2. Choose **Pages** in the left menu.
-3. Under **Build and deployment**:
-   - Source: **Deploy from a branch**
-   - Branch: `main`
-   - Folder: `/ (root)`
-4. Click **Save**.
-5. GitHub will display the public Pages URL after deployment, typically:
-   `https://YOUR-USERNAME.github.io/ir-consent-delphi/`
+Check that:
 
-## 6. Test before circulation
+- first sign-in creates a reviewer record;
+- the GMC lookup displays the expected name when available;
+- an invalid PIN is rejected on return;
+- answers show `Saving...` and then `Saved`;
+- closing the site and signing in again restores progress;
+- signing in on another browser/device restores the same draft;
+- submitted procedures are marked submitted and cannot be submitted twice;
+- response rows are written correctly to the Google Sheet;
+- locally proposed risks are not duplicated when an equivalent evidence-derived risk is already present.
 
-Use a test consultant ID such as `TEST01`.
+Delete any test response/submission/draft rows before circulation if required.
 
-Test the following:
-- the procedure dashboard loads all procedures;
-- you can choose one procedure without completing the others;
-- progress persists after refreshing/closing the browser;
-- incomplete procedures cannot be submitted;
-- a complete procedure can be submitted;
-- after submission, the dashboard marks it as submitted;
-- you can then complete a different procedure;
-- the Google Sheet receives the correct number of rows for each submitted procedure;
-- `Submissions` gets one row for each submitted procedure.
+## Important deployment order
 
-Delete your test rows before opening the exercise.
-
-## 7. How consultants use it
-
-A consultant:
-1. enters their agreed identifier;
-2. sees all procedures;
-3. chooses whichever procedure(s) they wish to evaluate;
-4. records their experience with that procedure;
-5. scores every candidate risk in that selected procedure;
-6. submits that procedure;
-7. optionally returns to the dashboard and assesses another.
-
-They are not required to complete all procedures.
-
-## 8. Round 2
-
-Export the `Responses` tab from Google Sheets as CSV.
-
-Run:
-
-```bash
-python tools/generate_round2.py responses.csv data.json round2-data.json 3
-```
-
-The final `3` is the minimum number of complete consultant responses required before consensus is considered. Change it if your group prospectively agrees a different threshold.
-
-The script:
-- deduplicates consultant/item responses using the latest submission;
-- calculates the denominator per item from consultants who completed that procedure;
-- applies the 80% inclusion/exclusion rule;
-- flags items with too few responses;
-- creates a Round 2 dataset containing unresolved or insufficient-response items.
-
-## Governance
-
-Do not enter patient-identifiable information into this site. It is intended only for consultant voting on procedure-level consent risks. Agree locally whether consultant responses should be identifiable, pseudonymous or anonymous and follow your organisation's audit/QI governance requirements.
+Do not merge frontend changes that require the new login workflow until the updated `Code.gs` has been deployed as a new Apps Script version. The current frontend depends on the new backend actions for login and draft restoration.

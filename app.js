@@ -105,8 +105,15 @@ async function saveDraftToServer() {
 async function flushDraft() {
   clearTimeout(saveTimer);
   saveTimer = null;
-  if (auth.gmcNumber) localStorage.setItem(localDraftKey(auth.gmcNumber), JSON.stringify(state));
-  return auth.gmcNumber ? await saveDraftToServer() : false;
+  if (!auth.gmcNumber) return false;
+  localStorage.setItem(localDraftKey(auth.gmcNumber), JSON.stringify(state));
+  if (saveInFlight) await saveInFlight;
+  clearTimeout(saveTimer);
+  saveTimer = null;
+  const stateTime = Date.parse(state.updatedAt || "") || 0;
+  const savedTime = Date.parse(lastServerSavedAt || "") || 0;
+  if (stateTime > savedTime) return await saveDraftToServer();
+  return true;
 }
 
 function setSaveStatus(text, mode) {

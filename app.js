@@ -141,9 +141,8 @@ function apiRequest(payload) {
       setTimeout(() => { iframe.remove(); form.remove(); }, 0);
     };
     const onMessage = event => {
-      const allowed = event.origin === "https://script.google.com" || event.origin.endsWith(".googleusercontent.com");
       const d = event.data || {};
-      if (!allowed || d.source !== "IR_CONSENT_BACKEND" || d.requestId !== requestId) return;
+      if (event.source !== iframe.contentWindow || d.source !== "IR_CONSENT_BACKEND" || d.requestId !== requestId) return;
       cleanup();
       resolve(d.payload || {});
     };

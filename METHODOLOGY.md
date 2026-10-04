@@ -6,7 +6,7 @@ The project aims to develop an agreed departmental core risk set for commonly pe
 
 ## Evidence dataset
 
-The website contains 238 procedure-specific candidate risks across 20 procedures. Existing candidate risks were retained and additional risks identified during the 2026 evidence review were added. Evidence is linked at individual risk level where available.
+The website contains 243 procedure-specific candidate risks across 20 procedures. Existing candidate risks were retained and additional risks identified during the 2026 evidence review were added. Evidence is linked at individual risk level where available.
 
 ### Evidence hierarchy
 

@@ -106,7 +106,7 @@ a:hover{text-decoration:underline}
 .topbar-kicker{color:var(--muted);margin-right:8px}
 .topbar-kicker::after{content:"/";margin-left:8px;color:#c2c9d0}
 .topbar-right{display:flex;gap:8px;align-items:center}
-.consultant-chip,.round-chip{
+.reviewer-chip,.round-chip{
   display:inline-flex;align-items:center;
   min-height:30px;
   border-radius:3px;
@@ -114,7 +114,7 @@ a:hover{text-decoration:underline}
   font-size:12px;
   font-weight:600;
 }
-.consultant-chip{background:#f1f4f6;color:var(--heading);border:1px solid var(--border)}
+.reviewer-chip{background:#f1f4f6;color:var(--heading);border:1px solid var(--border)}
 .round-chip{background:var(--navy);color:#fff}
 
 .main-content{max-width:1280px;margin:0 auto;padding:28px 32px 88px}
@@ -459,7 +459,7 @@ h3{font-size:18px;line-height:1.35}
   .topbar{min-height:52px;font-size:12px}
   .topbar-kicker{display:none}
   .topbar-kicker::after{display:none}
-  .consultant-chip{display:none!important}
+  .reviewer-chip{display:none!important}
   .page-heading{display:block}
   .page-heading>.btn{margin-top:12px}
   .procedure-grid{grid-template-columns:1fr}

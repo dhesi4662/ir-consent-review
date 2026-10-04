@@ -19,6 +19,7 @@ After changing `Code.gs`:
 
 The backend creates these additional tabs automatically:
 
+- `Approved Reviewers`: GMC number, reviewer name and active status. The supplied departmental reviewer roster is seeded automatically the first time the new backend runs.
 - `Reviewers`: GMC number, name, PIN salt/hash, login and lock information
 - `Drafts`: compressed server-side draft state
 
@@ -35,7 +36,7 @@ On first use the reviewer enters:
 - 7 digit GMC number
 - a self-selected 6 digit PIN
 
-The backend attempts to obtain the reviewer's name from the public GMC registrant page. If that lookup cannot be read, the reviewer is asked to enter their name manually.
+The backend checks the GMC number against the `Approved Reviewers` tab. Only active reviewers on that list can create an account. The stored reviewer name is used for the welcome message; no live GMC website lookup is required.
 
 On later visits the same GMC number and PIN restore the saved server draft. A local browser copy is also maintained as a recovery copy.
 

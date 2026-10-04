@@ -10,7 +10,7 @@ Static GitHub Pages frontend for departmental review of procedure-specific IR co
 - numerical-frequency question only where a directly sourced numerical estimate is available
 - scoring guide available throughout the site
 - GMC number and 6 digit PIN sign-in
-- reviewer name lookup from the public GMC register when available
+- approved reviewer roster keyed by GMC number
 - automatic local and server-side draft saving
 - cross-device draft restoration
 - per-procedure submission and locking after submission
@@ -18,6 +18,6 @@ Static GitHub Pages frontend for departmental review of procedure-specific IR co
 
 PINs are stored as salted, peppered SHA-256 hashes, not in plain text. The browser keeps the PIN only in memory for the active session.
 
-The GMC lookup is best effort. If the public register cannot be read, the site asks the reviewer to enter their name manually.
+Reviewer names are read from the `Approved Reviewers` sheet. Only active GMC numbers on that list can create an account.
 
 The visual language is adapted from the open-source Gentelella admin dashboard project (ColorlibHQ/gentelella, MIT licensed). This project does not bundle the Gentelella framework itself.

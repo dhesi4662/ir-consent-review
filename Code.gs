@@ -3,7 +3,22 @@ const RESPONSES_SHEET = "Responses";
 const SUBMISSIONS_SHEET = "Submissions";
 const ADDITIONAL_RISKS_SHEET = "Additional Risks";
 const REVIEWERS_SHEET = "Reviewers";
+const APPROVED_REVIEWERS_SHEET = "Approved Reviewers";
 const DRAFTS_SHEET = "Drafts";
+
+const DEFAULT_APPROVED_REVIEWERS = [
+  ["7278762", "Christopher John Miller", true],
+  ["6106031", "Constantinos Tingerides", true],
+  ["4606060", "James Curtis Lenton", true],
+  ["7460951", "Omar Abdel-Hadi", true],
+  ["3087367", "Paul Jeremy Turner", true],
+  ["4762384", "Sapna Puppala", true],
+  ["4329532", "Christopher John Hammond", true],
+  ["3441901", "Jai Vinodray Patel", true],
+  ["3090628", "Simon John McPherson", true],
+  ["6149406", "Paul Walker", true],
+  ["7753987", "Simran Singh Dhesi", true]
+];
 const PROJECT_CODE = "IR-CONSENT-2026";
 const ROUND = 1;
 const MAX_FAILED_ATTEMPTS = 5;
@@ -32,7 +47,6 @@ function doGet() {
 function login_(p) {
   const gmc = normaliseGmc_(p.gmcNumber);
   const pin = normalisePin_(p.pin);
-  const manualName = String(p.manualName || "").trim();
 
   if (!/^\d{7}$/.test(gmc)) {
     return { ok: false, code: "INVALID_GMC", error: "Enter a valid 7 digit GMC number." };
@@ -63,23 +77,16 @@ function login_(p) {
     };
   }
 
-  const lookup = lookupGmcName_(gmc);
-  if (lookup.notFound) {
-    return { ok: false, code: "GMC_NOT_FOUND", error: "No doctor was found for that GMC number." };
-  }
-  if (!lookup.name && !manualName) {
+  const approved = findApprovedReviewer_(ss, gmc);
+  if (!approved) {
     return {
       ok: false,
-      code: "GMC_LOOKUP_FAILED",
-      requiresName: true,
-      error: "The GMC register could not be read at the moment. Please enter your name to continue."
+      code: "GMC_NOT_APPROVED",
+      error: "GMC number not recognised. Please check the number or contact the project lead."
     };
   }
 
-  const name = lookup.name || cleanName_(manualName);
-  if (!name) {
-    return { ok: false, code: "MISSING_NAME", error: "Please enter your name." };
-  }
+  const name = approved.name;
 
   const lock = LockService.getScriptLock();
   lock.waitLock(10000);
@@ -109,8 +116,8 @@ function login_(p) {
       new Date(),
       0,
       "",
-      Boolean(lookup.name),
-      lookup.sourceUrl || "https://www.gmc-uk.org/registrants/" + gmc
+      false,
+      "Approved reviewer roster"
     ]);
   } finally {
     lock.releaseLock();
@@ -121,7 +128,7 @@ function login_(p) {
     newAccount: true,
     gmcNumber: gmc,
     name: name,
-    gmcVerified: Boolean(lookup.name),
+    gmcVerified: false,
     draft: null,
     submittedProcedures: []
   };
@@ -287,69 +294,40 @@ function authenticateExistingReviewer_(sheet, existing, pin) {
   };
 }
 
-function lookupGmcName_(gmc) {
-  const url = "https://www.gmc-uk.org/registrants/" + encodeURIComponent(gmc);
-
-  try {
-    const response = UrlFetchApp.fetch(url, {
-      method: "get",
-      followRedirects: true,
-      muteHttpExceptions: true,
-      headers: {
-        "User-Agent": "Mozilla/5.0 (compatible; IRConsentReview/1.0)",
-        "Accept": "text/html,application/xhtml+xml"
-      }
-    });
-
-    const code = response.getResponseCode();
-    if (code === 404) return { name: "", notFound: true, sourceUrl: url };
-    if (code < 200 || code >= 400) return { name: "", unavailable: true, sourceUrl: url };
-
-    const contentType = String(response.getHeaders()["Content-Type"] || response.getHeaders()["content-type"] || "");
-    if (!/text\/html/i.test(contentType)) {
-      return { name: "", unavailable: true, sourceUrl: url };
-    }
-
-    const html = response.getContentText();
-    const titleMatch = html.match(/<title[^>]*>([\s\S]*?)<\/title>/i);
-    if (titleMatch) {
-      const title = decodeHtml_(stripTags_(titleMatch[1])).replace(/\s+/g, " ").trim();
-      const titleName = title.match(new RegExp("^(.+?)\\s*\\(\\s*" + gmc + "\\s*\\)\\s*-\\s*Registrant details page", "i"));
-      if (titleName && titleName[1]) {
-        return { name: cleanName_(titleName[1]), sourceUrl: url };
-      }
-    }
-
-    const h1Matches = [];
-    const h1Regex = /<h1[^>]*>([\s\S]*?)<\/h1>/gi;
-    let h1Match;
-    while ((h1Match = h1Regex.exec(html)) !== null) {
-      const h1 = cleanName_(decodeHtml_(stripTags_(h1Match[1])));
-      if (h1) h1Matches.push(h1);
-    }
-
-    for (let i = 0; i < h1Matches.length; i++) {
-      let h1 = h1Matches[i];
-      h1 = h1.replace(new RegExp("\\s*\\(\\s*" + gmc + "\\s*\\)\\s*$"), "").trim();
-      if (h1 && !/our registers|registrant details|search our registers/i.test(h1)) {
-        return { name: cleanName_(h1), sourceUrl: url };
-      }
-    }
-
-    const text = decodeHtml_(stripTags_(html)).replace(/\s+/g, " ").trim();
-    const inlineMatch = text.match(new RegExp("([A-Za-z][A-Za-z'’\\-., ]{2,100}?)\\s*\\(\\s*" + gmc + "\\s*\\)\\s*-\\s*Registrant details page", "i"));
-    if (inlineMatch && inlineMatch[1]) {
-      return { name: cleanName_(inlineMatch[1]), sourceUrl: url };
-    }
-
-    if (/page not found|registrant not found|no record found/i.test(text)) {
-      return { name: "", notFound: true, sourceUrl: url };
-    }
-
-    return { name: "", unavailable: true, sourceUrl: url };
-  } catch (err) {
-    return { name: "", unavailable: true, sourceUrl: url };
+function ensureApprovedReviewers_(ss) {
+  let sheet = ss.getSheetByName(APPROVED_REVIEWERS_SHEET);
+  if (!sheet) {
+    sheet = ss.insertSheet(APPROVED_REVIEWERS_SHEET);
   }
+
+  if (sheet.getLastRow() === 0) {
+    sheet.appendRow(["gmc_number", "name", "active"]);
+  }
+
+  if (sheet.getLastRow() === 1) {
+    sheet.getRange(2, 1, DEFAULT_APPROVED_REVIEWERS.length, 3).setValues(DEFAULT_APPROVED_REVIEWERS);
+  }
+
+  return sheet;
+}
+
+function findApprovedReviewer_(ss, gmc) {
+  const sheet = ensureApprovedReviewers_(ss);
+  const lastRow = sheet.getLastRow();
+  if (lastRow < 2) return null;
+
+  const values = sheet.getRange(2, 1, lastRow - 1, 3).getValues();
+  for (let i = 0; i < values.length; i++) {
+    const rowGmc = normaliseGmc_(values[i][0]);
+    const name = cleanName_(values[i][1]);
+    const activeValue = values[i][2];
+    const active = activeValue === true || /^(true|yes|y|1|active)$/i.test(String(activeValue || "").trim());
+
+    if (rowGmc === gmc && active && name) {
+      return { row: i + 2, gmcNumber: rowGmc, name: name };
+    }
+  }
+  return null;
 }
 
 function findReviewer_(sheet, gmc) {

@@ -1,16 +1,17 @@
 # IR Consent Review
 
-Consultant review site for GitHub Pages.
+Static GitHub Pages frontend for Round 1 of a consultant modified-Delphi review of procedure-specific IR consent risks.
 
-- Procedure-selective participation
-- 1–5 scoring for each candidate risk
-- Optional frequency decision and comments
-- Additional risks entered as separate items
-- Local autosave
-- Procedure-level submission to Google Sheets
-- Separate `Additional Risks` sheet for easy review
-- Round 2 generator included
+Current dataset: 20 procedures and 238 evidence-derived Delphi candidate risks. The site also displays a small project-defined local core set that is not part of the Delphi vote.
 
-Visual system adapted from the `stencil-tablet` template in `zarazhangrui/beautiful-html-templates`.
+## Current interface
 
-See `docs/DEPLOYMENT.md` for setup.
+- Gentelella-inspired clinical/admin layout
+- risk-level evidence sources with Tier 1–5 colour coding
+- numerical-frequency question shown only where a directly sourced numerical estimate is available
+- fixed scoring/evidence guide available throughout the site
+- local core consent items shown separately from evidence-derived Delphi candidates
+- per-procedure completion and submission
+- browser autosave and JSON backup
+
+The visual language is adapted from the open-source Gentelella admin dashboard project (ColorlibHQ/gentelella, MIT licensed). This project does not bundle the Gentelella framework itself.

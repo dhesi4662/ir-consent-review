@@ -1,23 +1,61 @@
-# Methodology wording
+# IR Consent Review — methodology
 
-## Suggested description
+## Purpose
 
-An initial audit assessed variation in local documentation of risks during consent for interventional radiology procedures. The reference material was subsequently updated using current professional guidance and other authoritative sources. This evidence review generated a candidate procedure-specific risk matrix rather than a definitive consent standard.
+The project aims to develop an agreed departmental core risk set for commonly performed interventional radiology procedures. It is intended to support consistent documentation while preserving patient-specific discussion of material risk.
 
-Candidate risks were atomised into individual items for structured consultant review using a modified Delphi process. Consultants were invited to review any or all procedures according to their clinical experience and areas of practice. Participation was therefore procedure-selective rather than requiring every participant to assess every procedure.
+## Evidence dataset
 
-For each procedure selected, participants were required to score all candidate risks before that procedure could be submitted. They also recorded their level of experience with that procedure. Each item was rated on a five-point scale: 1, definitely exclude; 2, probably exclude; 3, uncertain; 4, probably include; and 5, definitely include.
+The Round 1 website contains 238 procedure-specific candidate risks across 20 procedures. Existing candidate risks were retained and additional risks identified during the 2026 evidence review were added. Evidence is linked at individual risk level where available.
 
-Consensus is calculated independently for each candidate item using only consultants who completed the relevant procedure as the denominator. The supplied implementation uses ≥80% scoring 4–5 for inclusion and ≥80% scoring 1–2 for exclusion. Items meeting neither threshold proceed to Round 2. A minimum number of completed procedure responses should also be prospectively specified before an item can be labelled as reaching departmental consensus; the supplied configuration defaults to three.
+### Evidence hierarchy
 
-Round 2 should present anonymised aggregate Round 1 results before rescoring unresolved items. The final output is an agreed departmental core risk set. This does not replace individualised consent: material risks arising from patient factors, anatomy, access route, contrast, radiation, sedation, device choice or procedural technique remain case dependent.
+- Tier 1: professional society guideline/standard or high-quality systematic review/meta-analysis
+- Tier 2: large multicentre prospective study, major registry, randomised trial or audited national dataset
+- Tier 3: large peer-reviewed cohort/retrospective series or good-quality peer-reviewed review
+- Tier 4: established tertiary/high-volume centre or national patient information / reputable secondary clinical resource
+- Tier 5: small case series, case report, older/indirect evidence or expert opinion
+- Unverified: no risk-level supporting source confirmed in the current review
 
-## Decisions to agree before launch
+The website colour-codes each source by its tier. The displayed 'best evidence tier' is the highest-quality source supporting that candidate risk; it does not imply that the evidence is high certainty or transferable to every patient.
 
-1. Confirm that procedure-selective participation is acceptable.
-2. Confirm the minimum response number required for consensus (default currently 3).
-3. Confirm the 80% inclusion/exclusion threshold.
-4. Decide whether responses are identifiable, pseudonymous or anonymous.
-5. Decide whether all experience categories count equally in consensus or whether a sensitivity analysis should be performed using only consultants who routinely/occasionally perform the procedure.
-6. Decide how newly suggested risks are handled between rounds.
-7. Decide whether persistent non-consensus after Round 2 is resolved through governance discussion or retained as non-consensus.
+## Local core items
+
+A separate project-defined local core is displayed for every procedure:
+
+- Pain / discomfort
+- Bleeding / bruising / haematoma
+- Damage to surrounding structures
+- Technical or clinical failure, with possible need for repeat or alternative treatment
+
+Air embolism is additionally included as a local core item for the pre-specified venous procedure group.
+
+These items are explicitly labelled as a local/project convention rather than being attributed to a single published source. They are not included in the Delphi vote.
+
+## Round 1 scoring
+
+Consultants may review one, several or all procedures according to their practice and experience. Once a procedure is selected, all procedure-specific candidate risks must be scored before submission.
+
+Score:
+
+1. Definitely exclude
+2. Probably exclude
+3. Unsure
+4. Probably include
+5. Definitely include
+
+Additional missing risks can be entered separately.
+
+## Numerical frequency
+
+The website asks `Include a numerical frequency on the final consent aid?` only where the evidence dataset contains a directly reported numerical incidence/frequency. When incidence is not reliably established or is context dependent, no frequency vote is shown.
+
+## Consensus rule
+
+Planned rule per procedure-risk item:
+
+- >=80% scoring 4–5: Include
+- >=80% scoring 1–2: Exclude
+- otherwise: Round 2
+
+Consensus uses only consultants who completed that procedure. A minimum number of completed procedure responses should be satisfied before a consensus label is applied; the current default is 3.

@@ -3,6 +3,6 @@ window.DELPHI_CONFIG = {
   projectCode: "IR-CONSENT-2026",
   round: 1,
   requireConsultantId: true,
-  autosaveKey: "ir-consent-review-round1-v4",
+  autosaveKey: "ir-consent-review-round1-v8",
   minimumResponsesForConsensus: 3
 };

@@ -1,16 +1,159 @@
 const cfg = window.DELPHI_CONFIG || {};
 let dataset = null;
 let currentProcedure = null;
-let state = { consultantId: "", startedAt: null, procedures: {} };
+let state = blankState();
+let auth = { gmcNumber: "", pin: "", name: "", gmcVerified: false };
+let saveTimer = null;
+let saveInFlight = null;
+let lastServerSavedAt = null;
 
 const $ = id => document.getElementById(id);
-const save = () => localStorage.setItem(cfg.autosaveKey || "ir-consent-review", JSON.stringify(state));
-const load = () => {
+
+function blankState() {
+  return { consultantId: "", reviewerName: "", startedAt: null, updatedAt: null, procedures: {} };
+}
+
+function localDraftKey(gmcNumber) {
+  return `${cfg.autosaveKey || "ir-consent-review"}-${gmcNumber}`;
+}
+
+function lastGmcKey() {
+  return `${cfg.autosaveKey || "ir-consent-review"}-last-gmc`;
+}
+
+function loadLocalDraft(gmcNumber) {
   try {
-    const saved = JSON.parse(localStorage.getItem(cfg.autosaveKey || "ir-consent-review"));
-    if (saved) state = saved;
-  } catch (e) {}
-};
+    const saved = JSON.parse(localStorage.getItem(localDraftKey(gmcNumber)) || "null");
+    return saved && typeof saved === "object" ? saved : null;
+  } catch (e) {
+    return null;
+  }
+}
+
+function normaliseState(input) {
+  const next = input && typeof input === "object" ? input : blankState();
+  if (!next.procedures || typeof next.procedures !== "object") next.procedures = {};
+  if (!next.updatedAt) next.updatedAt = null;
+  return next;
+}
+
+function isNewer(a, b) {
+  if (!a) return false;
+  if (!b) return true;
+  return (Date.parse(a.updatedAt || "") || 0) > (Date.parse(b.updatedAt || "") || 0);
+}
+
+function chooseDraft(serverDraft, localDraft) {
+  if (!serverDraft && !localDraft) return blankState();
+  if (!serverDraft) return normaliseState(localDraft);
+  if (!localDraft) return normaliseState(serverDraft);
+  return normaliseState(isNewer(localDraft, serverDraft) ? localDraft : serverDraft);
+}
+
+function touch(proc) {
+  const now = new Date().toISOString();
+  state.updatedAt = now;
+  if (proc) pState(proc).updatedAt = now;
+}
+
+function save(proc) {
+  touch(proc || currentProcedure);
+  if (auth.gmcNumber) localStorage.setItem(localDraftKey(auth.gmcNumber), JSON.stringify(state));
+  scheduleServerSave();
+}
+
+function scheduleServerSave(delay = 1200) {
+  if (!auth.gmcNumber || !auth.pin) return;
+  clearTimeout(saveTimer);
+  setSaveStatus("Saving...", "saving");
+  saveTimer = setTimeout(() => {
+    saveTimer = null;
+    saveDraftToServer();
+  }, delay);
+}
+
+async function saveDraftToServer() {
+  if (!auth.gmcNumber || !auth.pin) return false;
+  if (saveInFlight) return saveInFlight;
+  const snapshot = JSON.parse(JSON.stringify(state));
+  setSaveStatus("Saving...", "saving");
+  saveInFlight = (async () => {
+    try {
+      const result = await apiRequest({
+        action: "saveDraft",
+        projectCode: cfg.projectCode,
+        round: cfg.round || dataset.project.round,
+        gmcNumber: auth.gmcNumber,
+        pin: auth.pin,
+        draft: snapshot
+      });
+      if (!result.ok) throw new Error(result.error || "Draft save failed");
+      lastServerSavedAt = snapshot.updatedAt || new Date().toISOString();
+      setSaveStatus("Saved", "saved");
+      if ((Date.parse(state.updatedAt || "") || 0) > (Date.parse(lastServerSavedAt || "") || 0)) scheduleServerSave(100);
+      return true;
+    } catch (e) {
+      setSaveStatus("Saved on this device", "local");
+      return false;
+    } finally {
+      saveInFlight = null;
+    }
+  })();
+  return saveInFlight;
+}
+
+async function flushDraft() {
+  clearTimeout(saveTimer);
+  saveTimer = null;
+  if (auth.gmcNumber) localStorage.setItem(localDraftKey(auth.gmcNumber), JSON.stringify(state));
+  return auth.gmcNumber ? await saveDraftToServer() : false;
+}
+
+function setSaveStatus(text, mode) {
+  const el = $("saveStatus");
+  if (!el || !auth.gmcNumber) return;
+  el.textContent = text;
+  el.className = `save-status ${mode || ""}`;
+}
+
+function apiRequest(payload) {
+  if (!cfg.endpoint) return Promise.reject(new Error("No endpoint configured"));
+  const requestId = `r-${Date.now()}-${Math.random().toString(36).slice(2)}`;
+  payload.requestId = requestId;
+  return new Promise((resolve, reject) => {
+    const frameName = `ir-backend-${requestId}`;
+    const iframe = document.createElement("iframe");
+    iframe.name = frameName;
+    iframe.className = "backend-frame";
+    iframe.setAttribute("aria-hidden", "true");
+    const form = document.createElement("form");
+    form.method = "POST";
+    form.action = cfg.endpoint;
+    form.target = frameName;
+    form.className = "backend-form";
+    const input = document.createElement("textarea");
+    input.name = "payload";
+    input.value = JSON.stringify(payload);
+    form.appendChild(input);
+    const cleanup = () => {
+      window.removeEventListener("message", onMessage);
+      clearTimeout(timeout);
+      setTimeout(() => { iframe.remove(); form.remove(); }, 0);
+    };
+    const onMessage = event => {
+      const allowed = event.origin === "https://script.google.com" || event.origin.endsWith(".googleusercontent.com");
+      const d = event.data || {};
+      if (!allowed || d.source !== "IR_CONSENT_BACKEND" || d.requestId !== requestId) return;
+      cleanup();
+      resolve(d.payload || {});
+    };
+    const timeout = setTimeout(() => { cleanup(); reject(new Error("Backend request timed out")); }, 20000);
+    window.addEventListener("message", onMessage);
+    document.body.appendChild(iframe);
+    document.body.appendChild(form);
+    form.submit();
+  });
+}
 
 const pState = proc => {
   if (!state.procedures[proc]) {

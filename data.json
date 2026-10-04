@@ -108,7 +108,12 @@
         "note": "Locally proposed common consent risk; no specific published source assigned."
       }
     ],
-    "Transarterial chemoembolisation (TACE)": [],
+    "Transarterial chemoembolisation (TACE)": [
+      {
+        "risk": "Technical or clinical failure, with possible need for repeat or alternative treatment",
+        "note": "Locally proposed common consent risk; no specific published source assigned."
+      }
+    ],
     "Thoracic endovascular aortic repair (TEVAR)": [
       {
         "risk": "Pain / discomfort",

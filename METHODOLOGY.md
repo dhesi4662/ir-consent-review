@@ -1,4 +1,4 @@
-# IR Consent Review - methodology
+# Leeds IR Consent Audit Delphi Review - methodology
 
 ## Purpose
 
@@ -6,7 +6,7 @@ The project aims to develop an agreed departmental core risk set for commonly pe
 
 ## Evidence dataset
 
-The Round 1 website contains 238 procedure-specific candidate risks across 20 procedures. Existing candidate risks were retained and additional risks identified during the 2026 evidence review were added. Evidence is linked at individual risk level where available.
+The website contains 238 procedure-specific candidate risks across 20 procedures. Existing candidate risks were retained and additional risks identified during the 2026 evidence review were added. Evidence is linked at individual risk level where available.
 
 ### Evidence hierarchy
 
@@ -37,7 +37,7 @@ Where an existing procedure-specific candidate already represents one of these c
 
 Local-practice candidates are scored using the same 1 to 5 scale and enter the same consensus process as the other candidate risks.
 
-## Round 1 scoring
+## Scoring
 
 Reviewers may review one, several or all procedures according to their practice and experience. Once a procedure is selected, all procedure-specific candidate risks must be scored before submission.
 

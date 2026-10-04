@@ -23,7 +23,7 @@
       "Unverified": "No risk-level supporting source confirmed in the current evidence review",
       "Local practice": "Locally proposed common consent risk; no specific published source assigned"
     },
-    "local_core_note": "Locally proposed common consent risks are included for review alongside the procedure-specific risks."
+    "local_core_note": "Locally proposed common risks are only added where no equivalent or closely overlapping procedure-specific risk is already present."
   },
   "procedures": [
     "Bronchial artery embolisation (BAE)",
@@ -48,35 +48,10 @@
     "Venous stenting"
   ],
   "local_core_by_procedure": {
-    "Bronchial artery embolisation (BAE)": [
-      {
-        "risk": "Pain / discomfort",
-        "note": "Locally proposed common consent risk; no specific published source assigned."
-      },
-      {
-        "risk": "Bleeding / bruising / haematoma",
-        "note": "Locally proposed common consent risk; no specific published source assigned."
-      },
-      {
-        "risk": "Damage to surrounding structures",
-        "note": "Locally proposed common consent risk; no specific published source assigned."
-      },
-      {
-        "risk": "Technical or clinical failure, with possible need for repeat or alternative treatment",
-        "note": "Locally proposed common consent risk; no specific published source assigned."
-      }
-    ],
+    "Bronchial artery embolisation (BAE)": [],
     "Carotid artery angioplasty and stenting (CAS)": [
       {
         "risk": "Pain / discomfort",
-        "note": "Locally proposed common consent risk; no specific published source assigned."
-      },
-      {
-        "risk": "Bleeding / bruising / haematoma",
-        "note": "Locally proposed common consent risk; no specific published source assigned."
-      },
-      {
-        "risk": "Damage to surrounding structures",
         "note": "Locally proposed common consent risk; no specific published source assigned."
       },
       {
@@ -86,18 +61,6 @@
     ],
     "Diagnostic angiography": [
       {
-        "risk": "Pain / discomfort",
-        "note": "Locally proposed common consent risk; no specific published source assigned."
-      },
-      {
-        "risk": "Bleeding / bruising / haematoma",
-        "note": "Locally proposed common consent risk; no specific published source assigned."
-      },
-      {
-        "risk": "Damage to surrounding structures",
-        "note": "Locally proposed common consent risk; no specific published source assigned."
-      },
-      {
         "risk": "Technical or clinical failure, with possible need for repeat or alternative treatment",
         "note": "Locally proposed common consent risk; no specific published source assigned."
       }
@@ -106,95 +69,22 @@
       {
         "risk": "Pain / discomfort",
         "note": "Locally proposed common consent risk; no specific published source assigned."
-      },
-      {
-        "risk": "Bleeding / bruising / haematoma",
-        "note": "Locally proposed common consent risk; no specific published source assigned."
-      },
-      {
-        "risk": "Damage to surrounding structures",
-        "note": "Locally proposed common consent risk; no specific published source assigned."
-      },
-      {
-        "risk": "Technical or clinical failure, with possible need for repeat or alternative treatment",
-        "note": "Locally proposed common consent risk; no specific published source assigned."
       }
     ],
     "Gastrointestinal bleeding embolisation": [
       {
         "risk": "Pain / discomfort",
         "note": "Locally proposed common consent risk; no specific published source assigned."
-      },
-      {
-        "risk": "Bleeding / bruising / haematoma",
-        "note": "Locally proposed common consent risk; no specific published source assigned."
-      },
-      {
-        "risk": "Damage to surrounding structures",
-        "note": "Locally proposed common consent risk; no specific published source assigned."
-      },
-      {
-        "risk": "Technical or clinical failure, with possible need for repeat or alternative treatment",
-        "note": "Locally proposed common consent risk; no specific published source assigned."
       }
     ],
     "Pelvic congestion / pelvic vein embolisation": [
-      {
-        "risk": "Pain / discomfort",
-        "note": "Locally proposed common consent risk; no specific published source assigned."
-      },
-      {
-        "risk": "Bleeding / bruising / haematoma",
-        "note": "Locally proposed common consent risk; no specific published source assigned."
-      },
-      {
-        "risk": "Damage to surrounding structures",
-        "note": "Locally proposed common consent risk; no specific published source assigned."
-      },
-      {
-        "risk": "Technical or clinical failure, with possible need for repeat or alternative treatment",
-        "note": "Locally proposed common consent risk; no specific published source assigned."
-      },
       {
         "risk": "Air embolism",
         "note": "Locally proposed common consent risk for venous procedures; no specific published source assigned."
       }
     ],
-    "Percutaneous gastrostomy insertion": [
-      {
-        "risk": "Pain / discomfort",
-        "note": "Locally proposed common consent risk; no specific published source assigned."
-      },
-      {
-        "risk": "Bleeding / bruising / haematoma",
-        "note": "Locally proposed common consent risk; no specific published source assigned."
-      },
-      {
-        "risk": "Damage to surrounding structures",
-        "note": "Locally proposed common consent risk; no specific published source assigned."
-      },
-      {
-        "risk": "Technical or clinical failure, with possible need for repeat or alternative treatment",
-        "note": "Locally proposed common consent risk; no specific published source assigned."
-      }
-    ],
+    "Percutaneous gastrostomy insertion": [],
     "Transjugular liver biopsy (TJLB)": [
-      {
-        "risk": "Pain / discomfort",
-        "note": "Locally proposed common consent risk; no specific published source assigned."
-      },
-      {
-        "risk": "Bleeding / bruising / haematoma",
-        "note": "Locally proposed common consent risk; no specific published source assigned."
-      },
-      {
-        "risk": "Damage to surrounding structures",
-        "note": "Locally proposed common consent risk; no specific published source assigned."
-      },
-      {
-        "risk": "Technical or clinical failure, with possible need for repeat or alternative treatment",
-        "note": "Locally proposed common consent risk; no specific published source assigned."
-      },
       {
         "risk": "Air embolism",
         "note": "Locally proposed common consent risk for venous procedures; no specific published source assigned."
@@ -204,37 +94,9 @@
       {
         "risk": "Pain / discomfort",
         "note": "Locally proposed common consent risk; no specific published source assigned."
-      },
-      {
-        "risk": "Bleeding / bruising / haematoma",
-        "note": "Locally proposed common consent risk; no specific published source assigned."
-      },
-      {
-        "risk": "Damage to surrounding structures",
-        "note": "Locally proposed common consent risk; no specific published source assigned."
-      },
-      {
-        "risk": "Technical or clinical failure, with possible need for repeat or alternative treatment",
-        "note": "Locally proposed common consent risk; no specific published source assigned."
       }
     ],
     "Portal vein embolisation (PVE)": [
-      {
-        "risk": "Pain / discomfort",
-        "note": "Locally proposed common consent risk; no specific published source assigned."
-      },
-      {
-        "risk": "Bleeding / bruising / haematoma",
-        "note": "Locally proposed common consent risk; no specific published source assigned."
-      },
-      {
-        "risk": "Damage to surrounding structures",
-        "note": "Locally proposed common consent risk; no specific published source assigned."
-      },
-      {
-        "risk": "Technical or clinical failure, with possible need for repeat or alternative treatment",
-        "note": "Locally proposed common consent risk; no specific published source assigned."
-      },
       {
         "risk": "Air embolism",
         "note": "Locally proposed common consent risk for venous procedures; no specific published source assigned."
@@ -244,53 +106,12 @@
       {
         "risk": "Pain / discomfort",
         "note": "Locally proposed common consent risk; no specific published source assigned."
-      },
-      {
-        "risk": "Bleeding / bruising / haematoma",
-        "note": "Locally proposed common consent risk; no specific published source assigned."
-      },
-      {
-        "risk": "Damage to surrounding structures",
-        "note": "Locally proposed common consent risk; no specific published source assigned."
-      },
-      {
-        "risk": "Technical or clinical failure, with possible need for repeat or alternative treatment",
-        "note": "Locally proposed common consent risk; no specific published source assigned."
       }
     ],
-    "Transarterial chemoembolisation (TACE)": [
-      {
-        "risk": "Pain / discomfort",
-        "note": "Locally proposed common consent risk; no specific published source assigned."
-      },
-      {
-        "risk": "Bleeding / bruising / haematoma",
-        "note": "Locally proposed common consent risk; no specific published source assigned."
-      },
-      {
-        "risk": "Damage to surrounding structures",
-        "note": "Locally proposed common consent risk; no specific published source assigned."
-      },
-      {
-        "risk": "Technical or clinical failure, with possible need for repeat or alternative treatment",
-        "note": "Locally proposed common consent risk; no specific published source assigned."
-      }
-    ],
+    "Transarterial chemoembolisation (TACE)": [],
     "Thoracic endovascular aortic repair (TEVAR)": [
       {
         "risk": "Pain / discomfort",
-        "note": "Locally proposed common consent risk; no specific published source assigned."
-      },
-      {
-        "risk": "Bleeding / bruising / haematoma",
-        "note": "Locally proposed common consent risk; no specific published source assigned."
-      },
-      {
-        "risk": "Damage to surrounding structures",
-        "note": "Locally proposed common consent risk; no specific published source assigned."
-      },
-      {
-        "risk": "Technical or clinical failure, with possible need for repeat or alternative treatment",
         "note": "Locally proposed common consent risk; no specific published source assigned."
       }
     ],
@@ -298,139 +119,24 @@
       {
         "risk": "Pain / discomfort",
         "note": "Locally proposed common consent risk; no specific published source assigned."
-      },
-      {
-        "risk": "Bleeding / bruising / haematoma",
-        "note": "Locally proposed common consent risk; no specific published source assigned."
-      },
-      {
-        "risk": "Damage to surrounding structures",
-        "note": "Locally proposed common consent risk; no specific published source assigned."
-      },
-      {
-        "risk": "Technical or clinical failure, with possible need for repeat or alternative treatment",
-        "note": "Locally proposed common consent risk; no specific published source assigned."
       }
     ],
-    "PTA of dialysis access": [
-      {
-        "risk": "Pain / discomfort",
-        "note": "Locally proposed common consent risk; no specific published source assigned."
-      },
-      {
-        "risk": "Bleeding / bruising / haematoma",
-        "note": "Locally proposed common consent risk; no specific published source assigned."
-      },
-      {
-        "risk": "Damage to surrounding structures",
-        "note": "Locally proposed common consent risk; no specific published source assigned."
-      },
-      {
-        "risk": "Technical or clinical failure, with possible need for repeat or alternative treatment",
-        "note": "Locally proposed common consent risk; no specific published source assigned."
-      }
-    ],
+    "PTA of dialysis access": [],
     "Transjugular intrahepatic portosystemic shunt (TIPS)": [
       {
-        "risk": "Pain / discomfort",
-        "note": "Locally proposed common consent risk; no specific published source assigned."
-      },
-      {
-        "risk": "Bleeding / bruising / haematoma",
-        "note": "Locally proposed common consent risk; no specific published source assigned."
-      },
-      {
-        "risk": "Damage to surrounding structures",
-        "note": "Locally proposed common consent risk; no specific published source assigned."
-      },
-      {
-        "risk": "Technical or clinical failure, with possible need for repeat or alternative treatment",
-        "note": "Locally proposed common consent risk; no specific published source assigned."
-      },
-      {
         "risk": "Air embolism",
         "note": "Locally proposed common consent risk for venous procedures; no specific published source assigned."
       }
     ],
-    "Tunneled dialysis catheter insertion": [
-      {
-        "risk": "Pain / discomfort",
-        "note": "Locally proposed common consent risk; no specific published source assigned."
-      },
-      {
-        "risk": "Bleeding / bruising / haematoma",
-        "note": "Locally proposed common consent risk; no specific published source assigned."
-      },
-      {
-        "risk": "Damage to surrounding structures",
-        "note": "Locally proposed common consent risk; no specific published source assigned."
-      },
-      {
-        "risk": "Technical or clinical failure, with possible need for repeat or alternative treatment",
-        "note": "Locally proposed common consent risk; no specific published source assigned."
-      },
-      {
-        "risk": "Air embolism",
-        "note": "Locally proposed common consent risk for venous procedures; no specific published source assigned."
-      }
-    ],
-    "Uterine artery embolisation for fibroids (UAE)": [
-      {
-        "risk": "Pain / discomfort",
-        "note": "Locally proposed common consent risk; no specific published source assigned."
-      },
-      {
-        "risk": "Bleeding / bruising / haematoma",
-        "note": "Locally proposed common consent risk; no specific published source assigned."
-      },
-      {
-        "risk": "Damage to surrounding structures",
-        "note": "Locally proposed common consent risk; no specific published source assigned."
-      },
-      {
-        "risk": "Technical or clinical failure, with possible need for repeat or alternative treatment",
-        "note": "Locally proposed common consent risk; no specific published source assigned."
-      }
-    ],
+    "Tunneled dialysis catheter insertion": [],
+    "Uterine artery embolisation for fibroids (UAE)": [],
     "Varicocele embolisation": [
-      {
-        "risk": "Pain / discomfort",
-        "note": "Locally proposed common consent risk; no specific published source assigned."
-      },
-      {
-        "risk": "Bleeding / bruising / haematoma",
-        "note": "Locally proposed common consent risk; no specific published source assigned."
-      },
-      {
-        "risk": "Damage to surrounding structures",
-        "note": "Locally proposed common consent risk; no specific published source assigned."
-      },
-      {
-        "risk": "Technical or clinical failure, with possible need for repeat or alternative treatment",
-        "note": "Locally proposed common consent risk; no specific published source assigned."
-      },
       {
         "risk": "Air embolism",
         "note": "Locally proposed common consent risk for venous procedures; no specific published source assigned."
       }
     ],
     "Venous stenting": [
-      {
-        "risk": "Pain / discomfort",
-        "note": "Locally proposed common consent risk; no specific published source assigned."
-      },
-      {
-        "risk": "Bleeding / bruising / haematoma",
-        "note": "Locally proposed common consent risk; no specific published source assigned."
-      },
-      {
-        "risk": "Damage to surrounding structures",
-        "note": "Locally proposed common consent risk; no specific published source assigned."
-      },
-      {
-        "risk": "Technical or clinical failure, with possible need for repeat or alternative treatment",
-        "note": "Locally proposed common consent risk; no specific published source assigned."
-      },
       {
         "risk": "Air embolism",
         "note": "Locally proposed common consent risk for venous procedures; no specific published source assigned."

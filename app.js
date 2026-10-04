@@ -188,7 +188,8 @@ const localReviewItems = proc => localCoreFor(proc).map((item, idx) => ({
   has_numeric_incidence: false,
   best_evidence_tier: "Local practice",
   sources: [],
-  evidence_note: "Locally proposed common consent risk. No specific published source assigned."
+  evidence_note: "Locally proposed common consent risk. No specific published source assigned.",
+  local_policy: Array.isArray(item.local_policy) ? item.local_policy : [item.risk]
 }));
 const reviewItems = proc => [...localReviewItems(proc), ...procItems(proc)];
 
@@ -423,6 +424,7 @@ function renderRisk(proc, item) {
       <div class="risk-title-block">
         <div class="risk-badges">
           <span class="evidence-badge ${tierClass(tier)}">${escapeHtml(tier)}</span>
+          ${Array.isArray(item.local_policy) && item.local_policy.length ? `<span class="meta-badge local-policy-badge">Local policy</span>` : ""}
         </div>
         <h3>${escapeHtml(item.risk)}</h3>
       </div>
@@ -486,6 +488,7 @@ function renderEvidenceDetails(item) {
       <div class="evidence-content">
         <p><span class="source-tier tier-local">Local practice</span></p>
         <p>Locally proposed common consent risk. No specific published source is assigned.</p>
+        ${Array.isArray(item.local_policy) && item.local_policy.length ? `<p><strong>Local generic policy:</strong> ${item.local_policy.map(escapeHtml).join("; ")}</p>` : ""}
       </div>
     </details>`;
   }
@@ -501,12 +504,16 @@ function renderEvidenceDetails(item) {
 
   const contextFrequency = !item.has_numeric_incidence && item.incidence_summary ? `<p><strong>Frequency:</strong> ${escapeHtml(item.incidence_summary)}</p>` : "";
   const note = item.evidence_note ? `<p><strong>Evidence note:</strong> ${escapeHtml(item.evidence_note)}</p>` : "";
+  const localPolicy = Array.isArray(item.local_policy) && item.local_policy.length
+    ? `<p><strong>Also included in local generic policy:</strong> ${item.local_policy.map(escapeHtml).join("; ")}</p>`
+    : "";
 
   return `<details class="evidence-details">
     <summary>Evidence and source${sources.length === 1 ? "" : "s"}</summary>
     <div class="evidence-content">
       ${contextFrequency}
       ${sourceHtml}
+      ${localPolicy}
       ${note}
     </div>
   </details>`;

@@ -489,7 +489,7 @@ function respond_(obj) {
   const payload = JSON.stringify(obj).replace(/</g, "\\u003c");
   const requestId = obj && obj.requestId ? String(obj.requestId) : "";
   const html = "<!doctype html><html><body><script>" +
-    "window.parent.postMessage({source:'IR_CONSENT_BACKEND',requestId:" +
+    "window.top.postMessage({source:'IR_CONSENT_BACKEND',requestId:" +
     JSON.stringify(requestId) + ",payload:" + payload + "},'*');" +
     "</script></body></html>";
   return HtmlService.createHtmlOutput(html)

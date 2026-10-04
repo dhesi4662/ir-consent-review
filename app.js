@@ -320,9 +320,15 @@ function hideAll() {
 }
 
 function showDashboard() {
+  if (!auth.gmcNumber) {
+    hideAll();
+    $("intro").classList.remove("hidden");
+    return;
+  }
   hideAll();
   $("dashboard").classList.remove("hidden");
   setPageLabel("Procedures");
+  if ($("welcomeText")) $("welcomeText").textContent = auth.name ? `Welcome, Dr ${auth.name}` : `GMC ${auth.gmcNumber}`;
   renderDashboard();
   window.scrollTo({ top: 0, behavior: "smooth" });
 }

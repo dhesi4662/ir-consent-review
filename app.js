@@ -358,8 +358,9 @@ function renderDashboard() {
       <h2>${escapeHtml(proc)}</h2>
       <p>${st.total} risk${st.total === 1 ? "" : "s"}</p>
       <div class="card-progress"><span style="width:${st.total ? Math.round(st.scored / st.total * 100) : 0}%"></span></div>
-      <button class="btn btn-primary" type="button">${st.submitted ? "Open" : "Review"}</button>`;
-    div.querySelector("button").onclick = () => openProcedure(proc);
+      <button class="btn ${st.submitted ? "btn-secondary" : "btn-primary"}" type="button" ${st.submitted ? "disabled" : ""}>${st.submitted ? "Submitted" : "Review"}</button>`;
+    const button = div.querySelector("button");
+    if (!st.submitted) button.onclick = () => openProcedure(proc);
     wrap.appendChild(div);
   });
 }
@@ -580,10 +581,6 @@ function showReview() {
   $("review").classList.remove("hidden");
   setPageLabel("Review responses");
   $("reviewTitle").textContent = currentProcedure;
-
-  const coreWrap = $("reviewLocalCore");
-  coreWrap.innerHTML = "";
-  localCoreFor(currentProcedure).forEach(item => coreWrap.appendChild(localCoreItem(item)));
 
   const body = $("reviewBody");
   body.innerHTML = "";

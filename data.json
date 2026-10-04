@@ -21,9 +21,9 @@
       "Tier 4": "Established tertiary/high-volume centre or national patient information / reputable secondary clinical resource",
       "Tier 5": "Small case series, case report, older/indirect evidence or expert opinion",
       "Unverified": "No risk-level supporting source confirmed in the current evidence review",
-      "Local core": "Project-defined local standard; not attributed to a single published source"
+      "Local practice": "Locally proposed common consent risk; no specific published source assigned"
     },
-    "local_core_note": "Local core items are project-defined, not evidence-tiered, and are not part of the Delphi vote. They are intended to appear on the final consent aid regardless of the procedure-specific vote, while leaving room for patient-specific risks."
+    "local_core_note": "Locally proposed common consent risks are included for review alongside the procedure-specific risks."
   },
   "procedures": [
     "Bronchial artery embolisation (BAE)",
@@ -51,389 +51,389 @@
     "Bronchial artery embolisation (BAE)": [
       {
         "risk": "Pain / discomfort",
-        "note": "Project-defined local core item; not derived from a single published source and not part of the Delphi vote."
+        "note": "Locally proposed common consent risk; no specific published source assigned."
       },
       {
         "risk": "Bleeding / bruising / haematoma",
-        "note": "Project-defined local core item; not derived from a single published source and not part of the Delphi vote."
+        "note": "Locally proposed common consent risk; no specific published source assigned."
       },
       {
         "risk": "Damage to surrounding structures",
-        "note": "Project-defined local core item; not derived from a single published source and not part of the Delphi vote."
+        "note": "Locally proposed common consent risk; no specific published source assigned."
       },
       {
         "risk": "Technical or clinical failure, with possible need for repeat or alternative treatment",
-        "note": "Project-defined local core item; not derived from a single published source and not part of the Delphi vote."
+        "note": "Locally proposed common consent risk; no specific published source assigned."
       }
     ],
     "Carotid artery angioplasty and stenting (CAS)": [
       {
         "risk": "Pain / discomfort",
-        "note": "Project-defined local core item; not derived from a single published source and not part of the Delphi vote."
+        "note": "Locally proposed common consent risk; no specific published source assigned."
       },
       {
         "risk": "Bleeding / bruising / haematoma",
-        "note": "Project-defined local core item; not derived from a single published source and not part of the Delphi vote."
+        "note": "Locally proposed common consent risk; no specific published source assigned."
       },
       {
         "risk": "Damage to surrounding structures",
-        "note": "Project-defined local core item; not derived from a single published source and not part of the Delphi vote."
+        "note": "Locally proposed common consent risk; no specific published source assigned."
       },
       {
         "risk": "Technical or clinical failure, with possible need for repeat or alternative treatment",
-        "note": "Project-defined local core item; not derived from a single published source and not part of the Delphi vote."
+        "note": "Locally proposed common consent risk; no specific published source assigned."
       }
     ],
     "Diagnostic angiography": [
       {
         "risk": "Pain / discomfort",
-        "note": "Project-defined local core item; not derived from a single published source and not part of the Delphi vote."
+        "note": "Locally proposed common consent risk; no specific published source assigned."
       },
       {
         "risk": "Bleeding / bruising / haematoma",
-        "note": "Project-defined local core item; not derived from a single published source and not part of the Delphi vote."
+        "note": "Locally proposed common consent risk; no specific published source assigned."
       },
       {
         "risk": "Damage to surrounding structures",
-        "note": "Project-defined local core item; not derived from a single published source and not part of the Delphi vote."
+        "note": "Locally proposed common consent risk; no specific published source assigned."
       },
       {
         "risk": "Technical or clinical failure, with possible need for repeat or alternative treatment",
-        "note": "Project-defined local core item; not derived from a single published source and not part of the Delphi vote."
+        "note": "Locally proposed common consent risk; no specific published source assigned."
       }
     ],
     "Endovascular aneurysm repair (EVAR)": [
       {
         "risk": "Pain / discomfort",
-        "note": "Project-defined local core item; not derived from a single published source and not part of the Delphi vote."
+        "note": "Locally proposed common consent risk; no specific published source assigned."
       },
       {
         "risk": "Bleeding / bruising / haematoma",
-        "note": "Project-defined local core item; not derived from a single published source and not part of the Delphi vote."
+        "note": "Locally proposed common consent risk; no specific published source assigned."
       },
       {
         "risk": "Damage to surrounding structures",
-        "note": "Project-defined local core item; not derived from a single published source and not part of the Delphi vote."
+        "note": "Locally proposed common consent risk; no specific published source assigned."
       },
       {
         "risk": "Technical or clinical failure, with possible need for repeat or alternative treatment",
-        "note": "Project-defined local core item; not derived from a single published source and not part of the Delphi vote."
+        "note": "Locally proposed common consent risk; no specific published source assigned."
       }
     ],
     "Gastrointestinal bleeding embolisation": [
       {
         "risk": "Pain / discomfort",
-        "note": "Project-defined local core item; not derived from a single published source and not part of the Delphi vote."
+        "note": "Locally proposed common consent risk; no specific published source assigned."
       },
       {
         "risk": "Bleeding / bruising / haematoma",
-        "note": "Project-defined local core item; not derived from a single published source and not part of the Delphi vote."
+        "note": "Locally proposed common consent risk; no specific published source assigned."
       },
       {
         "risk": "Damage to surrounding structures",
-        "note": "Project-defined local core item; not derived from a single published source and not part of the Delphi vote."
+        "note": "Locally proposed common consent risk; no specific published source assigned."
       },
       {
         "risk": "Technical or clinical failure, with possible need for repeat or alternative treatment",
-        "note": "Project-defined local core item; not derived from a single published source and not part of the Delphi vote."
+        "note": "Locally proposed common consent risk; no specific published source assigned."
       }
     ],
     "Pelvic congestion / pelvic vein embolisation": [
       {
         "risk": "Pain / discomfort",
-        "note": "Project-defined local core item; not derived from a single published source and not part of the Delphi vote."
+        "note": "Locally proposed common consent risk; no specific published source assigned."
       },
       {
         "risk": "Bleeding / bruising / haematoma",
-        "note": "Project-defined local core item; not derived from a single published source and not part of the Delphi vote."
+        "note": "Locally proposed common consent risk; no specific published source assigned."
       },
       {
         "risk": "Damage to surrounding structures",
-        "note": "Project-defined local core item; not derived from a single published source and not part of the Delphi vote."
+        "note": "Locally proposed common consent risk; no specific published source assigned."
       },
       {
         "risk": "Technical or clinical failure, with possible need for repeat or alternative treatment",
-        "note": "Project-defined local core item; not derived from a single published source and not part of the Delphi vote."
+        "note": "Locally proposed common consent risk; no specific published source assigned."
       },
       {
         "risk": "Air embolism",
-        "note": "Project-defined local core item for venous procedures; not derived from a single published source and not part of the Delphi vote."
+        "note": "Locally proposed common consent risk for venous procedures; no specific published source assigned."
       }
     ],
     "Percutaneous gastrostomy insertion": [
       {
         "risk": "Pain / discomfort",
-        "note": "Project-defined local core item; not derived from a single published source and not part of the Delphi vote."
+        "note": "Locally proposed common consent risk; no specific published source assigned."
       },
       {
         "risk": "Bleeding / bruising / haematoma",
-        "note": "Project-defined local core item; not derived from a single published source and not part of the Delphi vote."
+        "note": "Locally proposed common consent risk; no specific published source assigned."
       },
       {
         "risk": "Damage to surrounding structures",
-        "note": "Project-defined local core item; not derived from a single published source and not part of the Delphi vote."
+        "note": "Locally proposed common consent risk; no specific published source assigned."
       },
       {
         "risk": "Technical or clinical failure, with possible need for repeat or alternative treatment",
-        "note": "Project-defined local core item; not derived from a single published source and not part of the Delphi vote."
+        "note": "Locally proposed common consent risk; no specific published source assigned."
       }
     ],
     "Transjugular liver biopsy (TJLB)": [
       {
         "risk": "Pain / discomfort",
-        "note": "Project-defined local core item; not derived from a single published source and not part of the Delphi vote."
+        "note": "Locally proposed common consent risk; no specific published source assigned."
       },
       {
         "risk": "Bleeding / bruising / haematoma",
-        "note": "Project-defined local core item; not derived from a single published source and not part of the Delphi vote."
+        "note": "Locally proposed common consent risk; no specific published source assigned."
       },
       {
         "risk": "Damage to surrounding structures",
-        "note": "Project-defined local core item; not derived from a single published source and not part of the Delphi vote."
+        "note": "Locally proposed common consent risk; no specific published source assigned."
       },
       {
         "risk": "Technical or clinical failure, with possible need for repeat or alternative treatment",
-        "note": "Project-defined local core item; not derived from a single published source and not part of the Delphi vote."
+        "note": "Locally proposed common consent risk; no specific published source assigned."
       },
       {
         "risk": "Air embolism",
-        "note": "Project-defined local core item for venous procedures; not derived from a single published source and not part of the Delphi vote."
+        "note": "Locally proposed common consent risk for venous procedures; no specific published source assigned."
       }
     ],
     "Peripheral arterial angioplasty +/- stenting": [
       {
         "risk": "Pain / discomfort",
-        "note": "Project-defined local core item; not derived from a single published source and not part of the Delphi vote."
+        "note": "Locally proposed common consent risk; no specific published source assigned."
       },
       {
         "risk": "Bleeding / bruising / haematoma",
-        "note": "Project-defined local core item; not derived from a single published source and not part of the Delphi vote."
+        "note": "Locally proposed common consent risk; no specific published source assigned."
       },
       {
         "risk": "Damage to surrounding structures",
-        "note": "Project-defined local core item; not derived from a single published source and not part of the Delphi vote."
+        "note": "Locally proposed common consent risk; no specific published source assigned."
       },
       {
         "risk": "Technical or clinical failure, with possible need for repeat or alternative treatment",
-        "note": "Project-defined local core item; not derived from a single published source and not part of the Delphi vote."
+        "note": "Locally proposed common consent risk; no specific published source assigned."
       }
     ],
     "Portal vein embolisation (PVE)": [
       {
         "risk": "Pain / discomfort",
-        "note": "Project-defined local core item; not derived from a single published source and not part of the Delphi vote."
+        "note": "Locally proposed common consent risk; no specific published source assigned."
       },
       {
         "risk": "Bleeding / bruising / haematoma",
-        "note": "Project-defined local core item; not derived from a single published source and not part of the Delphi vote."
+        "note": "Locally proposed common consent risk; no specific published source assigned."
       },
       {
         "risk": "Damage to surrounding structures",
-        "note": "Project-defined local core item; not derived from a single published source and not part of the Delphi vote."
+        "note": "Locally proposed common consent risk; no specific published source assigned."
       },
       {
         "risk": "Technical or clinical failure, with possible need for repeat or alternative treatment",
-        "note": "Project-defined local core item; not derived from a single published source and not part of the Delphi vote."
+        "note": "Locally proposed common consent risk; no specific published source assigned."
       },
       {
         "risk": "Air embolism",
-        "note": "Project-defined local core item for venous procedures; not derived from a single published source and not part of the Delphi vote."
+        "note": "Locally proposed common consent risk for venous procedures; no specific published source assigned."
       }
     ],
     "Prostatic artery embolisation (PAE)": [
       {
         "risk": "Pain / discomfort",
-        "note": "Project-defined local core item; not derived from a single published source and not part of the Delphi vote."
+        "note": "Locally proposed common consent risk; no specific published source assigned."
       },
       {
         "risk": "Bleeding / bruising / haematoma",
-        "note": "Project-defined local core item; not derived from a single published source and not part of the Delphi vote."
+        "note": "Locally proposed common consent risk; no specific published source assigned."
       },
       {
         "risk": "Damage to surrounding structures",
-        "note": "Project-defined local core item; not derived from a single published source and not part of the Delphi vote."
+        "note": "Locally proposed common consent risk; no specific published source assigned."
       },
       {
         "risk": "Technical or clinical failure, with possible need for repeat or alternative treatment",
-        "note": "Project-defined local core item; not derived from a single published source and not part of the Delphi vote."
+        "note": "Locally proposed common consent risk; no specific published source assigned."
       }
     ],
     "Transarterial chemoembolisation (TACE)": [
       {
         "risk": "Pain / discomfort",
-        "note": "Project-defined local core item; not derived from a single published source and not part of the Delphi vote."
+        "note": "Locally proposed common consent risk; no specific published source assigned."
       },
       {
         "risk": "Bleeding / bruising / haematoma",
-        "note": "Project-defined local core item; not derived from a single published source and not part of the Delphi vote."
+        "note": "Locally proposed common consent risk; no specific published source assigned."
       },
       {
         "risk": "Damage to surrounding structures",
-        "note": "Project-defined local core item; not derived from a single published source and not part of the Delphi vote."
+        "note": "Locally proposed common consent risk; no specific published source assigned."
       },
       {
         "risk": "Technical or clinical failure, with possible need for repeat or alternative treatment",
-        "note": "Project-defined local core item; not derived from a single published source and not part of the Delphi vote."
+        "note": "Locally proposed common consent risk; no specific published source assigned."
       }
     ],
     "Thoracic endovascular aortic repair (TEVAR)": [
       {
         "risk": "Pain / discomfort",
-        "note": "Project-defined local core item; not derived from a single published source and not part of the Delphi vote."
+        "note": "Locally proposed common consent risk; no specific published source assigned."
       },
       {
         "risk": "Bleeding / bruising / haematoma",
-        "note": "Project-defined local core item; not derived from a single published source and not part of the Delphi vote."
+        "note": "Locally proposed common consent risk; no specific published source assigned."
       },
       {
         "risk": "Damage to surrounding structures",
-        "note": "Project-defined local core item; not derived from a single published source and not part of the Delphi vote."
+        "note": "Locally proposed common consent risk; no specific published source assigned."
       },
       {
         "risk": "Technical or clinical failure, with possible need for repeat or alternative treatment",
-        "note": "Project-defined local core item; not derived from a single published source and not part of the Delphi vote."
+        "note": "Locally proposed common consent risk; no specific published source assigned."
       }
     ],
     "Thrombolysis of dialysis access": [
       {
         "risk": "Pain / discomfort",
-        "note": "Project-defined local core item; not derived from a single published source and not part of the Delphi vote."
+        "note": "Locally proposed common consent risk; no specific published source assigned."
       },
       {
         "risk": "Bleeding / bruising / haematoma",
-        "note": "Project-defined local core item; not derived from a single published source and not part of the Delphi vote."
+        "note": "Locally proposed common consent risk; no specific published source assigned."
       },
       {
         "risk": "Damage to surrounding structures",
-        "note": "Project-defined local core item; not derived from a single published source and not part of the Delphi vote."
+        "note": "Locally proposed common consent risk; no specific published source assigned."
       },
       {
         "risk": "Technical or clinical failure, with possible need for repeat or alternative treatment",
-        "note": "Project-defined local core item; not derived from a single published source and not part of the Delphi vote."
+        "note": "Locally proposed common consent risk; no specific published source assigned."
       }
     ],
     "PTA of dialysis access": [
       {
         "risk": "Pain / discomfort",
-        "note": "Project-defined local core item; not derived from a single published source and not part of the Delphi vote."
+        "note": "Locally proposed common consent risk; no specific published source assigned."
       },
       {
         "risk": "Bleeding / bruising / haematoma",
-        "note": "Project-defined local core item; not derived from a single published source and not part of the Delphi vote."
+        "note": "Locally proposed common consent risk; no specific published source assigned."
       },
       {
         "risk": "Damage to surrounding structures",
-        "note": "Project-defined local core item; not derived from a single published source and not part of the Delphi vote."
+        "note": "Locally proposed common consent risk; no specific published source assigned."
       },
       {
         "risk": "Technical or clinical failure, with possible need for repeat or alternative treatment",
-        "note": "Project-defined local core item; not derived from a single published source and not part of the Delphi vote."
+        "note": "Locally proposed common consent risk; no specific published source assigned."
       }
     ],
     "Transjugular intrahepatic portosystemic shunt (TIPS)": [
       {
         "risk": "Pain / discomfort",
-        "note": "Project-defined local core item; not derived from a single published source and not part of the Delphi vote."
+        "note": "Locally proposed common consent risk; no specific published source assigned."
       },
       {
         "risk": "Bleeding / bruising / haematoma",
-        "note": "Project-defined local core item; not derived from a single published source and not part of the Delphi vote."
+        "note": "Locally proposed common consent risk; no specific published source assigned."
       },
       {
         "risk": "Damage to surrounding structures",
-        "note": "Project-defined local core item; not derived from a single published source and not part of the Delphi vote."
+        "note": "Locally proposed common consent risk; no specific published source assigned."
       },
       {
         "risk": "Technical or clinical failure, with possible need for repeat or alternative treatment",
-        "note": "Project-defined local core item; not derived from a single published source and not part of the Delphi vote."
+        "note": "Locally proposed common consent risk; no specific published source assigned."
       },
       {
         "risk": "Air embolism",
-        "note": "Project-defined local core item for venous procedures; not derived from a single published source and not part of the Delphi vote."
+        "note": "Locally proposed common consent risk for venous procedures; no specific published source assigned."
       }
     ],
     "Tunneled dialysis catheter insertion": [
       {
         "risk": "Pain / discomfort",
-        "note": "Project-defined local core item; not derived from a single published source and not part of the Delphi vote."
+        "note": "Locally proposed common consent risk; no specific published source assigned."
       },
       {
         "risk": "Bleeding / bruising / haematoma",
-        "note": "Project-defined local core item; not derived from a single published source and not part of the Delphi vote."
+        "note": "Locally proposed common consent risk; no specific published source assigned."
       },
       {
         "risk": "Damage to surrounding structures",
-        "note": "Project-defined local core item; not derived from a single published source and not part of the Delphi vote."
+        "note": "Locally proposed common consent risk; no specific published source assigned."
       },
       {
         "risk": "Technical or clinical failure, with possible need for repeat or alternative treatment",
-        "note": "Project-defined local core item; not derived from a single published source and not part of the Delphi vote."
+        "note": "Locally proposed common consent risk; no specific published source assigned."
       },
       {
         "risk": "Air embolism",
-        "note": "Project-defined local core item for venous procedures; not derived from a single published source and not part of the Delphi vote."
+        "note": "Locally proposed common consent risk for venous procedures; no specific published source assigned."
       }
     ],
     "Uterine artery embolisation for fibroids (UAE)": [
       {
         "risk": "Pain / discomfort",
-        "note": "Project-defined local core item; not derived from a single published source and not part of the Delphi vote."
+        "note": "Locally proposed common consent risk; no specific published source assigned."
       },
       {
         "risk": "Bleeding / bruising / haematoma",
-        "note": "Project-defined local core item; not derived from a single published source and not part of the Delphi vote."
+        "note": "Locally proposed common consent risk; no specific published source assigned."
       },
       {
         "risk": "Damage to surrounding structures",
-        "note": "Project-defined local core item; not derived from a single published source and not part of the Delphi vote."
+        "note": "Locally proposed common consent risk; no specific published source assigned."
       },
       {
         "risk": "Technical or clinical failure, with possible need for repeat or alternative treatment",
-        "note": "Project-defined local core item; not derived from a single published source and not part of the Delphi vote."
+        "note": "Locally proposed common consent risk; no specific published source assigned."
       }
     ],
     "Varicocele embolisation": [
       {
         "risk": "Pain / discomfort",
-        "note": "Project-defined local core item; not derived from a single published source and not part of the Delphi vote."
+        "note": "Locally proposed common consent risk; no specific published source assigned."
       },
       {
         "risk": "Bleeding / bruising / haematoma",
-        "note": "Project-defined local core item; not derived from a single published source and not part of the Delphi vote."
+        "note": "Locally proposed common consent risk; no specific published source assigned."
       },
       {
         "risk": "Damage to surrounding structures",
-        "note": "Project-defined local core item; not derived from a single published source and not part of the Delphi vote."
+        "note": "Locally proposed common consent risk; no specific published source assigned."
       },
       {
         "risk": "Technical or clinical failure, with possible need for repeat or alternative treatment",
-        "note": "Project-defined local core item; not derived from a single published source and not part of the Delphi vote."
+        "note": "Locally proposed common consent risk; no specific published source assigned."
       },
       {
         "risk": "Air embolism",
-        "note": "Project-defined local core item for venous procedures; not derived from a single published source and not part of the Delphi vote."
+        "note": "Locally proposed common consent risk for venous procedures; no specific published source assigned."
       }
     ],
     "Venous stenting": [
       {
         "risk": "Pain / discomfort",
-        "note": "Project-defined local core item; not derived from a single published source and not part of the Delphi vote."
+        "note": "Locally proposed common consent risk; no specific published source assigned."
       },
       {
         "risk": "Bleeding / bruising / haematoma",
-        "note": "Project-defined local core item; not derived from a single published source and not part of the Delphi vote."
+        "note": "Locally proposed common consent risk; no specific published source assigned."
       },
       {
         "risk": "Damage to surrounding structures",
-        "note": "Project-defined local core item; not derived from a single published source and not part of the Delphi vote."
+        "note": "Locally proposed common consent risk; no specific published source assigned."
       },
       {
         "risk": "Technical or clinical failure, with possible need for repeat or alternative treatment",
-        "note": "Project-defined local core item; not derived from a single published source and not part of the Delphi vote."
+        "note": "Locally proposed common consent risk; no specific published source assigned."
       },
       {
         "risk": "Air embolism",
-        "note": "Project-defined local core item for venous procedures; not derived from a single published source and not part of the Delphi vote."
+        "note": "Locally proposed common consent risk for venous procedures; no specific published source assigned."
       }
     ]
   },
@@ -518,7 +518,7 @@
       "risk": "Chest discomfort and post-embolisation symptoms",
       "risk_type": "procedure-specific",
       "candidate_status": "EXISTING",
-      "incidence_summary": "Pain or discomfort — 1.4–34% chest pain (table); up to 91% in cited series (text); Post-embolisation syndrome — 1.7–31%",
+      "incidence_summary": "Pain or discomfort - 1.4–34% chest pain (table); up to 91% in cited series (text); Post-embolisation syndrome - 1.7–31%",
       "has_numeric_incidence": true,
       "best_evidence_tier": "Tier 1",
       "sources": [
@@ -569,7 +569,7 @@
       "risk": "Non-target embolisation causing spinal cord infarction/neurological deficit, stroke, myocardial or other systemic infarction",
       "risk_type": "ischaemic/non-target injury",
       "candidate_status": "EXISTING",
-      "incidence_summary": "Component-specific: Spinal cord ischaemia/injury — <1% in recent series cited by the 2022 SOP; historical 0.2–6.5%",
+      "incidence_summary": "Component-specific: Spinal cord ischaemia/injury - <1% in recent series cited by the 2022 SOP; historical 0.2–6.5%",
       "has_numeric_incidence": true,
       "best_evidence_tier": "Tier 1",
       "sources": [
@@ -656,7 +656,7 @@
       "risk": "Technical failure or recurrent haemoptysis",
       "risk_type": "technical failure/recurrence",
       "candidate_status": "EXISTING",
-      "incidence_summary": "Component-specific: Recurrence of treated condition — 26.5%",
+      "incidence_summary": "Component-specific: Recurrence of treated condition - 26.5%",
       "has_numeric_incidence": true,
       "best_evidence_tier": "Tier 1",
       "sources": [
@@ -912,7 +912,7 @@
       "risk": "TIA, stroke, distal embolisation",
       "risk_type": "ischaemic/non-target injury",
       "candidate_status": "EXISTING",
-      "incidence_summary": "Component-specific: Stroke — 2.7% peri-procedural any stroke in the cited pooled analysis",
+      "incidence_summary": "Component-specific: Stroke - 2.7% peri-procedural any stroke in the cited pooled analysis",
       "has_numeric_incidence": true,
       "best_evidence_tier": "Tier 1",
       "sources": [
@@ -1355,7 +1355,7 @@
       "risk": "Graft infection/failure",
       "risk_type": "mixed/compound",
       "candidate_status": "EXISTING",
-      "incidence_summary": "Component-specific: Graft infection — 0.2–1%",
+      "incidence_summary": "Component-specific: Graft infection - 0.2–1%",
       "has_numeric_incidence": true,
       "best_evidence_tier": "Tier 1",
       "sources": [
@@ -1524,7 +1524,7 @@
       "risk": "Bowel infarction/necrosis, perforation or later stricture due to non-target or extensive embolisation",
       "risk_type": "mixed/compound",
       "candidate_status": "EXISTING",
-      "incidence_summary": "Component-specific: Bowel ischaemia/infarction — 7.5% post-embolisation ischaemia",
+      "incidence_summary": "Component-specific: Bowel ischaemia/infarction - 7.5% post-embolisation ischaemia",
       "has_numeric_incidence": true,
       "best_evidence_tier": "Tier 1",
       "sources": [
@@ -1603,7 +1603,7 @@
       "risk": "Persistent/recurrent bleeding",
       "risk_type": "technical failure/recurrence",
       "candidate_status": "EXISTING",
-      "incidence_summary": "Component-specific: Recurrence of treated condition — 20.7% overall LGIB; 25.0% UGIB and 17.1% LGIB at 30 days",
+      "incidence_summary": "Component-specific: Recurrence of treated condition - 20.7% overall LGIB; 25.0% UGIB and 17.1% LGIB at 30 days",
       "has_numeric_incidence": true,
       "best_evidence_tier": "Tier 1",
       "sources": [
@@ -1807,7 +1807,7 @@
       "risk": "Persistent/recurrent symptoms",
       "risk_type": "technical failure/recurrence",
       "candidate_status": "EXISTING",
-      "incidence_summary": "Component-specific: Recurrence of treated condition — 0–42% in review narrative",
+      "incidence_summary": "Component-specific: Recurrence of treated condition - 0–42% in review narrative",
       "has_numeric_incidence": true,
       "best_evidence_tier": "Tier 3",
       "sources": [
@@ -2229,7 +2229,7 @@
       "risk": "Capsular perforation or intra-abdominal bleeding",
       "risk_type": "mixed/compound",
       "candidate_status": "EXISTING",
-      "incidence_summary": "Component-specific: Intra-abdominal haemorrhage — 0.6% (8 patients)",
+      "incidence_summary": "Component-specific: Intra-abdominal haemorrhage - 0.6% (8 patients)",
       "has_numeric_incidence": true,
       "best_evidence_tier": "Tier 1",
       "sources": [
@@ -2475,7 +2475,7 @@
       "risk": "Access bleeding/haematoma, pseudoaneurysm, AV fistula, arterial injury",
       "risk_type": "mixed/compound",
       "candidate_status": "EXISTING",
-      "incidence_summary": "Access-site haematoma — 1–10%; Pseudoaneurysm — 0.2–2%; Iatrogenic arteriovenous fistula — 0–0.7%",
+      "incidence_summary": "Access-site haematoma - 1–10%; Pseudoaneurysm - 0.2–2%; Iatrogenic arteriovenous fistula - 0–0.7%",
       "has_numeric_incidence": true,
       "best_evidence_tier": "Tier 1",
       "sources": [
@@ -2531,7 +2531,7 @@
       "risk": "Acute limb ischaemia, limb loss, reintervention",
       "risk_type": "mixed/compound",
       "candidate_status": "EXISTING",
-      "incidence_summary": "Component-specific: Limb loss/amputation — 0.6–2.2%",
+      "incidence_summary": "Component-specific: Limb loss/amputation - 0.6–2.2%",
       "has_numeric_incidence": true,
       "best_evidence_tier": "Tier 1",
       "sources": [
@@ -3235,7 +3235,7 @@
       "risk": "Transient dysuria, frequency/urgency, haematuria, rectal bleeding or post-embolisation symptoms",
       "risk_type": "mixed/compound",
       "candidate_status": "EXISTING",
-      "incidence_summary": "Rectal bleeding — 2.5%; Dysuria — 9%; Haematuria — 5.6%",
+      "incidence_summary": "Rectal bleeding - 2.5%; Dysuria - 9%; Haematuria - 5.6%",
       "has_numeric_incidence": true,
       "best_evidence_tier": "Tier 1",
       "sources": [
@@ -3258,7 +3258,7 @@
       "risk": "UTI/retention",
       "risk_type": "mixed/compound",
       "candidate_status": "EXISTING",
-      "incidence_summary": "Urinary tract infection — 7.6%; Urinary retention requiring catheterisation — 2.5%",
+      "incidence_summary": "Urinary tract infection - 7.6%; Urinary retention requiring catheterisation - 2.5%",
       "has_numeric_incidence": true,
       "best_evidence_tier": "Tier 1",
       "sources": [
@@ -3335,7 +3335,7 @@
       "risk": "Abscess/sepsis (risk increased with biliary-enteric communication/instrumentation)",
       "risk_type": "infection",
       "candidate_status": "EXISTING",
-      "incidence_summary": "Component-specific: Hepatic abscess — 0.1–4.5%",
+      "incidence_summary": "Component-specific: Hepatic abscess - 0.1–4.5%",
       "has_numeric_incidence": true,
       "best_evidence_tier": "Tier 1",
       "sources": [
@@ -3524,7 +3524,7 @@
       "risk": "Post-embolisation symptoms: pain, nausea and fever",
       "risk_type": "procedure-specific",
       "candidate_status": "EXISTING",
-      "incidence_summary": "Component-specific: Post-embolisation syndrome — About 30% [S21] | 36.1–41.0% [S22]",
+      "incidence_summary": "Component-specific: Post-embolisation syndrome - About 30% [S21] | 36.1–41.0% [S22]",
       "has_numeric_incidence": true,
       "best_evidence_tier": "Tier 1",
       "sources": [
@@ -3924,7 +3924,7 @@
       "risk": "Distal embolisation/hand ischaemia",
       "risk_type": "ischaemic/non-target injury",
       "candidate_status": "EXISTING",
-      "incidence_summary": "Component-specific: Distal embolisation — 0.4–7% arterial embolism",
+      "incidence_summary": "Component-specific: Distal embolisation - 0.4–7% arterial embolism",
       "has_numeric_incidence": true,
       "best_evidence_tier": "Tier 3",
       "sources": [
@@ -4350,7 +4350,7 @@
       "risk": "Capsular puncture/intra-abdominal haemorrhage, biliary/portal injury, cardiac failure/volume overload, liver failure or death",
       "risk_type": "mixed/compound",
       "candidate_status": "EXISTING",
-      "incidence_summary": "Intra-abdominal haemorrhage — 1–2% intraperitoneal haemorrhage; Death — <2% procedural mortality",
+      "incidence_summary": "Intra-abdominal haemorrhage - 1–2% intraperitoneal haemorrhage; Death - <2% procedural mortality",
       "has_numeric_incidence": true,
       "best_evidence_tier": "Tier 1",
       "sources": [
@@ -4641,7 +4641,7 @@
       "risk": "Arterial puncture, bleeding/haematoma, arrhythmia, pneumothorax/haemothorax (site-dependent), infection, venous thrombosis/stenosis",
       "risk_type": "mixed/compound",
       "candidate_status": "EXISTING",
-      "incidence_summary": "Pneumothorax — <1 in 500 jugular; <2 in 100 subclavian; Infection — 2–5 per 1,000 catheter-days",
+      "incidence_summary": "Pneumothorax - <1 in 500 jugular; <2 in 100 subclavian; Infection - 2–5 per 1,000 catheter-days",
       "has_numeric_incidence": true,
       "best_evidence_tier": "Tier 1",
       "sources": [
@@ -5241,7 +5241,7 @@
       "risk": "Persistent/recurrent varicocele",
       "risk_type": "technical failure/recurrence",
       "candidate_status": "EXISTING",
-      "incidence_summary": "Component-specific: Recurrence of treated condition — 4.2% glue; 9.1% coils; 11.03% sclerosants",
+      "incidence_summary": "Component-specific: Recurrence of treated condition - 4.2% glue; 9.1% coils; 11.03% sclerosants",
       "has_numeric_incidence": true,
       "best_evidence_tier": "Tier 1",
       "sources": [

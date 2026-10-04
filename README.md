@@ -1,4 +1,4 @@
-# Leeds IR Consent Audit Delphi Review
+# Leeds IR Consent Audit
 
 Static GitHub Pages frontend for departmental review of procedure-specific IR consent risks.
 

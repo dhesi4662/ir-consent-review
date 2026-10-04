@@ -4830,13 +4830,57 @@
       "evidence_note": ""
     },
     {
-      "id": "D191",
+      "id": "D191A",
       "procedure": "Tunneled dialysis catheter insertion",
-      "risk": "Arterial puncture, bleeding/haematoma, arrhythmia, pneumothorax/haemothorax (site-dependent), infection, venous thrombosis/stenosis",
-      "risk_type": "mixed/compound",
+      "risk": "Cardiac arrhythmia",
+      "risk_type": "procedure-specific",
       "candidate_status": "EXISTING",
-      "incidence_summary": "Pneumothorax - <1 in 500 jugular; <2 in 100 subclavian; Infection - 2–5 per 1,000 catheter-days",
+      "incidence_summary": "Not reliably established / context dependent",
+      "has_numeric_incidence": false,
+      "best_evidence_tier": "Tier 1",
+      "sources": [
+        {
+          "label": "[S42] Association of Anaesthetists vascular access (2025; Tier 1)",
+          "tier": "Tier 1",
+          "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12519924/"
+        }
+      ],
+      "evidence_note": "Split from the previously compound tunnelled dialysis catheter complication item."
+    },
+    {
+      "id": "D191B",
+      "procedure": "Tunneled dialysis catheter insertion",
+      "risk": "Pneumothorax (site-dependent)",
+      "risk_type": "procedure-specific",
+      "candidate_status": "EXISTING",
+      "incidence_summary": "<1 in 500 for jugular access; <2 in 100 for subclavian access",
       "has_numeric_incidence": true,
+      "best_evidence_tier": "Tier 1",
+      "sources": [
+        {
+          "label": "[S42] Association of Anaesthetists vascular access (2025; Tier 1)",
+          "tier": "Tier 1",
+          "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12519924/"
+        },
+        {
+          "label": "[S46] Leeds tunnelled line information (n.d.; Tier 4)",
+          "tier": "Tier 4",
+          "url": "https://www.leedsth.nhs.uk/patients/resources/tunnelled-central-line-insertion/"
+        }
+      ],
+      "evidence_note": "Incidence is site-specific and should not be treated as a universal rate.",
+      "local_policy": [
+        "Damage to surrounding structures"
+      ]
+    },
+    {
+      "id": "D191C",
+      "procedure": "Tunneled dialysis catheter insertion",
+      "risk": "Haemothorax (site-dependent)",
+      "risk_type": "procedure-specific",
+      "candidate_status": "EXISTING",
+      "incidence_summary": "Not reliably established / context dependent",
+      "has_numeric_incidence": false,
       "best_evidence_tier": "Tier 1",
       "sources": [
         {
@@ -4848,11 +4892,63 @@
           "label": "[S57] Miller et al., dialysis catheter complications (2016; Tier 5)",
           "tier": "Tier 5",
           "url": "https://doi.org/10.1177/2054358116669130"
+        }
+      ],
+      "evidence_note": "Split from the previously compound tunnelled dialysis catheter complication item.",
+      "local_policy": [
+        "Damage to surrounding structures"
+      ]
+    },
+    {
+      "id": "D191D",
+      "procedure": "Tunneled dialysis catheter insertion",
+      "risk": "Catheter-related infection",
+      "risk_type": "infection",
+      "candidate_status": "EXISTING",
+      "incidence_summary": "2–5 per 1,000 catheter-days",
+      "has_numeric_incidence": true,
+      "best_evidence_tier": "Tier 1",
+      "sources": [
+        {
+          "label": "[S24] UKKA vascular access guideline (2025; Tier 1)",
+          "tier": "Tier 1",
+          "url": "https://doi.org/10.1186/s12882-025-04374-y"
+        },
+        {
+          "label": "[S28] Schröppel et al., tunnelled dialysis catheters (2025; Tier 3)",
+          "tier": "Tier 3",
+          "url": "https://doi.org/10.1093/ndt/gfae181"
         },
         {
           "label": "[S46] Leeds tunnelled line information (n.d.; Tier 4)",
           "tier": "Tier 4",
           "url": "https://www.leedsth.nhs.uk/patients/resources/tunnelled-central-line-insertion/"
+        },
+        {
+          "label": "[S57] Miller et al., dialysis catheter complications (2016; Tier 5)",
+          "tier": "Tier 5",
+          "url": "https://doi.org/10.1177/2054358116669130"
+        }
+      ],
+      "evidence_note": "Incidence is catheter-day based and context dependent.",
+      "local_policy": [
+        "Local or systemic infection"
+      ]
+    },
+    {
+      "id": "D191E",
+      "procedure": "Tunneled dialysis catheter insertion",
+      "risk": "Venous thrombosis",
+      "risk_type": "venous",
+      "candidate_status": "EXISTING",
+      "incidence_summary": "Not reliably established / context dependent",
+      "has_numeric_incidence": false,
+      "best_evidence_tier": "Tier 1",
+      "sources": [
+        {
+          "label": "[S42] Association of Anaesthetists vascular access (2025; Tier 1)",
+          "tier": "Tier 1",
+          "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12519924/"
         },
         {
           "label": "[S24] UKKA vascular access guideline (2025; Tier 1)",
@@ -4863,13 +4959,47 @@
           "label": "[S28] Schröppel et al., tunnelled dialysis catheters (2025; Tier 3)",
           "tier": "Tier 3",
           "url": "https://doi.org/10.1093/ndt/gfae181"
+        },
+        {
+          "label": "[S57] Miller et al., dialysis catheter complications (2016; Tier 5)",
+          "tier": "Tier 5",
+          "url": "https://doi.org/10.1177/2054358116669130"
         }
       ],
-      "evidence_note": "Evidence aggregated from component risks: Inadvertent arterial puncture; Bleeding; Pneumothorax; Infection; Thrombosis; Cardiac arrhythmia; Access-site haematoma; Haemothorax; Venous stenosis. Incidence is source/context specific and should not be treated as a universal consent rate.",
-      "local_policy": [
-        "Damage to surrounding structures",
-        "Local or systemic infection"
-      ]
+      "evidence_note": "Split from the previously compound tunnelled dialysis catheter complication item."
+    },
+    {
+      "id": "D191F",
+      "procedure": "Tunneled dialysis catheter insertion",
+      "risk": "Venous stenosis",
+      "risk_type": "venous",
+      "candidate_status": "EXISTING",
+      "incidence_summary": "Not reliably established / context dependent",
+      "has_numeric_incidence": false,
+      "best_evidence_tier": "Tier 1",
+      "sources": [
+        {
+          "label": "[S42] Association of Anaesthetists vascular access (2025; Tier 1)",
+          "tier": "Tier 1",
+          "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12519924/"
+        },
+        {
+          "label": "[S24] UKKA vascular access guideline (2025; Tier 1)",
+          "tier": "Tier 1",
+          "url": "https://doi.org/10.1186/s12882-025-04374-y"
+        },
+        {
+          "label": "[S28] Schröppel et al., tunnelled dialysis catheters (2025; Tier 3)",
+          "tier": "Tier 3",
+          "url": "https://doi.org/10.1093/ndt/gfae181"
+        },
+        {
+          "label": "[S57] Miller et al., dialysis catheter complications (2016; Tier 5)",
+          "tier": "Tier 5",
+          "url": "https://doi.org/10.1177/2054358116669130"
+        }
+      ],
+      "evidence_note": "Split from the previously compound tunnelled dialysis catheter complication item."
     },
     {
       "id": "D192",

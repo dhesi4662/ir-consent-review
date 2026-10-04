@@ -385,20 +385,6 @@ function openProcedure(proc) {
   window.scrollTo({ top: 0, behavior: "smooth" });
 }
 
-function renderLocalCore(proc) {
-  $("localCoreNote").textContent = dataset.project.local_core_note || "";
-  const wrap = $("localCoreList");
-  wrap.innerHTML = "";
-  localCoreFor(proc).forEach(item => wrap.appendChild(localCoreItem(item)));
-}
-
-function localCoreItem(item) {
-  const div = document.createElement("div");
-  div.className = "local-core-item";
-  div.innerHTML = `<span class="core-check" aria-hidden="true">✓</span><span>${escapeHtml(item.risk)}</span>`;
-  return div;
-}
-
 function renderProcedure(proc) {
   const panel = $("procedurePanel");
   panel.innerHTML = "";

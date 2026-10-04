@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>IR Consent Review</title>
-  <meta name="description" content="Consultant Delphi review of procedure-specific interventional radiology consent risks.">
+  <meta name="description" content="Departmental review of interventional radiology consent risks.">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -24,17 +24,13 @@
       <button id="navBackup" class="side-nav-item" type="button">Download backup</button>
     </nav>
 
-    <div class="sidebar-note">
-      <strong>Delphi scoring</strong>
-      <span>Score procedure-specific candidate risks 1–5. Local core risks are shown separately and are not scored.</span>
-    </div>
   </aside>
 
   <div class="content-shell">
     <header class="topbar">
       <div>
         <span class="topbar-kicker">IR Consent Review</span>
-        <span id="topbarPage">Consultant review</span>
+        <span id="topbarPage">Review</span>
       </div>
       <div class="topbar-right">
         <span id="topbarConsultant" class="consultant-chip hidden"></span>
@@ -47,16 +43,25 @@
         <div class="panel login-panel">
           <div class="panel-title-row">
             <div>
-              <div class="section-kicker">Consultant review</div>
+              <div class="section-kicker">Round 1</div>
               <h1>IR Consent Review</h1>
             </div>
           </div>
-          <p class="lead">Review whichever procedures you routinely perform, supervise or feel comfortable assessing.</p>
+          <p class="lead">Please enter your name below and consider reviewing whichever procedures you routinely perform, supervise, or feel comfortable assessing. You do not need to review every procedure.</p>
           <div class="form-row single-field">
             <div class="field">
-              <label for="consultantId">Consultant ID</label>
-              <input id="consultantId" type="text" autocomplete="off" placeholder="e.g. C01">
+              <label for="consultantId">Name</label>
+              <input id="consultantId" type="text" autocomplete="name" placeholder="Your full name">
             </div>
+          </div>
+          <div class="intro-instructions">
+            <h2>Instructions</h2>
+            <ul>
+              <li>Select any procedure you feel able to assess.</li>
+              <li>For each procedure you choose, please score every listed risk from 1 to 5.</li>
+              <li>Supporting evidence can be viewed beneath each risk.</li>
+              <li>If you think an important risk is missing, add it before submitting the procedure.</li>
+            </ul>
           </div>
           <div class="intro-actions">
             <button id="startBtn" class="btn btn-primary" type="button">Continue</button>
@@ -70,7 +75,7 @@
           <div>
             <div class="section-kicker">Round 1</div>
             <h1>Procedures</h1>
-            <p>Select any procedure you feel comfortable reviewing.</p>
+            <p>Please select any procedure you feel comfortable assessing.</p>
           </div>
           <button id="exportBtnTop" class="btn btn-secondary" type="button">Download backup</button>
         </div>
@@ -102,24 +107,12 @@
           </div>
         </div>
 
-        <section id="localCoreCard" class="panel local-core-panel">
-          <div class="local-core-heading">
-            <div>
-              <div class="section-kicker">Local core</div>
-              <h2>Built-in consent items</h2>
-            </div>
-            <span class="evidence-badge local-core-badge">Local standard · not scored</span>
-          </div>
-          <p id="localCoreNote" class="local-core-note"></p>
-          <div id="localCoreList" class="local-core-list"></div>
-        </section>
-
         <div class="candidate-heading">
           <div>
-            <div class="section-kicker">Delphi vote</div>
-            <h2>Procedure-specific candidate risks</h2>
+            <div class="section-kicker">Review</div>
+            <h2>Risks</h2>
           </div>
-          <p>Score each item from 1–5. Evidence can be expanded beneath each risk.</p>
+          <p>Please score each risk from 1 to 5.</p>
         </div>
 
         <div id="procedurePanel"></div>
@@ -153,17 +146,6 @@
         </div>
 
         <div id="missingWarning" class="alert alert-warning hidden"></div>
-
-        <section class="panel review-local-core">
-          <div class="panel-title-row">
-            <div>
-              <div class="section-kicker">Local core</div>
-              <h2>Built-in items</h2>
-            </div>
-            <span class="evidence-badge local-core-badge">Not part of vote</span>
-          </div>
-          <div id="reviewLocalCore" class="local-core-list compact"></div>
-        </section>
 
         <section class="panel review-panel">
           <div class="table-wrap">
@@ -211,7 +193,7 @@
   </div>
 
   <div class="guide-section">
-    <h3>Delphi score</h3>
+    <h3>Score</h3>
     <div id="guideScale" class="guide-scale"></div>
   </div>
 
@@ -220,10 +202,6 @@
     <div id="evidenceLegend" class="evidence-legend"></div>
   </div>
 
-  <div class="guide-section guide-note">
-    <h3>Frequency question</h3>
-    <p>The numerical-frequency question is only shown when a source provides a directly reported numerical estimate. It asks whether that number should appear on the final consent aid.</p>
-  </div>
 </aside>
 
 <script src="config.js"></script>

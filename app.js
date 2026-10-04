@@ -29,6 +29,19 @@ const pState = proc => {
 const answerFor = (proc, id) => pState(proc).answers[id] || { score: "", frequency: "", comment: "" };
 const procItems = proc => dataset.items.filter(item => item.procedure === proc);
 const localCoreFor = proc => (dataset.local_core_by_procedure && dataset.local_core_by_procedure[proc]) || [];
+const localReviewItems = proc => localCoreFor(proc).map((item, idx) => ({
+  id: `LOCAL-${dataset.procedures.indexOf(proc) + 1}-${idx + 1}`,
+  procedure: proc,
+  risk: item.risk,
+  risk_type: "Local practice item",
+  candidate_status: "LOCAL",
+  incidence_summary: "",
+  has_numeric_incidence: false,
+  best_evidence_tier: "Local practice",
+  sources: [],
+  evidence_note: "Locally proposed common consent risk. No specific published source assigned."
+}));
+const reviewItems = proc => [...localReviewItems(proc), ...procItems(proc)];
 
 async function init() {
   dataset = await (await fetch("data.json", { cache: "no-store" })).json();
@@ -64,7 +77,7 @@ async function init() {
 function start() {
   const cid = $("consultantId").value.trim();
   if (cfg.requireConsultantId && !cid) {
-    alert("Enter your consultant ID.");
+    alert("Please enter your name.");
     return;
   }
   state.consultantId = cid || "anonymous";
@@ -80,7 +93,7 @@ function setConsultantChip() {
     chip.classList.add("hidden");
     return;
   }
-  chip.textContent = `Consultant ${state.consultantId}`;
+  chip.textContent = state.consultantId;
   chip.classList.remove("hidden");
 }
 
@@ -102,7 +115,7 @@ function showDashboard() {
 
 function procStatus(proc) {
   const ps = pState(proc);
-  const items = procItems(proc);
+  const items = reviewItems(proc);
   const scored = items.filter(item => answerFor(proc, item.id).score !== "").length;
   if (ps.submitted) return { label: "Submitted", cls: "submitted", scored, total: items.length };
   if (scored === 0) return { label: "Not started", cls: "not-started", scored, total: items.length };
@@ -115,7 +128,6 @@ function renderDashboard() {
   wrap.innerHTML = "";
   dataset.procedures.forEach(proc => {
     const st = procStatus(proc);
-    const coreCount = localCoreFor(proc).length;
     const div = document.createElement("article");
     div.className = "panel procedure-card";
     div.innerHTML = `
@@ -124,7 +136,7 @@ function renderDashboard() {
         <span class="item-count">${st.scored}/${st.total} scored</span>
       </div>
       <h2>${escapeHtml(proc)}</h2>
-      <p>${coreCount} local core item${coreCount === 1 ? "" : "s"} + ${st.total} Delphi candidate${st.total === 1 ? "" : "s"}</p>
+      <p>${st.total} risk${st.total === 1 ? "" : "s"}</p>
       <div class="card-progress"><span style="width:${st.total ? Math.round(st.scored / st.total * 100) : 0}%"></span></div>
       <button class="btn btn-primary" type="button">${st.submitted ? "Open" : "Review"}</button>`;
     div.querySelector("button").onclick = () => openProcedure(proc);
@@ -143,7 +155,6 @@ function openProcedure(proc) {
     pState(proc).experience = $("experienceSelect").value;
     save();
   };
-  renderLocalCore(proc);
   renderProcedure(proc);
   renderAdditionalRisks();
   window.scrollTo({ top: 0, behavior: "smooth" });
@@ -166,7 +177,7 @@ function localCoreItem(item) {
 function renderProcedure(proc) {
   const panel = $("procedurePanel");
   panel.innerHTML = "";
-  procItems(proc).forEach(item => panel.appendChild(renderRisk(proc, item)));
+  reviewItems(proc).forEach(item => panel.appendChild(renderRisk(proc, item)));
   updateProgress(proc);
 }
 
@@ -175,7 +186,6 @@ function renderRisk(proc, item) {
   const div = document.createElement("article");
   div.className = "panel risk-card";
 
-  const addedBadge = item.candidate_status === "ADDED" ? `<span class="meta-badge added-badge">Added 2026 review</span>` : "";
   const tier = item.best_evidence_tier || "Unverified";
   const frequencyBlock = item.has_numeric_incidence ? `
     <div class="frequency-panel">
@@ -195,7 +205,6 @@ function renderRisk(proc, item) {
     <div class="risk-header">
       <div class="risk-title-block">
         <div class="risk-badges">
-          ${addedBadge}
           <span class="evidence-badge ${tierClass(tier)}">${escapeHtml(tier)}</span>
         </div>
         <h3>${escapeHtml(item.risk)}</h3>
@@ -205,7 +214,7 @@ function renderRisk(proc, item) {
     ${renderEvidenceDetails(item)}
 
     <div class="score-section">
-      <div class="score-label">Should this risk be included in the core procedure-specific consent list?</div>
+      <div class="score-label">Should this risk be included in the core consent list for this procedure?</div>
       <div class="scale" aria-label="Score ${escapeHtml(item.risk)}">
         ${[1,2,3,4,5].map(n => `<label title="${escapeHtml(dataset.project.scale[String(n)])}" class="score-option">
           <input type="radio" name="score-${item.id}" value="${n}" ${String(a.score) === String(n) ? "checked" : ""}>
@@ -254,6 +263,16 @@ function renderRisk(proc, item) {
 }
 
 function renderEvidenceDetails(item) {
+  if (item.candidate_status === "LOCAL") {
+    return `<details class="evidence-details">
+      <summary>Source</summary>
+      <div class="evidence-content">
+        <p><span class="source-tier tier-local">Local practice</span></p>
+        <p>Locally proposed common consent risk. No specific published source is assigned.</p>
+      </div>
+    </details>`;
+  }
+
   const sources = Array.isArray(item.sources) ? item.sources : [];
   const sourceHtml = sources.length ? `
     <ul class="source-list">
@@ -267,7 +286,7 @@ function renderEvidenceDetails(item) {
   const note = item.evidence_note ? `<p><strong>Evidence note:</strong> ${escapeHtml(item.evidence_note)}</p>` : "";
 
   return `<details class="evidence-details">
-    <summary>Evidence & source${sources.length === 1 ? "" : "s"}</summary>
+    <summary>Evidence and source${sources.length === 1 ? "" : "s"}</summary>
     <div class="evidence-content">
       ${contextFrequency}
       ${sourceHtml}
@@ -277,7 +296,7 @@ function renderEvidenceDetails(item) {
 }
 
 function updateProgress(proc) {
-  const items = procItems(proc);
+  const items = reviewItems(proc);
   const scored = items.filter(item => answerFor(proc, item.id).score !== "").length;
   const pct = items.length ? Math.round(scored / items.length * 100) : 0;
   $("progress").style.width = `${pct}%`;
@@ -345,19 +364,19 @@ function showReview() {
   const body = $("reviewBody");
   body.innerHTML = "";
   let missing = 0;
-  procItems(currentProcedure).forEach(item => {
+  reviewItems(currentProcedure).forEach(item => {
     const a = answerFor(currentProcedure, item.id);
     if (!a.score) missing++;
-    const frequency = item.has_numeric_incidence ? (a.frequency || "—") : "Not asked";
+    const frequency = item.has_numeric_incidence ? (a.frequency || "-") : "Not asked";
     const tr = document.createElement("tr");
-    tr.innerHTML = `<td>${escapeHtml(item.risk)}</td><td>${escapeHtml(a.score || "—")}</td><td>${escapeHtml(frequency)}</td><td>${escapeHtml(a.comment || "")}</td>`;
+    tr.innerHTML = `<td>${escapeHtml(item.risk)}</td><td>${escapeHtml(a.score || "-")}</td><td>${escapeHtml(frequency)}</td><td>${escapeHtml(a.comment || "")}</td>`;
     body.appendChild(tr);
   });
 
-  const total = procItems(currentProcedure).length;
-  $("reviewSummary").textContent = `${total - missing}/${total} items scored · ${ps.experience}`;
+  const total = reviewItems(currentProcedure).length;
+  $("reviewSummary").textContent = `${total - missing}/${total} risks scored | ${ps.experience}`;
   $("missingWarning").classList.toggle("hidden", missing === 0);
-  $("missingWarning").textContent = missing ? `${missing} items remain unscored.` : "";
+  $("missingWarning").textContent = missing ? `${missing} risks remain unscored.` : "";
   $("submitProcedureBtn").disabled = missing > 0;
   $("submitStatus").innerHTML = "";
 
@@ -389,9 +408,8 @@ async function submitProcedure() {
     startedAt: state.startedAt,
     submittedAt: new Date().toISOString(),
     userAgent: navigator.userAgent,
-    localCoreRisks: localCoreFor(currentProcedure).map(x => x.risk),
     additionalRisks: ps.additionalRisks.map(x => x.trim()).filter(Boolean),
-    responses: procItems(currentProcedure).map(item => ({
+    responses: reviewItems(currentProcedure).map(item => ({
       itemId: item.id,
       procedure: item.procedure,
       risk: item.risk,
@@ -403,7 +421,7 @@ async function submitProcedure() {
   };
 
   $("submitProcedureBtn").disabled = true;
-  $("submitStatus").innerHTML = '<div class="alert alert-info">Submitting…</div>';
+  $("submitStatus").innerHTML = '<div class="alert alert-info">Submitting...</div>';
   try {
     await fetch(cfg.endpoint, {
       method: "POST",
@@ -450,7 +468,7 @@ function renderGuide() {
   scale.innerHTML = [1,2,3,4,5].map(n => `<div class="guide-scale-row"><span>${n}</span><strong>${escapeHtml(dataset.project.scale[String(n)])}</strong></div>`).join("");
 
   const legend = $("evidenceLegend");
-  const order = ["Tier 1","Tier 2","Tier 3","Tier 4","Tier 5","Unverified","Local core"];
+  const order = ["Tier 1","Tier 2","Tier 3","Tier 4","Tier 5","Unverified","Local practice"];
   legend.innerHTML = order.map(tier => `<div class="legend-row"><span class="evidence-badge ${tierClass(tier)}">${escapeHtml(tier)}</span><p>${escapeHtml(dataset.project.evidence_tiers[tier] || "")}</p></div>`).join("");
 }
 

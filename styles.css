@@ -47,26 +47,17 @@ a:hover{text-decoration:underline}
 }
 .brand-block{
   display:flex;
-  flex-direction:column;
-  align-items:flex-start;
-  gap:6px;
-  padding:16px 18px 14px;
+  align-items:center;
+  justify-content:flex-start;
+  padding:14px 14px 12px;
   border-bottom:1px solid rgba(255,255,255,.10);
 }
 .brand-logo{
   display:block;
-  width:149px;
+  width:198px;
   max-width:100%;
   height:auto;
-  background:#fff;
-  border-radius:2px;
-}
-.brand-title{
-  font-size:12px;
-  font-weight:600;
-  line-height:1.2;
-  color:#d8e0e7;
-  letter-spacing:.02em;
+  background:transparent;
 }
 .side-nav{padding:12px 0}
 .side-nav-item{

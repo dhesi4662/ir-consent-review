@@ -188,16 +188,13 @@ const reviewItems = proc => [...localReviewItems(proc), ...procItems(proc)];
 
 async function init() {
   dataset = await (await fetch("data.json", { cache: "no-store" })).json();
-  load();
-  if (state.consultantId) {
-    $("consultantId").value = state.consultantId;
-    setConsultantChip();
-  }
+  const rememberedGmc = localStorage.getItem(lastGmcKey());
+  if (rememberedGmc && $("gmcNumber")) $("gmcNumber").value = rememberedGmc;
 
   $("startBtn").onclick = start;
   $("introGuideBtn").onclick = openGuide;
   $("backDashboardBtn").onclick = showDashboard;
-  $("saveBackBtn").onclick = () => { save(); showDashboard(); };
+  $("saveBackBtn").onclick = async () => { await flushDraft(); showDashboard(); };
   $("reviewProcedureBtn").onclick = showReview;
   $("backSurveyBtn").onclick = () => { hideAll(); $("survey").classList.remove("hidden"); setPageLabel("Procedure review"); };
   $("submitProcedureBtn").onclick = submitProcedure;
@@ -205,39 +202,113 @@ async function init() {
   $("exportBtnTop").onclick = exportBackup;
   $("addRiskBtn").onclick = addAdditionalRisk;
   $("submittedBackBtn").onclick = showDashboard;
-
-  $("navProcedures").onclick = () => state.consultantId ? showDashboard() : $("consultantId").focus();
+  $("navProcedures").onclick = () => auth.gmcNumber ? showDashboard() : $("gmcNumber").focus();
   $("navGuide").onclick = openGuide;
   $("navBackup").onclick = exportBackup;
+  if ($("navSignOut")) $("navSignOut").onclick = signOut;
   $("floatingGuideBtn").onclick = openGuide;
   $("closeGuideBtn").onclick = closeGuide;
   $("guideBackdrop").onclick = closeGuide;
   document.addEventListener("keydown", e => { if (e.key === "Escape") closeGuide(); });
+  window.addEventListener("online", () => { if (auth.gmcNumber) flushDraft(); });
+
+  [$("gmcNumber"), $("pin")].filter(Boolean).forEach(el => {
+    el.addEventListener("keydown", e => { if (e.key === "Enter") start(); });
+  });
 
   renderGuide();
 }
 
-function start() {
-  const cid = $("consultantId").value.trim();
-  if (cfg.requireConsultantId && !cid) {
-    alert("Please enter your name.");
+async function start() {
+  const gmcNumber = String($("gmcNumber").value || "").replace(/\D/g, "");
+  const pin = String($("pin").value || "").replace(/\D/g, "");
+  const manualName = $("manualNameWrap").classList.contains("hidden") ? "" : $("manualName").value.trim();
+
+  if (!/^\d{7}$/.test(gmcNumber)) {
+    showLoginStatus("Please enter a valid 7 digit GMC number.", "error");
     return;
   }
-  state.consultantId = cid || "anonymous";
-  state.startedAt = state.startedAt || new Date().toISOString();
-  save();
-  setConsultantChip();
-  showDashboard();
+  if (!/^\d{6}$/.test(pin)) {
+    showLoginStatus("Please enter a 6 digit PIN.", "error");
+    return;
+  }
+
+  $("startBtn").disabled = true;
+  showLoginStatus("Checking details...", "info");
+
+  try {
+    const result = await apiRequest({
+      action: "login",
+      projectCode: cfg.projectCode,
+      round: cfg.round || dataset.project.round,
+      gmcNumber,
+      pin,
+      manualName
+    });
+
+    if (!result.ok) {
+      if (result.requiresName) {
+        $("manualNameWrap").classList.remove("hidden");
+        showLoginStatus(result.error || "Please enter your name to continue.", "warning");
+        $("manualName").focus();
+        return;
+      }
+      showLoginStatus(result.error || "Unable to sign in.", "error");
+      return;
+    }
+
+    auth = { gmcNumber, pin, name: result.name || "", gmcVerified: Boolean(result.gmcVerified) };
+    localStorage.setItem(lastGmcKey(), gmcNumber);
+
+    const localDraft = loadLocalDraft(gmcNumber);
+    state = chooseDraft(result.draft, localDraft);
+    state.consultantId = gmcNumber;
+    state.reviewerName = auth.name;
+    state.startedAt = state.startedAt || new Date().toISOString();
+    state.updatedAt = state.updatedAt || new Date().toISOString();
+
+    (result.submittedProcedures || []).forEach(proc => {
+      const ps = pState(proc);
+      ps.submitted = true;
+      ps.submittedAt = ps.submittedAt || new Date().toISOString();
+    });
+
+    localStorage.setItem(localDraftKey(gmcNumber), JSON.stringify(state));
+    setReviewerChip();
+    if ($("navSignOut")) $("navSignOut").classList.remove("hidden");
+    $("manualNameWrap").classList.add("hidden");
+    $("manualName").value = "";
+    $("pin").value = "";
+    hideLoginStatus();
+    showDashboard();
+
+    if (!result.draft || isNewer(localDraft, result.draft)) scheduleServerSave(100);
+    else setSaveStatus("Saved", "saved");
+  } catch (e) {
+    showLoginStatus("Unable to connect to the review server. Please try again.", "error");
+  } finally {
+    $("startBtn").disabled = false;
+  }
 }
 
-function setConsultantChip() {
+function setReviewerChip() {
   const chip = $("topbarConsultant");
-  if (!state.consultantId) {
+  if (!auth.gmcNumber) {
     chip.classList.add("hidden");
     return;
   }
-  chip.textContent = state.consultantId;
+  chip.textContent = auth.name ? `Dr ${auth.name} | GMC ${auth.gmcNumber}` : `GMC ${auth.gmcNumber}`;
   chip.classList.remove("hidden");
+}
+
+function showLoginStatus(message, kind) {
+  const el = $("loginStatus");
+  el.textContent = message;
+  el.className = `login-status ${kind || "info"}`;
+}
+
+function hideLoginStatus() {
+  $("loginStatus").classList.add("hidden");
 }
 
 function setPageLabel(text) {

@@ -272,6 +272,7 @@ h3{font-size:18px;line-height:1.35}
   white-space:nowrap;
 }
 .added-badge{background:#e8f4fd;color:#31708f;border:1px solid #c8e1f2}
+.local-policy-badge{background:#eef1f4;color:var(--navy);border:1px solid #cfd6dc}
 .evidence-badge{border:1px solid transparent}
 .tier-1{background:#d9f3ed;color:#0f6f5d;border-color:#bce4d9}
 .tier-2{background:#d9edf7;color:#2a6681;border-color:#bcdff1}

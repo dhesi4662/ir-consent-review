@@ -1,4 +1,4 @@
-# IR Consent Review — methodology
+# IR Consent Review - methodology
 
 ## Purpose
 
@@ -19,22 +19,27 @@ The Round 1 website contains 238 procedure-specific candidate risks across 20 pr
 
 The website colour-codes each source by its tier. The displayed 'best evidence tier' is the highest-quality source supporting that candidate risk; it does not imply that the evidence is high certainty or transferable to every patient.
 
-## Local core items
+## Local generic policy
 
-A separate project-defined local core is displayed for every procedure:
+The same locally proposed generic consent framework is checked across the procedure set:
 
 - Pain / discomfort
 - Bleeding / bruising / haematoma
 - Damage to surrounding structures
 - Technical or clinical failure, with possible need for repeat or alternative treatment
+- Allergic reaction
+- Radiation exposure where ionising radiation is used
+- Renal impairment where iodinated contrast may be used
+- Local or systemic infection
+- Air embolism for relevant venous procedures
 
-Air embolism is additionally included as a local core item for the pre-specified venous procedure group.
+Where an existing procedure-specific candidate already represents one of these concepts, that existing item is marked as also included in the local generic policy and is scored once only. A separate `Local practice` candidate is added only where no equivalent or closely overlapping procedure-specific risk is already present.
 
-These items are explicitly labelled as a local/project convention rather than being attributed to a single published source. They are not included in the Delphi vote.
+Local-practice candidates are scored using the same 1 to 5 scale and enter the same consensus process as the other candidate risks.
 
 ## Round 1 scoring
 
-Consultants may review one, several or all procedures according to their practice and experience. Once a procedure is selected, all procedure-specific candidate risks must be scored before submission.
+Reviewers may review one, several or all procedures according to their practice and experience. Once a procedure is selected, all procedure-specific candidate risks must be scored before submission.
 
 Score:
 
@@ -58,4 +63,4 @@ Planned rule per procedure-risk item:
 - >=80% scoring 1–2: Exclude
 - otherwise: Round 2
 
-Consensus uses only consultants who completed that procedure. A minimum number of completed procedure responses should be satisfied before a consensus label is applied; the current default is 3.
+Consensus uses only reviewers who completed that procedure. A minimum number of completed procedure responses should be satisfied before a consensus label is applied; the current default is 3.

@@ -23,7 +23,54 @@
       "Unverified": "No risk-level supporting source confirmed in the current evidence review",
       "Local practice": "Locally proposed common consent risk; no specific published source assigned"
     },
-    "local_core_note": "Locally proposed common risks are only added where no equivalent or closely overlapping procedure-specific risk is already present. The generic local policy includes pain/discomfort, bleeding/bruising/haematoma, damage to surrounding structures, technical or clinical failure, allergic reaction, radiation exposure, renal impairment and local or systemic infection where applicable, with air embolism additionally considered for venous procedures."
+    "local_core_note": "The same local generic policy is checked across procedures. Where a procedure-specific evidence item already represents a local-policy risk, that existing item is marked as also included in the local generic policy and is scored once only. A separate Local practice item is added only when the local-policy concept is not otherwise represented.",
+    "local_policy_items": [
+      {
+        "key": "pain",
+        "label": "Pain / discomfort",
+        "scope": "All procedures"
+      },
+      {
+        "key": "bleed",
+        "label": "Bleeding / bruising / haematoma",
+        "scope": "All procedures"
+      },
+      {
+        "key": "damage",
+        "label": "Damage to surrounding structures",
+        "scope": "All procedures"
+      },
+      {
+        "key": "failure",
+        "label": "Technical or clinical failure, with possible need for repeat or alternative treatment",
+        "scope": "All procedures"
+      },
+      {
+        "key": "allergy",
+        "label": "Allergic reaction",
+        "scope": "All procedures"
+      },
+      {
+        "key": "radiation",
+        "label": "Radiation exposure",
+        "scope": "All procedures where ionising radiation is used"
+      },
+      {
+        "key": "renal",
+        "label": "Renal impairment",
+        "scope": "All procedures where iodinated contrast may be used"
+      },
+      {
+        "key": "infection",
+        "label": "Local or systemic infection",
+        "scope": "All procedures"
+      },
+      {
+        "key": "air",
+        "label": "Air embolism",
+        "scope": "Relevant venous procedures"
+      }
+    ]
   },
   "procedures": [
     "Bronchial artery embolisation (BAE)",
@@ -51,150 +98,249 @@
     "Bronchial artery embolisation (BAE)": [
       {
         "risk": "Local or systemic infection",
-        "note": "Locally proposed common consent risk; no specific published source assigned. Added only where no equivalent or closely overlapping infection risk is already present."
+        "note": "Locally proposed common consent risk; no specific published source assigned. Added only where no equivalent or closely overlapping infection risk is already present.",
+        "local_policy": [
+          "Local or systemic infection"
+        ]
       }
     ],
     "Carotid artery angioplasty and stenting (CAS)": [
       {
         "risk": "Pain / discomfort",
-        "note": "Locally proposed common consent risk; no specific published source assigned."
+        "note": "Locally proposed common consent risk; no specific published source assigned.",
+        "local_policy": [
+          "Pain / discomfort"
+        ]
       },
       {
         "risk": "Technical or clinical failure, with possible need for repeat or alternative treatment",
-        "note": "Locally proposed common consent risk; no specific published source assigned."
+        "note": "Locally proposed common consent risk; no specific published source assigned.",
+        "local_policy": [
+          "Technical or clinical failure, with possible need for repeat or alternative treatment"
+        ]
       },
       {
         "risk": "Local or systemic infection",
-        "note": "Locally proposed common consent risk; no specific published source assigned. Added only where no equivalent or closely overlapping infection risk is already present."
+        "note": "Locally proposed common consent risk; no specific published source assigned. Added only where no equivalent or closely overlapping infection risk is already present.",
+        "local_policy": [
+          "Local or systemic infection"
+        ]
       }
     ],
     "Diagnostic angiography": [
       {
         "risk": "Technical or clinical failure, with possible need for repeat or alternative treatment",
-        "note": "Locally proposed common consent risk; no specific published source assigned."
+        "note": "Locally proposed common consent risk; no specific published source assigned.",
+        "local_policy": [
+          "Technical or clinical failure, with possible need for repeat or alternative treatment"
+        ]
       },
       {
         "risk": "Local or systemic infection",
-        "note": "Locally proposed common consent risk; no specific published source assigned. Added only where no equivalent or closely overlapping infection risk is already present."
+        "note": "Locally proposed common consent risk; no specific published source assigned. Added only where no equivalent or closely overlapping infection risk is already present.",
+        "local_policy": [
+          "Local or systemic infection"
+        ]
       }
     ],
     "Endovascular aneurysm repair (EVAR)": [
       {
         "risk": "Pain / discomfort",
-        "note": "Locally proposed common consent risk; no specific published source assigned."
+        "note": "Locally proposed common consent risk; no specific published source assigned.",
+        "local_policy": [
+          "Pain / discomfort"
+        ]
       }
     ],
     "Gastrointestinal bleeding embolisation": [
       {
         "risk": "Pain / discomfort",
-        "note": "Locally proposed common consent risk; no specific published source assigned."
+        "note": "Locally proposed common consent risk; no specific published source assigned.",
+        "local_policy": [
+          "Pain / discomfort"
+        ]
       },
       {
         "risk": "Local or systemic infection",
-        "note": "Locally proposed common consent risk; no specific published source assigned. Added only where no equivalent or closely overlapping infection risk is already present."
+        "note": "Locally proposed common consent risk; no specific published source assigned. Added only where no equivalent or closely overlapping infection risk is already present.",
+        "local_policy": [
+          "Local or systemic infection"
+        ]
       }
     ],
     "Pelvic congestion / pelvic vein embolisation": [
       {
         "risk": "Air embolism",
-        "note": "Locally proposed common consent risk for venous procedures; no specific published source assigned."
+        "note": "Locally proposed common consent risk for venous procedures; no specific published source assigned.",
+        "local_policy": [
+          "Air embolism"
+        ]
       },
       {
         "risk": "Local or systemic infection",
-        "note": "Locally proposed common consent risk; no specific published source assigned. Added only where no equivalent or closely overlapping infection risk is already present."
+        "note": "Locally proposed common consent risk; no specific published source assigned. Added only where no equivalent or closely overlapping infection risk is already present.",
+        "local_policy": [
+          "Local or systemic infection"
+        ]
       }
     ],
     "Percutaneous gastrostomy insertion": [],
     "Transjugular liver biopsy (TJLB)": [
       {
         "risk": "Air embolism",
-        "note": "Locally proposed common consent risk for venous procedures; no specific published source assigned."
+        "note": "Locally proposed common consent risk for venous procedures; no specific published source assigned.",
+        "local_policy": [
+          "Air embolism"
+        ]
       },
       {
         "risk": "Radiation exposure",
-        "note": "Locally proposed common consent risk; no specific published source assigned. Added only where no equivalent procedure-specific radiation risk is already present."
+        "note": "Locally proposed common consent risk; no specific published source assigned. Added only where no equivalent procedure-specific radiation risk is already present.",
+        "local_policy": [
+          "Radiation exposure"
+        ]
       },
       {
         "risk": "Renal impairment",
-        "note": "Locally proposed common consent risk; no specific published source assigned. Applied where contrast use makes this relevant and no equivalent procedure-specific renal impairment risk is already present."
+        "note": "Locally proposed common consent risk; no specific published source assigned. Applied where contrast use makes this relevant and no equivalent procedure-specific renal impairment risk is already present.",
+        "local_policy": [
+          "Renal impairment"
+        ]
       },
       {
         "risk": "Local or systemic infection",
-        "note": "Locally proposed common consent risk; no specific published source assigned. Added only where no equivalent or closely overlapping infection risk is already present."
+        "note": "Locally proposed common consent risk; no specific published source assigned. Added only where no equivalent or closely overlapping infection risk is already present.",
+        "local_policy": [
+          "Local or systemic infection"
+        ]
       }
     ],
     "Peripheral arterial angioplasty +/- stenting": [
       {
         "risk": "Pain / discomfort",
-        "note": "Locally proposed common consent risk; no specific published source assigned."
+        "note": "Locally proposed common consent risk; no specific published source assigned.",
+        "local_policy": [
+          "Pain / discomfort"
+        ]
       }
     ],
     "Portal vein embolisation (PVE)": [
       {
         "risk": "Air embolism",
-        "note": "Locally proposed common consent risk for venous procedures; no specific published source assigned."
+        "note": "Locally proposed common consent risk for venous procedures; no specific published source assigned.",
+        "local_policy": [
+          "Air embolism"
+        ]
       }
     ],
     "Prostatic artery embolisation (PAE)": [
       {
         "risk": "Pain / discomfort",
-        "note": "Locally proposed common consent risk; no specific published source assigned."
+        "note": "Locally proposed common consent risk; no specific published source assigned.",
+        "local_policy": [
+          "Pain / discomfort"
+        ]
       }
     ],
     "Transarterial chemoembolisation (TACE)": [
       {
         "risk": "Technical or clinical failure, with possible need for repeat or alternative treatment",
-        "note": "Locally proposed common consent risk; no specific published source assigned."
+        "note": "Locally proposed common consent risk; no specific published source assigned.",
+        "local_policy": [
+          "Technical or clinical failure, with possible need for repeat or alternative treatment"
+        ]
       }
     ],
     "Thoracic endovascular aortic repair (TEVAR)": [
       {
         "risk": "Pain / discomfort",
-        "note": "Locally proposed common consent risk; no specific published source assigned."
+        "note": "Locally proposed common consent risk; no specific published source assigned.",
+        "local_policy": [
+          "Pain / discomfort"
+        ]
       },
       {
         "risk": "Local or systemic infection",
-        "note": "Locally proposed common consent risk; no specific published source assigned. Added only where no equivalent or closely overlapping infection risk is already present."
+        "note": "Locally proposed common consent risk; no specific published source assigned. Added only where no equivalent or closely overlapping infection risk is already present.",
+        "local_policy": [
+          "Local or systemic infection"
+        ]
       }
     ],
     "Thrombolysis of dialysis access": [
       {
         "risk": "Pain / discomfort",
-        "note": "Locally proposed common consent risk; no specific published source assigned."
+        "note": "Locally proposed common consent risk; no specific published source assigned.",
+        "local_policy": [
+          "Pain / discomfort"
+        ]
       },
       {
         "risk": "Local or systemic infection",
-        "note": "Locally proposed common consent risk; no specific published source assigned. Added only where no equivalent or closely overlapping infection risk is already present."
+        "note": "Locally proposed common consent risk; no specific published source assigned. Added only where no equivalent or closely overlapping infection risk is already present.",
+        "local_policy": [
+          "Local or systemic infection"
+        ]
       }
     ],
     "PTA of dialysis access": [
       {
         "risk": "Local or systemic infection",
-        "note": "Locally proposed common consent risk; no specific published source assigned. Added only where no equivalent or closely overlapping infection risk is already present."
+        "note": "Locally proposed common consent risk; no specific published source assigned. Added only where no equivalent or closely overlapping infection risk is already present.",
+        "local_policy": [
+          "Local or systemic infection"
+        ]
       }
     ],
     "Transjugular intrahepatic portosystemic shunt (TIPS)": [
       {
         "risk": "Air embolism",
-        "note": "Locally proposed common consent risk for venous procedures; no specific published source assigned."
+        "note": "Locally proposed common consent risk for venous procedures; no specific published source assigned.",
+        "local_policy": [
+          "Air embolism"
+        ]
       }
     ],
-    "Tunneled dialysis catheter insertion": [],
+    "Tunneled dialysis catheter insertion": [
+      {
+        "risk": "Allergic reaction",
+        "note": "Locally proposed common consent risk; no specific published source assigned. Added because no equivalent or closely overlapping procedure-specific risk is currently listed.",
+        "local_policy": [
+          "Allergic reaction"
+        ]
+      },
+      {
+        "risk": "Renal impairment",
+        "note": "Locally proposed common consent risk; no specific published source assigned. Added because no equivalent or closely overlapping procedure-specific risk is currently listed.",
+        "local_policy": [
+          "Renal impairment"
+        ]
+      }
+    ],
     "Uterine artery embolisation for fibroids (UAE)": [],
     "Varicocele embolisation": [
       {
         "risk": "Air embolism",
-        "note": "Locally proposed common consent risk for venous procedures; no specific published source assigned."
+        "note": "Locally proposed common consent risk for venous procedures; no specific published source assigned.",
+        "local_policy": [
+          "Air embolism"
+        ]
       },
       {
         "risk": "Local or systemic infection",
-        "note": "Locally proposed common consent risk; no specific published source assigned. Added only where no equivalent or closely overlapping infection risk is already present."
+        "note": "Locally proposed common consent risk; no specific published source assigned. Added only where no equivalent or closely overlapping infection risk is already present.",
+        "local_policy": [
+          "Local or systemic infection"
+        ]
       }
     ],
     "Venous stenting": [
       {
         "risk": "Air embolism",
-        "note": "Locally proposed common consent risk for venous procedures; no specific published source assigned."
+        "note": "Locally proposed common consent risk for venous procedures; no specific published source assigned.",
+        "local_policy": [
+          "Air embolism"
+        ]
       }
     ]
   },
@@ -225,7 +371,10 @@
           "url": "https://doi.org/10.1186/s12890-024-03244-x"
         }
       ],
-      "evidence_note": "Evidence aggregated from component risks: Bleeding; Access-site haematoma."
+      "evidence_note": "Evidence aggregated from component risks: Bleeding; Access-site haematoma.",
+      "local_policy": [
+        "Bleeding / bruising / haematoma"
+      ]
     },
     {
       "id": "D002",
@@ -253,7 +402,10 @@
           "url": "https://www.cuh.nhs.uk/patient-information/bronchial-artery-embolisation-a-guide-for-patients/"
         }
       ],
-      "evidence_note": ""
+      "evidence_note": "",
+      "local_policy": [
+        "Damage to surrounding structures"
+      ]
     },
     {
       "id": "D003",
@@ -294,7 +446,10 @@
           "url": "https://www.cuh.nhs.uk/patient-information/bronchial-artery-embolisation-a-guide-for-patients/"
         }
       ],
-      "evidence_note": "Evidence aggregated from component risks: Pain or discomfort; Post-embolisation syndrome. Incidence is source/context specific and should not be treated as a universal consent rate."
+      "evidence_note": "Evidence aggregated from component risks: Pain or discomfort; Post-embolisation syndrome. Incidence is source/context specific and should not be treated as a universal consent rate.",
+      "local_policy": [
+        "Pain / discomfort"
+      ]
     },
     {
       "id": "D005",
@@ -322,7 +477,11 @@
           "url": "https://doi.org/10.1186/s12890-024-03244-x"
         }
       ],
-      "evidence_note": "Evidence aggregated from component risks: Contrast reaction; Acute kidney injury/renal impairment."
+      "evidence_note": "Evidence aggregated from component risks: Contrast reaction; Acute kidney injury/renal impairment.",
+      "local_policy": [
+        "Allergic reaction",
+        "Renal impairment"
+      ]
     },
     {
       "id": "D006",
@@ -409,7 +568,10 @@
           "url": "https://www.cuh.nhs.uk/patient-information/bronchial-artery-embolisation-a-guide-for-patients/"
         }
       ],
-      "evidence_note": ""
+      "evidence_note": "",
+      "local_policy": [
+        "Radiation exposure"
+      ]
     },
     {
       "id": "D010",
@@ -432,7 +594,10 @@
           "url": "https://doi.org/10.1186/s12890-024-03244-x"
         }
       ],
-      "evidence_note": "Evidence aggregated from component risks: Recurrence of treated condition; Technical failure/inability to complete procedure. Incidence is source/context specific and should not be treated as a universal consent rate."
+      "evidence_note": "Evidence aggregated from component risks: Recurrence of treated condition; Technical failure/inability to complete procedure. Incidence is source/context specific and should not be treated as a universal consent rate.",
+      "local_policy": [
+        "Technical or clinical failure, with possible need for repeat or alternative treatment"
+      ]
     },
     {
       "id": "D011",
@@ -514,7 +679,10 @@
           "url": "https://doi.org/10.1007/s00270-022-03349-y"
         }
       ],
-      "evidence_note": "Evidence aggregated from component risks: Bleeding; Access-site bruising."
+      "evidence_note": "Evidence aggregated from component risks: Bleeding; Access-site bruising.",
+      "local_policy": [
+        "Bleeding / bruising / haematoma"
+      ]
     },
     {
       "id": "D015",
@@ -578,7 +746,10 @@
           "url": "https://doi.org/10.1007/s00270-022-03349-y"
         }
       ],
-      "evidence_note": "Evidence aggregated from component risks: Vessel occlusion; Vessel rupture; Arterial dissection; Vessel perforation."
+      "evidence_note": "Evidence aggregated from component risks: Vessel occlusion; Vessel rupture; Arterial dissection; Vessel perforation.",
+      "local_policy": [
+        "Damage to surrounding structures"
+      ]
     },
     {
       "id": "D018",
@@ -606,7 +777,11 @@
           "url": "https://doi.org/10.1007/s00270-024-03707-y"
         }
       ],
-      "evidence_note": "Evidence aggregated from component risks: Contrast reaction; Acute kidney injury/renal impairment."
+      "evidence_note": "Evidence aggregated from component risks: Contrast reaction; Acute kidney injury/renal impairment.",
+      "local_policy": [
+        "Allergic reaction",
+        "Renal impairment"
+      ]
     },
     {
       "id": "D019",
@@ -665,7 +840,10 @@
           "url": "https://doi.org/10.1007/s00270-021-02904-3"
         }
       ],
-      "evidence_note": ""
+      "evidence_note": "",
+      "local_policy": [
+        "Radiation exposure"
+      ]
     },
     {
       "id": "D022",
@@ -785,7 +963,11 @@
           "url": "https://doi.org/10.1161/CIR.0000000000001251"
         }
       ],
-      "evidence_note": "Evidence aggregated from component risks: Access-site bruising; Access-site haematoma; Pain or discomfort."
+      "evidence_note": "Evidence aggregated from component risks: Access-site bruising; Access-site haematoma; Pain or discomfort.",
+      "local_policy": [
+        "Pain / discomfort",
+        "Bleeding / bruising / haematoma"
+      ]
     },
     {
       "id": "D027",
@@ -818,7 +1000,10 @@
           "url": "https://www.cuh.nhs.uk/patient-information/angiogramangioplasty/"
         }
       ],
-      "evidence_note": "Evidence aggregated from component risks: Vessel occlusion; Distal embolisation; Vascular injury; Arterial dissection; Thrombosis; Pseudoaneurysm; Iatrogenic arteriovenous fistula."
+      "evidence_note": "Evidence aggregated from component risks: Vessel occlusion; Distal embolisation; Vascular injury; Arterial dissection; Thrombosis; Pseudoaneurysm; Iatrogenic arteriovenous fistula.",
+      "local_policy": [
+        "Damage to surrounding structures"
+      ]
     },
     {
       "id": "D028",
@@ -884,7 +1069,11 @@
           "url": "https://www.cuh.nhs.uk/patient-information/angiogramangioplasty/"
         }
       ],
-      "evidence_note": "Evidence aggregated from component risks: Contrast reaction; Acute kidney injury/renal impairment."
+      "evidence_note": "Evidence aggregated from component risks: Contrast reaction; Acute kidney injury/renal impairment.",
+      "local_policy": [
+        "Allergic reaction",
+        "Renal impairment"
+      ]
     },
     {
       "id": "D030",
@@ -914,7 +1103,10 @@
           "url": "https://doi.org/10.1007/s00270-021-02904-3"
         }
       ],
-      "evidence_note": ""
+      "evidence_note": "",
+      "local_policy": [
+        "Radiation exposure"
+      ]
     },
     {
       "id": "D032",
@@ -973,7 +1165,10 @@
           "url": "https://www.cirse.org/wp-content/uploads/2018/07/SOP_SIR_2010_Clinical-Practice-Guidelines-for-Endovascular-Abdominal-Aortic-Aneurysm-Repair.pdf"
         }
       ],
-      "evidence_note": "Evidence aggregated from component risks: Bleeding; Access-site bruising."
+      "evidence_note": "Evidence aggregated from component risks: Bleeding; Access-site bruising.",
+      "local_policy": [
+        "Bleeding / bruising / haematoma"
+      ]
     },
     {
       "id": "D035",
@@ -1042,7 +1237,11 @@
           "url": "https://doi.org/10.1148/radiol.240100"
         }
       ],
-      "evidence_note": "Evidence aggregated from component risks: Acute kidney injury/renal impairment; Contrast reaction."
+      "evidence_note": "Evidence aggregated from component risks: Acute kidney injury/renal impairment; Contrast reaction.",
+      "local_policy": [
+        "Allergic reaction",
+        "Renal impairment"
+      ]
     },
     {
       "id": "D038",
@@ -1136,7 +1335,10 @@
           "url": "https://doi.org/10.1007/s00270-023-03629-1"
         }
       ],
-      "evidence_note": "Evidence aggregated from component risks: Graft infection; Graft failure. Incidence is source/context specific and should not be treated as a universal consent rate."
+      "evidence_note": "Evidence aggregated from component risks: Graft infection; Graft failure. Incidence is source/context specific and should not be treated as a universal consent rate.",
+      "local_policy": [
+        "Local or systemic infection"
+      ]
     },
     {
       "id": "D041",
@@ -1159,7 +1361,10 @@
           "url": "https://www.cirse.org/wp-content/uploads/2018/07/SOP_SIR_2010_Clinical-Practice-Guidelines-for-Endovascular-Abdominal-Aortic-Aneurysm-Repair.pdf"
         }
       ],
-      "evidence_note": "Evidence aggregated from component risks: Vascular injury; Bleeding; Limb/hand ischaemia; Arterial dissection; Vessel rupture."
+      "evidence_note": "Evidence aggregated from component risks: Vascular injury; Bleeding; Limb/hand ischaemia; Arterial dissection; Vessel rupture.",
+      "local_policy": [
+        "Damage to surrounding structures"
+      ]
     },
     {
       "id": "D042",
@@ -1177,7 +1382,10 @@
           "url": "https://doi.org/10.1007/s00270-021-02904-3"
         }
       ],
-      "evidence_note": ""
+      "evidence_note": "",
+      "local_policy": [
+        "Radiation exposure"
+      ]
     },
     {
       "id": "D043",
@@ -1205,7 +1413,10 @@
           "url": "https://www.cirse.org/wp-content/uploads/2018/07/SOP_SIR_2010_Clinical-Practice-Guidelines-for-Endovascular-Abdominal-Aortic-Aneurysm-Repair.pdf"
         }
       ],
-      "evidence_note": "Evidence aggregated from component risks: Reintervention; Technical failure/inability to complete procedure."
+      "evidence_note": "Evidence aggregated from component risks: Reintervention; Technical failure/inability to complete procedure.",
+      "local_policy": [
+        "Technical or clinical failure, with possible need for repeat or alternative treatment"
+      ]
     },
     {
       "id": "D044",
@@ -1277,7 +1488,10 @@
           "url": "https://doi.org/10.1007/s00270-022-03349-y"
         }
       ],
-      "evidence_note": "Evidence aggregated from component risks: Bleeding; Access-site haematoma."
+      "evidence_note": "Evidence aggregated from component risks: Bleeding; Access-site haematoma.",
+      "local_policy": [
+        "Bleeding / bruising / haematoma"
+      ]
     },
     {
       "id": "D048",
@@ -1356,7 +1570,11 @@
           "url": "https://www.acr.org/Clinical-Resources/Clinical-Tools-and-Reference/Contrast-Manual"
         }
       ],
-      "evidence_note": "Evidence aggregated from component risks: Contrast reaction; Acute kidney injury/renal impairment."
+      "evidence_note": "Evidence aggregated from component risks: Contrast reaction; Acute kidney injury/renal impairment.",
+      "local_policy": [
+        "Allergic reaction",
+        "Renal impairment"
+      ]
     },
     {
       "id": "D051",
@@ -1402,7 +1620,10 @@
           "url": "https://doi.org/10.1007/s00270-021-02904-3"
         }
       ],
-      "evidence_note": ""
+      "evidence_note": "",
+      "local_policy": [
+        "Radiation exposure"
+      ]
     },
     {
       "id": "D053",
@@ -1430,7 +1651,10 @@
           "url": "https://doi.org/10.1007/s00270-022-03349-y"
         }
       ],
-      "evidence_note": "Evidence aggregated from component risks: Unplanned surgery; Reintervention."
+      "evidence_note": "Evidence aggregated from component risks: Unplanned surgery; Reintervention.",
+      "local_policy": [
+        "Technical or clinical failure, with possible need for repeat or alternative treatment"
+      ]
     },
     {
       "id": "D054",
@@ -1448,7 +1672,10 @@
           "url": "https://doi.org/10.1007/s00270-022-03349-y"
         }
       ],
-      "evidence_note": ""
+      "evidence_note": "",
+      "local_policy": [
+        "Damage to surrounding structures"
+      ]
     },
     {
       "id": "D055",
@@ -1514,7 +1741,11 @@
           "url": "https://www.bsir.org/patients-1/patient-information-leaflets/adult-procedures/pelvic-congestion-syndrome-and-pelvic-vein-embolisation/"
         }
       ],
-      "evidence_note": "Evidence aggregated from component risks: Contrast reaction; Acute kidney injury/renal impairment."
+      "evidence_note": "Evidence aggregated from component risks: Contrast reaction; Acute kidney injury/renal impairment.",
+      "local_policy": [
+        "Allergic reaction",
+        "Renal impairment"
+      ]
     },
     {
       "id": "D057",
@@ -1560,7 +1791,10 @@
           "url": "https://www.bsir.org/patients-1/patient-information-leaflets/adult-procedures/pelvic-congestion-syndrome-and-pelvic-vein-embolisation/"
         }
       ],
-      "evidence_note": "Evidence aggregated from component risks: Pain or discomfort; Thrombophlebitis."
+      "evidence_note": "Evidence aggregated from component risks: Pain or discomfort; Thrombophlebitis.",
+      "local_policy": [
+        "Pain / discomfort"
+      ]
     },
     {
       "id": "D059",
@@ -1583,7 +1817,10 @@
           "url": "https://www.bsir.org/patients-1/patient-information-leaflets/adult-procedures/pelvic-congestion-syndrome-and-pelvic-vein-embolisation/"
         }
       ],
-      "evidence_note": "Evidence aggregated from component risks: Persistent symptoms/clinical treatment failure; Recurrence of treated condition. Incidence is source/context specific and should not be treated as a universal consent rate."
+      "evidence_note": "Evidence aggregated from component risks: Persistent symptoms/clinical treatment failure; Recurrence of treated condition. Incidence is source/context specific and should not be treated as a universal consent rate.",
+      "local_policy": [
+        "Technical or clinical failure, with possible need for repeat or alternative treatment"
+      ]
     },
     {
       "id": "D060",
@@ -1601,7 +1838,10 @@
           "url": "https://doi.org/10.1007/s00270-021-02904-3"
         }
       ],
-      "evidence_note": ""
+      "evidence_note": "",
+      "local_policy": [
+        "Radiation exposure"
+      ]
     },
     {
       "id": "D061",
@@ -1675,7 +1915,10 @@
           "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC5886772/"
         }
       ],
-      "evidence_note": "Evidence aggregated from component risks: Bleeding; Access-site haematoma."
+      "evidence_note": "Evidence aggregated from component risks: Bleeding; Access-site haematoma.",
+      "local_policy": [
+        "Bleeding / bruising / haematoma"
+      ]
     },
     {
       "id": "D064",
@@ -1703,7 +1946,10 @@
           "url": "https://www.bsir.org/patients-1/patient-information-leaflets/adult-procedures/pelvic-congestion-syndrome-and-pelvic-vein-embolisation/"
         }
       ],
-      "evidence_note": "Evidence aggregated from component risks: Vascular injury; Vessel perforation."
+      "evidence_note": "Evidence aggregated from component risks: Vascular injury; Vessel perforation.",
+      "local_policy": [
+        "Damage to surrounding structures"
+      ]
     },
     {
       "id": "D065",
@@ -1795,7 +2041,10 @@
           "url": "https://www.cirse.org/wp-content/uploads/2018/07/SOP_SIR_2011_Multi-disciplinary-Practical-Guidelines-for-Gastrointestinal-Access-for-Enteral-Nutrition-and-Decompression.pdf"
         }
       ],
-      "evidence_note": "Evidence aggregated from component risks: Peritonitis; Adjacent-organ/local-structure injury; Bowel injury (unspecified)."
+      "evidence_note": "Evidence aggregated from component risks: Peritonitis; Adjacent-organ/local-structure injury; Bowel injury (unspecified).",
+      "local_policy": [
+        "Damage to surrounding structures"
+      ]
     },
     {
       "id": "D069",
@@ -1818,7 +2067,11 @@
           "url": "https://www.acr.org/Clinical-Resources/Clinical-Tools-and-Reference/Contrast-Manual"
         }
       ],
-      "evidence_note": ""
+      "evidence_note": "",
+      "local_policy": [
+        "Allergic reaction",
+        "Renal impairment"
+      ]
     },
     {
       "id": "D070",
@@ -1836,7 +2089,10 @@
           "url": "https://www.cirse.org/wp-content/uploads/2018/07/SOP_SIR_2011_Multi-disciplinary-Practical-Guidelines-for-Gastrointestinal-Access-for-Enteral-Nutrition-and-Decompression.pdf"
         }
       ],
-      "evidence_note": ""
+      "evidence_note": "",
+      "local_policy": [
+        "Technical or clinical failure, with possible need for repeat or alternative treatment"
+      ]
     },
     {
       "id": "D071",
@@ -1854,7 +2110,10 @@
           "url": "https://www.cirse.org/wp-content/uploads/2018/07/SOP_SIR_2011_Multi-disciplinary-Practical-Guidelines-for-Gastrointestinal-Access-for-Enteral-Nutrition-and-Decompression.pdf"
         }
       ],
-      "evidence_note": ""
+      "evidence_note": "",
+      "local_policy": [
+        "Pain / discomfort"
+      ]
     },
     {
       "id": "D072",
@@ -1877,7 +2136,10 @@
           "url": "https://www.cirse.org/wp-content/uploads/2018/07/SOP_SIR_2011_Multi-disciplinary-Practical-Guidelines-for-Gastrointestinal-Access-for-Enteral-Nutrition-and-Decompression.pdf"
         }
       ],
-      "evidence_note": ""
+      "evidence_note": "",
+      "local_policy": [
+        "Local or systemic infection"
+      ]
     },
     {
       "id": "D073",
@@ -1900,7 +2162,10 @@
           "url": "https://www.cirse.org/wp-content/uploads/2018/07/SOP_SIR_2011_Multi-disciplinary-Practical-Guidelines-for-Gastrointestinal-Access-for-Enteral-Nutrition-and-Decompression.pdf"
         }
       ],
-      "evidence_note": ""
+      "evidence_note": "",
+      "local_policy": [
+        "Bleeding / bruising / haematoma"
+      ]
     },
     {
       "id": "D074",
@@ -1918,7 +2183,10 @@
           "url": "https://doi.org/10.1007/s00270-021-02904-3"
         }
       ],
-      "evidence_note": ""
+      "evidence_note": "",
+      "local_policy": [
+        "Radiation exposure"
+      ]
     },
     {
       "id": "D075",
@@ -2028,7 +2296,10 @@
           "url": "https://www.acr.org/Clinical-Resources/Clinical-Tools-and-Reference/Contrast-Manual"
         }
       ],
-      "evidence_note": ""
+      "evidence_note": "",
+      "local_policy": [
+        "Allergic reaction"
+      ]
     },
     {
       "id": "D080",
@@ -2046,7 +2317,10 @@
           "url": "https://doi.org/10.14740/jmc5269"
         }
       ],
-      "evidence_note": "Evidence aggregated from component risks: Haemobilia; Biliary injury/ischaemia."
+      "evidence_note": "Evidence aggregated from component risks: Haemobilia; Biliary injury/ischaemia.",
+      "local_policy": [
+        "Damage to surrounding structures"
+      ]
     },
     {
       "id": "D081",
@@ -2069,7 +2343,10 @@
           "url": "https://doi.org/10.14309/ctg.0000000000000063"
         }
       ],
-      "evidence_note": "Evidence aggregated from component risks: Inadequate biopsy sample; Reintervention."
+      "evidence_note": "Evidence aggregated from component risks: Inadequate biopsy sample; Reintervention.",
+      "local_policy": [
+        "Technical or clinical failure, with possible need for repeat or alternative treatment"
+      ]
     },
     {
       "id": "D082",
@@ -2110,7 +2387,10 @@
           "url": "https://doi.org/10.14309/ctg.0000000000000063"
         }
       ],
-      "evidence_note": "Evidence aggregated from component risks: Bleeding; Access-site haematoma."
+      "evidence_note": "Evidence aggregated from component risks: Bleeding; Access-site haematoma.",
+      "local_policy": [
+        "Bleeding / bruising / haematoma"
+      ]
     },
     {
       "id": "D084",
@@ -2128,7 +2408,10 @@
           "url": "https://doi.org/10.1136/gutjnl-2020-321299"
         }
       ],
-      "evidence_note": ""
+      "evidence_note": "",
+      "local_policy": [
+        "Pain / discomfort"
+      ]
     },
     {
       "id": "D085",
@@ -2256,7 +2539,10 @@
           "url": "https://www.cirse.org/wp-content/uploads/2018/11/2014_Superficial-Femoral-and-Popliteal-Artey-Stenting_Katsanos.pdf"
         }
       ],
-      "evidence_note": "Evidence aggregated from component risks: Vascular injury; Bleeding; Access-site haematoma; Pseudoaneurysm; Iatrogenic arteriovenous fistula. Incidence is source/context specific and should not be treated as a universal consent rate."
+      "evidence_note": "Evidence aggregated from component risks: Vascular injury; Bleeding; Access-site haematoma; Pseudoaneurysm; Iatrogenic arteriovenous fistula. Incidence is source/context specific and should not be treated as a universal consent rate.",
+      "local_policy": [
+        "Bleeding / bruising / haematoma"
+      ]
     },
     {
       "id": "D091",
@@ -2368,7 +2654,11 @@
           "url": "https://doi.org/10.1148/radiol.240100"
         }
       ],
-      "evidence_note": "Evidence aggregated from component risks: Acute kidney injury/renal impairment; Contrast reaction."
+      "evidence_note": "Evidence aggregated from component risks: Acute kidney injury/renal impairment; Contrast reaction.",
+      "local_policy": [
+        "Allergic reaction",
+        "Renal impairment"
+      ]
     },
     {
       "id": "D095",
@@ -2455,7 +2745,10 @@
           "url": "https://doi.org/10.1007/s00270-021-02904-3"
         }
       ],
-      "evidence_note": ""
+      "evidence_note": "",
+      "local_policy": [
+        "Radiation exposure"
+      ]
     },
     {
       "id": "D099",
@@ -2478,7 +2771,10 @@
           "url": "https://www.cirse.org/wp-content/uploads/2018/11/2014_Superficial-Femoral-and-Popliteal-Artey-Stenting_Katsanos.pdf"
         }
       ],
-      "evidence_note": "Evidence aggregated from component risks: Restenosis; Recurrence of treated condition."
+      "evidence_note": "Evidence aggregated from component risks: Restenosis; Recurrence of treated condition.",
+      "local_policy": [
+        "Technical or clinical failure, with possible need for repeat or alternative treatment"
+      ]
     },
     {
       "id": "D100",
@@ -2501,7 +2797,10 @@
           "url": "https://www.cirse.org/wp-content/uploads/2018/11/2014_Superficial-Femoral-and-Popliteal-Artey-Stenting_Katsanos.pdf"
         }
       ],
-      "evidence_note": "Evidence aggregated from component risks: Vessel rupture; Vessel perforation."
+      "evidence_note": "Evidence aggregated from component risks: Vessel rupture; Vessel perforation.",
+      "local_policy": [
+        "Damage to surrounding structures"
+      ]
     },
     {
       "id": "D101",
@@ -2537,7 +2836,10 @@
           "url": "https://www.cirse.org/wp-content/uploads/2018/11/2014_Superficial-Femoral-and-Popliteal-Artey-Stenting_Katsanos.pdf"
         }
       ],
-      "evidence_note": "Very rare; only when a stent is implanted."
+      "evidence_note": "Very rare; only when a stent is implanted.",
+      "local_policy": [
+        "Local or systemic infection"
+      ]
     },
     {
       "id": "D103",
@@ -2555,7 +2857,10 @@
           "url": "https://doi.org/10.1007/s00270-024-03743-8"
         }
       ],
-      "evidence_note": ""
+      "evidence_note": "",
+      "local_policy": [
+        "Pain / discomfort"
+      ]
     },
     {
       "id": "D104",
@@ -2578,7 +2883,11 @@
           "url": "https://www.acr.org/Clinical-Resources/Clinical-Tools-and-Reference/Contrast-Manual"
         }
       ],
-      "evidence_note": "Evidence aggregated from component risks: Contrast reaction; Acute kidney injury/renal impairment."
+      "evidence_note": "Evidence aggregated from component risks: Contrast reaction; Acute kidney injury/renal impairment.",
+      "local_policy": [
+        "Allergic reaction",
+        "Renal impairment"
+      ]
     },
     {
       "id": "D105",
@@ -2601,7 +2910,10 @@
           "url": "https://doi.org/10.1007/s00270-012-0440-y"
         }
       ],
-      "evidence_note": ""
+      "evidence_note": "",
+      "local_policy": [
+        "Technical or clinical failure, with possible need for repeat or alternative treatment"
+      ]
     },
     {
       "id": "D106",
@@ -2624,7 +2936,10 @@
           "url": "https://doi.org/10.1007/s00270-012-0440-y"
         }
       ],
-      "evidence_note": "Evidence aggregated from component risks: Infection; Cholangitis; Hepatic abscess; Sepsis."
+      "evidence_note": "Evidence aggregated from component risks: Infection; Cholangitis; Hepatic abscess; Sepsis.",
+      "local_policy": [
+        "Local or systemic infection"
+      ]
     },
     {
       "id": "D107",
@@ -2665,7 +2980,10 @@
           "url": "https://doi.org/10.1007/s00270-012-0440-y"
         }
       ],
-      "evidence_note": ""
+      "evidence_note": "",
+      "local_policy": [
+        "Damage to surrounding structures"
+      ]
     },
     {
       "id": "D109",
@@ -2706,7 +3024,10 @@
           "url": "https://doi.org/10.1007/s00270-021-02904-3"
         }
       ],
-      "evidence_note": ""
+      "evidence_note": "",
+      "local_policy": [
+        "Radiation exposure"
+      ]
     },
     {
       "id": "D111",
@@ -2729,7 +3050,10 @@
           "url": "https://doi.org/10.1007/s00270-012-0440-y"
         }
       ],
-      "evidence_note": ""
+      "evidence_note": "",
+      "local_policy": [
+        "Bleeding / bruising / haematoma"
+      ]
     },
     {
       "id": "D112",
@@ -2842,7 +3166,10 @@
           "url": "https://doi.org/10.1007/s00270-022-03349-y"
         }
       ],
-      "evidence_note": "Evidence aggregated from component risks: Bleeding; Access-site haematoma."
+      "evidence_note": "Evidence aggregated from component risks: Bleeding; Access-site haematoma.",
+      "local_policy": [
+        "Bleeding / bruising / haematoma"
+      ]
     },
     {
       "id": "D118",
@@ -2865,7 +3192,10 @@
           "url": "https://doi.org/10.1148/rg.2021200144"
         }
       ],
-      "evidence_note": ""
+      "evidence_note": "",
+      "local_policy": [
+        "Damage to surrounding structures"
+      ]
     },
     {
       "id": "D119",
@@ -2893,7 +3223,11 @@
           "url": "https://doi.org/10.1148/rg.2021200144"
         }
       ],
-      "evidence_note": "Evidence aggregated from component risks: Acute kidney injury/renal impairment; Contrast reaction."
+      "evidence_note": "Evidence aggregated from component risks: Acute kidney injury/renal impairment; Contrast reaction.",
+      "local_policy": [
+        "Allergic reaction",
+        "Renal impairment"
+      ]
     },
     {
       "id": "D120",
@@ -2934,7 +3268,10 @@
           "url": "https://doi.org/10.1148/rg.2021200144"
         }
       ],
-      "evidence_note": ""
+      "evidence_note": "",
+      "local_policy": [
+        "Technical or clinical failure, with possible need for repeat or alternative treatment"
+      ]
     },
     {
       "id": "D122",
@@ -2952,7 +3289,10 @@
           "url": "https://doi.org/10.1007/s00270-021-02904-3"
         }
       ],
-      "evidence_note": ""
+      "evidence_note": "",
+      "local_policy": [
+        "Radiation exposure"
+      ]
     },
     {
       "id": "D123",
@@ -3011,7 +3351,10 @@
           "url": "https://doi.org/10.1148/rg.2021200144"
         }
       ],
-      "evidence_note": "Evidence aggregated from component risks: Post-embolisation syndrome; Rectal bleeding; Dysuria; Urinary frequency/urgency; Haematuria. Incidence is source/context specific and should not be treated as a universal consent rate."
+      "evidence_note": "Evidence aggregated from component risks: Post-embolisation syndrome; Rectal bleeding; Dysuria; Urinary frequency/urgency; Haematuria. Incidence is source/context specific and should not be treated as a universal consent rate.",
+      "local_policy": [
+        "Pain / discomfort"
+      ]
     },
     {
       "id": "D126",
@@ -3070,7 +3413,10 @@
           "url": "https://doi.org/10.1148/rg.2021200144"
         }
       ],
-      "evidence_note": "Illustrated post-PAE infectious complication."
+      "evidence_note": "Illustrated post-PAE infectious complication.",
+      "local_policy": [
+        "Local or systemic infection"
+      ]
     },
     {
       "id": "D129",
@@ -3116,7 +3462,10 @@
           "url": "https://doi.org/10.3389/fonc.2023.1072922"
         }
       ],
-      "evidence_note": "Evidence aggregated from component risks: Hepatic abscess; Sepsis. Incidence is source/context specific and should not be treated as a universal consent rate."
+      "evidence_note": "Evidence aggregated from component risks: Hepatic abscess; Sepsis. Incidence is source/context specific and should not be treated as a universal consent rate.",
+      "local_policy": [
+        "Local or systemic infection"
+      ]
     },
     {
       "id": "D131",
@@ -3134,7 +3483,10 @@
           "url": "https://doi.org/10.1007/s00270-022-03349-y"
         }
       ],
-      "evidence_note": "Evidence aggregated from component risks: Bleeding; Access-site haematoma."
+      "evidence_note": "Evidence aggregated from component risks: Bleeding; Access-site haematoma.",
+      "local_policy": [
+        "Bleeding / bruising / haematoma"
+      ]
     },
     {
       "id": "D132",
@@ -3213,7 +3565,11 @@
           "url": "https://doi.org/10.3390/cancers14143351"
         }
       ],
-      "evidence_note": "Evidence aggregated from component risks: Contrast reaction; Acute kidney injury/renal impairment."
+      "evidence_note": "Evidence aggregated from component risks: Contrast reaction; Acute kidney injury/renal impairment.",
+      "local_policy": [
+        "Allergic reaction",
+        "Renal impairment"
+      ]
     },
     {
       "id": "D135",
@@ -3277,7 +3633,10 @@
           "url": "https://doi.org/10.3390/cancers14143351"
         }
       ],
-      "evidence_note": ""
+      "evidence_note": "",
+      "local_policy": [
+        "Damage to surrounding structures"
+      ]
     },
     {
       "id": "D138",
@@ -3305,7 +3664,10 @@
           "url": "https://doi.org/10.1007/s00270-021-02968-1"
         }
       ],
-      "evidence_note": "Evidence aggregated from component risks: Pain or discomfort; Post-embolisation syndrome; Nausea; Fever. Incidence is source/context specific and should not be treated as a universal consent rate."
+      "evidence_note": "Evidence aggregated from component risks: Pain or discomfort; Post-embolisation syndrome; Nausea; Fever. Incidence is source/context specific and should not be treated as a universal consent rate.",
+      "local_policy": [
+        "Pain / discomfort"
+      ]
     },
     {
       "id": "D139",
@@ -3323,7 +3685,10 @@
           "url": "https://doi.org/10.1007/s00270-021-02904-3"
         }
       ],
-      "evidence_note": ""
+      "evidence_note": "",
+      "local_policy": [
+        "Radiation exposure"
+      ]
     },
     {
       "id": "D140",
@@ -3377,7 +3742,10 @@
           "url": "https://doi.org/10.1007/s00270-022-03349-y"
         }
       ],
-      "evidence_note": "Evidence aggregated from component risks: Bleeding; Access-site bruising."
+      "evidence_note": "Evidence aggregated from component risks: Bleeding; Access-site bruising.",
+      "local_policy": [
+        "Bleeding / bruising / haematoma"
+      ]
     },
     {
       "id": "D143",
@@ -3418,7 +3786,11 @@
           "url": "https://www.acr.org/Clinical-Resources/Clinical-Tools-and-Reference/Contrast-Manual"
         }
       ],
-      "evidence_note": "Evidence aggregated from component risks: Contrast reaction; Acute kidney injury/renal impairment."
+      "evidence_note": "Evidence aggregated from component risks: Contrast reaction; Acute kidney injury/renal impairment.",
+      "local_policy": [
+        "Allergic reaction",
+        "Renal impairment"
+      ]
     },
     {
       "id": "D145",
@@ -3454,7 +3826,10 @@
           "url": "https://doi.org/10.1007/s00270-026-04477-5"
         }
       ],
-      "evidence_note": ""
+      "evidence_note": "",
+      "local_policy": [
+        "Technical or clinical failure, with possible need for repeat or alternative treatment"
+      ]
     },
     {
       "id": "D147",
@@ -3477,7 +3852,10 @@
           "url": "https://doi.org/10.1007/s00270-026-04477-5"
         }
       ],
-      "evidence_note": "Evidence aggregated from component risks: Vascular injury; Bleeding; Limb/hand ischaemia; Vessel rupture."
+      "evidence_note": "Evidence aggregated from component risks: Vascular injury; Bleeding; Limb/hand ischaemia; Vessel rupture.",
+      "local_policy": [
+        "Damage to surrounding structures"
+      ]
     },
     {
       "id": "D148",
@@ -3495,7 +3873,10 @@
           "url": "https://doi.org/10.1007/s00270-021-02904-3"
         }
       ],
-      "evidence_note": ""
+      "evidence_note": "",
+      "local_policy": [
+        "Radiation exposure"
+      ]
     },
     {
       "id": "D149",
@@ -3608,7 +3989,10 @@
           "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC9971289/"
         }
       ],
-      "evidence_note": "Evidence aggregated from component risks: Bleeding; Access-site haematoma."
+      "evidence_note": "Evidence aggregated from component risks: Bleeding; Access-site haematoma.",
+      "local_policy": [
+        "Bleeding / bruising / haematoma"
+      ]
     },
     {
       "id": "D155",
@@ -3654,7 +4038,10 @@
           "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC9971289/"
         }
       ],
-      "evidence_note": ""
+      "evidence_note": "",
+      "local_policy": [
+        "Damage to surrounding structures"
+      ]
     },
     {
       "id": "D157",
@@ -3677,7 +4064,11 @@
           "url": "https://www.acr.org/Clinical-Resources/Clinical-Tools-and-Reference/Contrast-Manual"
         }
       ],
-      "evidence_note": "Evidence aggregated from component risks: Contrast reaction; Acute kidney injury/renal impairment."
+      "evidence_note": "Evidence aggregated from component risks: Contrast reaction; Acute kidney injury/renal impairment.",
+      "local_policy": [
+        "Allergic reaction",
+        "Renal impairment"
+      ]
     },
     {
       "id": "D158",
@@ -3728,7 +4119,10 @@
           "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC9971289/"
         }
       ],
-      "evidence_note": "Evidence aggregated from component risks: Treatment/procedural failure (unspecified); Thrombosis."
+      "evidence_note": "Evidence aggregated from component risks: Treatment/procedural failure (unspecified); Thrombosis.",
+      "local_policy": [
+        "Technical or clinical failure, with possible need for repeat or alternative treatment"
+      ]
     },
     {
       "id": "D160",
@@ -3774,7 +4168,10 @@
           "url": "https://doi.org/10.1007/s00270-021-02904-3"
         }
       ],
-      "evidence_note": ""
+      "evidence_note": "",
+      "local_policy": [
+        "Radiation exposure"
+      ]
     },
     {
       "id": "D162",
@@ -3873,7 +4270,10 @@
           "url": "https://www.guysandstthomas.nhs.uk/health-information/fistuloplasty"
         }
       ],
-      "evidence_note": "Evidence aggregated from component risks: Bleeding; Access-site haematoma."
+      "evidence_note": "Evidence aggregated from component risks: Bleeding; Access-site haematoma.",
+      "local_policy": [
+        "Bleeding / bruising / haematoma"
+      ]
     },
     {
       "id": "D167",
@@ -3914,7 +4314,10 @@
           "url": "https://doi.org/10.1186/s12882-025-04374-y"
         }
       ],
-      "evidence_note": "Evidence aggregated from component risks: Bleeding; Pain or discomfort."
+      "evidence_note": "Evidence aggregated from component risks: Bleeding; Pain or discomfort.",
+      "local_policy": [
+        "Pain / discomfort"
+      ]
     },
     {
       "id": "D169",
@@ -3965,7 +4368,11 @@
           "url": "https://www.guysandstthomas.nhs.uk/health-information/fistuloplasty"
         }
       ],
-      "evidence_note": "Evidence aggregated from component risks: Contrast reaction; Acute kidney injury/renal impairment."
+      "evidence_note": "Evidence aggregated from component risks: Contrast reaction; Acute kidney injury/renal impairment.",
+      "local_policy": [
+        "Allergic reaction",
+        "Renal impairment"
+      ]
     },
     {
       "id": "D171",
@@ -3993,7 +4400,10 @@
           "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC2685043/"
         }
       ],
-      "evidence_note": "Evidence aggregated from component risks: Limb/hand ischaemia; Steal syndrome; Distal embolisation; Arterial dissection; Vessel rupture; Thrombosis."
+      "evidence_note": "Evidence aggregated from component risks: Limb/hand ischaemia; Steal syndrome; Distal embolisation; Arterial dissection; Vessel rupture; Thrombosis.",
+      "local_policy": [
+        "Damage to surrounding structures"
+      ]
     },
     {
       "id": "D172",
@@ -4016,7 +4426,10 @@
           "url": "https://www.guysandstthomas.nhs.uk/health-information/fistuloplasty"
         }
       ],
-      "evidence_note": ""
+      "evidence_note": "",
+      "local_policy": [
+        "Radiation exposure"
+      ]
     },
     {
       "id": "D173",
@@ -4062,7 +4475,10 @@
           "url": "https://doi.org/10.1186/s12882-025-04374-y"
         }
       ],
-      "evidence_note": "Evidence aggregated from component risks: Restenosis; Recurrence of treated condition."
+      "evidence_note": "Evidence aggregated from component risks: Restenosis; Recurrence of treated condition.",
+      "local_policy": [
+        "Technical or clinical failure, with possible need for repeat or alternative treatment"
+      ]
     },
     {
       "id": "D175",
@@ -4131,7 +4547,10 @@
           "url": "https://www.leedsth.nhs.uk/patients/resources/transjugular-intrahepatic-portosystemic-shunt-tips/"
         }
       ],
-      "evidence_note": "Evidence aggregated from component risks: Volume overload; Liver capsular perforation; Intra-abdominal haemorrhage; Biliary injury/ischaemia; Portal vein injury; Cardiac failure; Liver failure; Death. Incidence is source/context specific and should not be treated as a universal consent rate."
+      "evidence_note": "Evidence aggregated from component risks: Volume overload; Liver capsular perforation; Intra-abdominal haemorrhage; Biliary injury/ischaemia; Portal vein injury; Cardiac failure; Liver failure; Death. Incidence is source/context specific and should not be treated as a universal consent rate.",
+      "local_policy": [
+        "Damage to surrounding structures"
+      ]
     },
     {
       "id": "D178",
@@ -4159,7 +4578,11 @@
           "url": "https://www.leedsth.nhs.uk/patients/resources/transjugular-intrahepatic-portosystemic-shunt-tips/"
         }
       ],
-      "evidence_note": "Evidence aggregated from component risks: Contrast reaction; Acute kidney injury/renal impairment."
+      "evidence_note": "Evidence aggregated from component risks: Contrast reaction; Acute kidney injury/renal impairment.",
+      "local_policy": [
+        "Allergic reaction",
+        "Renal impairment"
+      ]
     },
     {
       "id": "D179",
@@ -4207,7 +4630,10 @@
       "has_numeric_incidence": false,
       "best_evidence_tier": "Unverified",
       "sources": [],
-      "evidence_note": "No supporting source was verified at risk level in the current review; retained from the existing list."
+      "evidence_note": "No supporting source was verified at risk level in the current review; retained from the existing list.",
+      "local_policy": [
+        "Pain / discomfort"
+      ]
     },
     {
       "id": "D182",
@@ -4230,7 +4656,10 @@
           "url": "https://www.leedsth.nhs.uk/patients/resources/transjugular-intrahepatic-portosystemic-shunt-tips/"
         }
       ],
-      "evidence_note": "Evidence aggregated from component risks: Bleeding; Access-site haematoma."
+      "evidence_note": "Evidence aggregated from component risks: Bleeding; Access-site haematoma.",
+      "local_policy": [
+        "Bleeding / bruising / haematoma"
+      ]
     },
     {
       "id": "D183",
@@ -4276,7 +4705,10 @@
           "url": "https://www.leedsth.nhs.uk/patients/resources/transjugular-intrahepatic-portosystemic-shunt-tips/"
         }
       ],
-      "evidence_note": ""
+      "evidence_note": "",
+      "local_policy": [
+        "Radiation exposure"
+      ]
     },
     {
       "id": "D185",
@@ -4294,7 +4726,10 @@
           "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC8760361/"
         }
       ],
-      "evidence_note": "Evidence aggregated from component risks: Shunt dysfunction; Shunt stenosis; Shunt thrombosis."
+      "evidence_note": "Evidence aggregated from component risks: Shunt dysfunction; Shunt stenosis; Shunt thrombosis.",
+      "local_policy": [
+        "Technical or clinical failure, with possible need for repeat or alternative treatment"
+      ]
     },
     {
       "id": "D186",
@@ -4348,7 +4783,10 @@
           "url": "https://doi.org/10.1055/s-0043-1767670"
         }
       ],
-      "evidence_note": "Recognised major post-TIPS infectious complication."
+      "evidence_note": "Recognised major post-TIPS infectious complication.",
+      "local_policy": [
+        "Local or systemic infection"
+      ]
     },
     {
       "id": "D189",
@@ -4376,7 +4814,10 @@
           "url": "https://doi.org/10.1186/s12882-025-04374-y"
         }
       ],
-      "evidence_note": "Evidence aggregated from component risks: Bleeding; Air embolism; Vascular injury."
+      "evidence_note": "Evidence aggregated from component risks: Bleeding; Air embolism; Vascular injury.",
+      "local_policy": [
+        "Air embolism"
+      ]
     },
     {
       "id": "D190",
@@ -4432,7 +4873,11 @@
           "url": "https://doi.org/10.1093/ndt/gfae181"
         }
       ],
-      "evidence_note": "Evidence aggregated from component risks: Inadvertent arterial puncture; Bleeding; Pneumothorax; Infection; Thrombosis; Cardiac arrhythmia; Access-site haematoma; Haemothorax; Venous stenosis. Incidence is source/context specific and should not be treated as a universal consent rate."
+      "evidence_note": "Evidence aggregated from component risks: Inadvertent arterial puncture; Bleeding; Pneumothorax; Infection; Thrombosis; Cardiac arrhythmia; Access-site haematoma; Haemothorax; Venous stenosis. Incidence is source/context specific and should not be treated as a universal consent rate.",
+      "local_policy": [
+        "Damage to surrounding structures",
+        "Local or systemic infection"
+      ]
     },
     {
       "id": "D192",
@@ -4460,7 +4905,10 @@
           "url": "https://doi.org/10.1177/2054358116669130"
         }
       ],
-      "evidence_note": "Evidence aggregated from component risks: Catheter malfunction/failure; Reintervention."
+      "evidence_note": "Evidence aggregated from component risks: Catheter malfunction/failure; Reintervention.",
+      "local_policy": [
+        "Technical or clinical failure, with possible need for repeat or alternative treatment"
+      ]
     },
     {
       "id": "D193",
@@ -4526,7 +4974,10 @@
           "url": "https://www.acr.org/Clinical-Resources/Clinical-Tools-and-Reference/Contrast-Manual"
         }
       ],
-      "evidence_note": "Evidence aggregated from component risks: Radiation exposure-related harm (unspecified); Contrast reaction."
+      "evidence_note": "Evidence aggregated from component risks: Radiation exposure-related harm (unspecified); Contrast reaction.",
+      "local_policy": [
+        "Radiation exposure"
+      ]
     },
     {
       "id": "D195",
@@ -4544,7 +4995,10 @@
           "url": "https://www.leedsth.nhs.uk/patients/resources/tunnelled-central-line-insertion/"
         }
       ],
-      "evidence_note": ""
+      "evidence_note": "",
+      "local_policy": [
+        "Pain / discomfort"
+      ]
     },
     {
       "id": "D196",
@@ -4567,7 +5021,10 @@
           "url": "https://doi.org/10.1177/2054358116669130"
         }
       ],
-      "evidence_note": "Evidence aggregated from component risks: Bleeding; Access-site haematoma."
+      "evidence_note": "Evidence aggregated from component risks: Bleeding; Access-site haematoma.",
+      "local_policy": [
+        "Bleeding / bruising / haematoma"
+      ]
     },
     {
       "id": "D197",
@@ -4590,7 +5047,10 @@
           "url": "https://doi.org/10.1111/1754-9485.13455"
         }
       ],
-      "evidence_note": "Evidence aggregated from component risks: Bleeding; Access-site haematoma."
+      "evidence_note": "Evidence aggregated from component risks: Bleeding; Access-site haematoma.",
+      "local_policy": [
+        "Bleeding / bruising / haematoma"
+      ]
     },
     {
       "id": "D198",
@@ -4613,7 +5073,10 @@
           "url": "https://doi.org/10.1007/s00270-022-03349-y"
         }
       ],
-      "evidence_note": ""
+      "evidence_note": "",
+      "local_policy": [
+        "Damage to surrounding structures"
+      ]
     },
     {
       "id": "D199",
@@ -4641,7 +5104,11 @@
           "url": "https://doi.org/10.1148/radiol.240100"
         }
       ],
-      "evidence_note": "Evidence aggregated from component risks: Acute kidney injury/renal impairment; Contrast reaction."
+      "evidence_note": "Evidence aggregated from component risks: Acute kidney injury/renal impairment; Contrast reaction.",
+      "local_policy": [
+        "Allergic reaction",
+        "Renal impairment"
+      ]
     },
     {
       "id": "D200",
@@ -4728,7 +5195,10 @@
           "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12460036/"
         }
       ],
-      "evidence_note": "Incidence is source/context specific and should not be treated as a universal consent rate."
+      "evidence_note": "Incidence is source/context specific and should not be treated as a universal consent rate.",
+      "local_policy": [
+        "Local or systemic infection"
+      ]
     },
     {
       "id": "D204",
@@ -4792,7 +5262,10 @@
           "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12460036/"
         }
       ],
-      "evidence_note": "Evidence aggregated from component risks: Pain or discomfort; Post-embolisation syndrome; Nausea; Fever."
+      "evidence_note": "Evidence aggregated from component risks: Pain or discomfort; Post-embolisation syndrome; Nausea; Fever.",
+      "local_policy": [
+        "Pain / discomfort"
+      ]
     },
     {
       "id": "D207",
@@ -4815,7 +5288,10 @@
           "url": "https://doi.org/10.1111/1754-9485.13455"
         }
       ],
-      "evidence_note": "Evidence aggregated from component risks: Persistent symptoms/clinical treatment failure; Reintervention."
+      "evidence_note": "Evidence aggregated from component risks: Persistent symptoms/clinical treatment failure; Reintervention.",
+      "local_policy": [
+        "Technical or clinical failure, with possible need for repeat or alternative treatment"
+      ]
     },
     {
       "id": "D208",
@@ -4833,7 +5309,10 @@
           "url": "https://doi.org/10.1007/s00270-021-02904-3"
         }
       ],
-      "evidence_note": ""
+      "evidence_note": "",
+      "local_policy": [
+        "Radiation exposure"
+      ]
     },
     {
       "id": "D209",
@@ -4966,7 +5445,11 @@
           "url": "https://www.leedsth.nhs.uk/patients/resources/testicular-vein-embolisation-tve/"
         }
       ],
-      "evidence_note": "Evidence aggregated from component risks: Contrast reaction; Acute kidney injury/renal impairment."
+      "evidence_note": "Evidence aggregated from component risks: Contrast reaction; Acute kidney injury/renal impairment.",
+      "local_policy": [
+        "Allergic reaction",
+        "Renal impairment"
+      ]
     },
     {
       "id": "D215",
@@ -4994,7 +5477,10 @@
           "url": "https://www.leedsth.nhs.uk/patients/resources/testicular-vein-embolisation-tve/"
         }
       ],
-      "evidence_note": "Evidence aggregated from component risks: Pain or discomfort; Swelling; Thrombophlebitis."
+      "evidence_note": "Evidence aggregated from component risks: Pain or discomfort; Swelling; Thrombophlebitis.",
+      "local_policy": [
+        "Pain / discomfort"
+      ]
     },
     {
       "id": "D216",
@@ -5045,7 +5531,10 @@
           "url": "https://www.leedsth.nhs.uk/patients/resources/testicular-vein-embolisation-tve/"
         }
       ],
-      "evidence_note": ""
+      "evidence_note": "",
+      "local_policy": [
+        "Radiation exposure"
+      ]
     },
     {
       "id": "D218",
@@ -5080,7 +5569,10 @@
           "url": "https://www.leedsth.nhs.uk/patients/resources/testicular-vein-embolisation-tve/"
         }
       ],
-      "evidence_note": "Evidence aggregated from component risks: Technical failure/inability to complete procedure; Reintervention."
+      "evidence_note": "Evidence aggregated from component risks: Technical failure/inability to complete procedure; Reintervention.",
+      "local_policy": [
+        "Technical or clinical failure, with possible need for repeat or alternative treatment"
+      ]
     },
     {
       "id": "D220",
@@ -5098,7 +5590,10 @@
           "url": "https://doi.org/10.1111/and.14510"
         }
       ],
-      "evidence_note": "Evidence aggregated from component risks: Bleeding; Access-site haematoma."
+      "evidence_note": "Evidence aggregated from component risks: Bleeding; Access-site haematoma.",
+      "local_policy": [
+        "Bleeding / bruising / haematoma"
+      ]
     },
     {
       "id": "D221",
@@ -5116,7 +5611,10 @@
           "url": "https://pubmed.ncbi.nlm.nih.gov/29493263/"
         }
       ],
-      "evidence_note": "Evidence aggregated from component risks: Vascular injury; Vessel perforation."
+      "evidence_note": "Evidence aggregated from component risks: Vascular injury; Vessel perforation.",
+      "local_policy": [
+        "Damage to surrounding structures"
+      ]
     },
     {
       "id": "D222",
@@ -5198,7 +5696,11 @@
           "url": "https://www.acr.org/Clinical-Resources/Clinical-Tools-and-Reference/Contrast-Manual"
         }
       ],
-      "evidence_note": "Evidence aggregated from component risks: Contrast reaction; Acute kidney injury/renal impairment."
+      "evidence_note": "Evidence aggregated from component risks: Contrast reaction; Acute kidney injury/renal impairment.",
+      "local_policy": [
+        "Allergic reaction",
+        "Renal impairment"
+      ]
     },
     {
       "id": "D226",
@@ -5210,7 +5712,10 @@
       "has_numeric_incidence": false,
       "best_evidence_tier": "Unverified",
       "sources": [],
-      "evidence_note": "Evidence aggregated from component risks: Persistent symptoms/clinical treatment failure; Recurrence of treated condition. No supporting source was verified at risk level in the current review; retained from the existing list."
+      "evidence_note": "Evidence aggregated from component risks: Persistent symptoms/clinical treatment failure; Recurrence of treated condition. No supporting source was verified at risk level in the current review; retained from the existing list.",
+      "local_policy": [
+        "Technical or clinical failure, with possible need for repeat or alternative treatment"
+      ]
     },
     {
       "id": "D227",
@@ -5228,7 +5733,10 @@
           "url": "https://doi.org/10.1007/s00270-021-02904-3"
         }
       ],
-      "evidence_note": ""
+      "evidence_note": "",
+      "local_policy": [
+        "Radiation exposure"
+      ]
     },
     {
       "id": "D228",
@@ -5338,7 +5846,10 @@
           "url": "https://pubmed.ncbi.nlm.nih.gov/39214918/"
         }
       ],
-      "evidence_note": "Evidence aggregated from component risks: Bleeding; Access-site haematoma."
+      "evidence_note": "Evidence aggregated from component risks: Bleeding; Access-site haematoma.",
+      "local_policy": [
+        "Bleeding / bruising / haematoma"
+      ]
     },
     {
       "id": "D233",
@@ -5361,7 +5872,10 @@
           "url": "https://pubmed.ncbi.nlm.nih.gov/39214918/"
         }
       ],
-      "evidence_note": "Evidence aggregated from component risks: Vessel rupture; Vessel perforation."
+      "evidence_note": "Evidence aggregated from component risks: Vessel rupture; Vessel perforation.",
+      "local_policy": [
+        "Damage to surrounding structures"
+      ]
     },
     {
       "id": "D234",
@@ -5415,7 +5929,10 @@
           "url": "https://doi.org/10.1007/s00270-024-03853-3"
         }
       ],
-      "evidence_note": "Access-site infection."
+      "evidence_note": "Access-site infection.",
+      "local_policy": [
+        "Local or systemic infection"
+      ]
     },
     {
       "id": "D237",
@@ -5433,7 +5950,10 @@
           "url": "https://doi.org/10.1007/s00270-024-03853-3"
         }
       ],
-      "evidence_note": "Post-stent back pain can occasionally persist."
+      "evidence_note": "Post-stent back pain can occasionally persist.",
+      "local_policy": [
+        "Pain / discomfort"
+      ]
     },
     {
       "id": "D238",

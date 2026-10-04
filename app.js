@@ -292,7 +292,7 @@ async function start() {
 }
 
 function setReviewerChip() {
-  const chip = $("topbarConsultant");
+  const chip = $("topbarReviewer");
   if (!auth.gmcNumber) {
     chip.classList.add("hidden");
     return;
@@ -679,7 +679,7 @@ async function signOut() {
   clearTimeout(saveTimer);
   saveTimer = null;
   if ($("navSignOut")) $("navSignOut").classList.add("hidden");
-  $("topbarConsultant").classList.add("hidden");
+  $("topbarReviewer").classList.add("hidden");
   if ($("saveStatus")) $("saveStatus").classList.add("hidden");
   $("pin").value = "";
   hideAll();

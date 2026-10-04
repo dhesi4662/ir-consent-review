@@ -618,15 +618,19 @@ function showReview() {
 }
 
 async function submitProcedure() {
-  if (!cfg.endpoint) {
-    $("submitStatus").innerHTML = '<div class="alert alert-warning">Submission is not configured.</div>';
-    return;
-  }
   const ps = pState(currentProcedure);
+  if (ps.submitted) return;
+
+  $("submitProcedureBtn").disabled = true;
+  $("submitStatus").innerHTML = '<div class="alert alert-info">Submitting...</div>';
+
   const payload = {
+    action: "submitProcedure",
     projectCode: cfg.projectCode,
     round: cfg.round || dataset.project.round,
-    consultantId: state.consultantId,
+    gmcNumber: auth.gmcNumber,
+    consultantId: auth.gmcNumber,
+    pin: auth.pin,
     procedure: currentProcedure,
     experience: ps.experience,
     startedAt: state.startedAt,
@@ -644,26 +648,22 @@ async function submitProcedure() {
     }))
   };
 
-  $("submitProcedureBtn").disabled = true;
-  $("submitStatus").innerHTML = '<div class="alert alert-info">Submitting...</div>';
   try {
-    await fetch(cfg.endpoint, {
-      method: "POST",
-      mode: "no-cors",
-      headers: { "Content-Type": "text/plain;charset=utf-8" },
-      body: JSON.stringify(payload)
-    });
+    const result = await apiRequest(payload);
+    if (!result.ok) throw new Error(result.error || "Submission failed");
+
     ps.submitted = true;
     ps.submittedAt = payload.submittedAt;
-    save();
+    save(currentProcedure);
+    await flushDraft();
+
     hideAll();
     $("submitted").classList.remove("hidden");
     setPageLabel("Submitted");
     $("submittedMessage").textContent = `${currentProcedure} has been submitted successfully.`;
     window.scrollTo({ top: 0, behavior: "smooth" });
   } catch (e) {
-    $("submitStatus").innerHTML = '<div class="alert alert-warning">Submission failed. Download your backup and contact the project lead.</div>';
-  } finally {
+    $("submitStatus").innerHTML = '<div class="alert alert-warning">Submission failed. Your progress is still saved. Please try again.</div>';
     $("submitProcedureBtn").disabled = false;
   }
 }

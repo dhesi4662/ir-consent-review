@@ -376,7 +376,7 @@ function showReview() {
   const total = reviewItems(currentProcedure).length;
   $("reviewSummary").textContent = `${total - missing}/${total} risks scored | ${ps.experience}`;
   $("missingWarning").classList.toggle("hidden", missing === 0);
-  $("missingWarning").textContent = missing ? `${missing} items remain unscored.` : "";
+  $("missingWarning").textContent = missing ? `${missing} risks remain unscored.` : "";
   $("submitProcedureBtn").disabled = missing > 0;
   $("submitStatus").innerHTML = "";
 
@@ -408,7 +408,6 @@ async function submitProcedure() {
     startedAt: state.startedAt,
     submittedAt: new Date().toISOString(),
     userAgent: navigator.userAgent,
-    localCoreRisks: localCoreFor(currentProcedure).map(x => x.risk),
     additionalRisks: ps.additionalRisks.map(x => x.trim()).filter(Boolean),
     responses: reviewItems(currentProcedure).map(item => ({
       itemId: item.id,
@@ -422,7 +421,7 @@ async function submitProcedure() {
   };
 
   $("submitProcedureBtn").disabled = true;
-  $("submitStatus").innerHTML = '<div class="alert alert-info">Submitting…</div>';
+  $("submitStatus").innerHTML = '<div class="alert alert-info">Submitting...</div>';
   try {
     await fetch(cfg.endpoint, {
       method: "POST",

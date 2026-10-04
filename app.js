@@ -365,6 +365,10 @@ function renderDashboard() {
 }
 
 function openProcedure(proc) {
+  if (pState(proc).submitted) {
+    alert("This procedure has already been submitted.");
+    return;
+  }
   currentProcedure = proc;
   hideAll();
   $("survey").classList.remove("hidden");

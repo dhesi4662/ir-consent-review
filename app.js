@@ -149,7 +149,7 @@ function apiRequest(payload) {
     };
     const onMessage = event => {
       const d = event.data || {};
-      if (event.source !== iframe.contentWindow || d.source !== "IR_CONSENT_BACKEND" || d.requestId !== requestId) return;
+      if (d.source !== "IR_CONSENT_BACKEND" || d.requestId !== requestId) return;
       cleanup();
       resolve(d.payload || {});
     };
